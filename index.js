@@ -12,6 +12,16 @@ const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = 'read_products';
 const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 
+//html rendering
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
+
+app.get('/about', function (req, res)
+{
+    res.render('about.html');
+});
+
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
@@ -72,13 +82,14 @@ app.get('/shopify/callback', (req, res) => {
           'X-Shopify-Access-Token': accessToken,
         };
 
-        request.get(shopRequestUrl, { headers: shopRequestHeaders })
-          .then((shopResponse) => {
-            res.end(shopResponse);
-          })
-          .catch((error) => {
-            res.status(error.statusCode).send(error.error.error_description);
-          });
+        res.render('about.html');
+        // request.get(shopRequestUrl, { headers: shopRequestHeaders })
+        //   .then((shopResponse) => {
+        //     res.end(shopResponse);
+        //   })
+        //   .catch((error) => {
+        //     res.status(error.statusCode).send(error.error.error_description);
+        //   });
         // TODO
         // Use access token to make API call to 'shop' endpoint
       })
