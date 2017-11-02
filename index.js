@@ -16,9 +16,16 @@ const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.get('/about', function (req, res)
-{
-    res.render('about.html');
+app.get('/about', function (req, res) {
+  res.render('about.html');
+});
+
+app.get('/trace', function (req, res) {
+  res.send({
+    'Order id': req.query.id,
+    'Shop': req.query.shop,
+    'Data': 'No Tracified Data Found'
+  });
 });
 
 
@@ -77,12 +84,37 @@ app.get('/shopify/callback', (req, res) => {
       .then((accessTokenResponse) => {
         const accessToken = accessTokenResponse.access_token;
 
-        const shopRequestUrl = 'https://' + shop + '/admin/shop.json';
+        // const shopRequestUrl = 'https://' + shop + '/admin/shop.json';
         const shopRequestHeaders = {
           'X-Shopify-Access-Token': accessToken,
         };
 
+        //asset uploading
+        // var options = {
+        //   method: 'PUT',
+        //   uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+        //   headers: shopRequestHeaders,
+        //   body: {
+        //     "asset": {
+        //       "key": "assets\/emputty.gif",
+        //       "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+        //     }
+        //   },
+        //   json: true // Automatically stringifies the body to JSON
+        // };
+
         res.render('about.html');
+
+        // request(options)
+        //   .then(function (parsedBody) {
+        //     res.render('about.html');
+        //   })
+        //   .catch(function (err) {
+        //     return (err);
+        //   });
+
+
+        // res.redirect('https://c4f5c707.ngrok.io/');
         // request.get(shopRequestUrl, { headers: shopRequestHeaders })
         //   .then((shopResponse) => {
         //     res.end(shopResponse);
