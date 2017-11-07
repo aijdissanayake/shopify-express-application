@@ -9,8 +9,10 @@ const request = require('request-promise');
 
 const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
-const scopes = 'read_products';
+const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
+
+var tokenSet = true;
 
 //html rendering
 app.set('views', __dirname + '/views');
@@ -35,6 +37,7 @@ app.get('/', (req, res) => {
 
 app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
+  //console.log(req);
   if (shop) {
     const state = nonce();
     const redirectUri = forwardingAddress + '/shopify/callback';
@@ -73,6 +76,9 @@ app.get('/shopify/callback', (req, res) => {
       return res.status(400).send('HMAC validation failed');
     }
 
+    console.log("code");
+    console.log(code);
+    var codep = "c3c57e5c8ba4759631bb9769527a702f";
     const accessTokenRequestUrl = 'https://' + shop + '/admin/oauth/access_token';
     const accessTokenPayload = {
       client_id: apiKey,
@@ -80,38 +86,41 @@ app.get('/shopify/callback', (req, res) => {
       code,
     };
 
+
+
     request.post(accessTokenRequestUrl, { json: accessTokenPayload })
       .then((accessTokenResponse) => {
         const accessToken = accessTokenResponse.access_token;
+        console.log('accessToken');
+        console.log(accessToken);
 
-        // const shopRequestUrl = 'https://' + shop + '/admin/shop.json';
+        const shopRequestUrl = 'https://' + shop + '/admin/orders.json';
         const shopRequestHeaders = {
           'X-Shopify-Access-Token': accessToken,
         };
 
         //asset uploading
-        // var options = {
-        //   method: 'PUT',
-        //   uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
-        //   headers: shopRequestHeaders,
-        //   body: {
-        //     "asset": {
-        //       "key": "assets\/emputty.gif",
-        //       "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
-        //     }
-        //   },
-        //   json: true // Automatically stringifies the body to JSON
-        // };
-
-        res.render('about.html');
-
-        // request(options)
-        //   .then(function (parsedBody) {
-        //     res.render('about.html');
-        //   })
-        //   .catch(function (err) {
-        //     return (err);
-        //   });
+        var options = {
+          method: 'PUT',
+          uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+          headers: shopRequestHeaders,
+          body: {
+            "asset": {
+              "key": "assets\/emputty.gif",
+              "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+            }
+          },
+          json: true // Automatically stringifies the body to JSON
+        };
+        // console.log(window.location.search);
+        // res.render('about.html');
+        request(options)
+          .then(function (parsedBody) {
+            res.render('about.html');
+          })
+          .catch(function (err) {
+            return (err);
+          });
 
 
         // res.redirect('https://c4f5c707.ngrok.io/');
@@ -140,3 +149,5 @@ app.get('/shopify/callback', (req, res) => {
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
+//https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
+//c3c57e5c8ba4759631bb9769527a702f
