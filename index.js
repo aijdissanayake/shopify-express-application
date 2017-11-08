@@ -13,6 +13,7 @@ const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 
 var tokenSet = true;
+var savedAT = '91d339c8159365e21a24dcb964352b5a';
 
 //html rendering
 app.set('views', __dirname + '/views');
@@ -38,19 +39,24 @@ app.get('/', (req, res) => {
 app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
   //console.log(req);
-  if (shop) {
-    const state = nonce();
-    const redirectUri = forwardingAddress + '/shopify/callback';
-    const installUrl = 'https://' + shop +
-      '/admin/oauth/authorize?client_id=' + apiKey +
-      '&scope=' + scopes +
-      '&state=' + state +
-      '&redirect_uri=' + redirectUri;
+  if(tokenSet){
+    res.status(200).send("You app shop has been authoeized and token is saved. Let's see traceability data soon ;)");
+  }
+  else{
+    if (shop) {
+      const state = nonce();
+      const redirectUri = forwardingAddress + '/shopify/callback';
+      const installUrl = 'https://' + shop +
+        '/admin/oauth/authorize?client_id=' + apiKey +
+        '&scope=' + scopes +
+        '&state=' + state +
+        '&redirect_uri=' + redirectUri;
 
-    res.cookie('state', state);
-    res.redirect(installUrl);
-  } else {
-    return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
+      res.cookie('state', state);
+      res.redirect(installUrl);
+    } else {
+      return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
+    }
   }
 });
 
