@@ -7,8 +7,8 @@ const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
 
-const apiKey = process.env.SHOPIFY_API_KEY;
-const apiSecret = process.env.SHOPIFY_API_SECRET;
+const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
+const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
