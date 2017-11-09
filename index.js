@@ -12,7 +12,7 @@ const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var tokenSet = true;
+var tokenSet = false;
 var savedAT = '91d339c8159365e21a24dcb964352b5a';
 
 app.set('port', process.env.PORT || 3000);
