@@ -41,7 +41,7 @@ app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
   //console.log(req);
   if(tokenSet){
-    res.status(200).send("You app shop has been authoeized and token is saved. Let's see traceability data soon ;)");
+    res.status(200).send("Your shop has been authorized and token is saved. Admin API can be accessed using the token ");
   }
   else{
     if (shop) {
