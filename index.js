@@ -12,8 +12,8 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var tokenSet = false;
-var savedAT = '91d339c8159365e21a24dcb964352b5a';
+var tokenSet = true;
+var savedAT = '427b8f836a793b2a28c7aa83cd14f44d';
 
 app.set('port', process.env.PORT || 3000);
 //html rendering
