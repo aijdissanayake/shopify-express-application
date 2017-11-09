@@ -13,6 +13,7 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "mongoose": "^4.13.1",
     "nonce": "^1.0.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
