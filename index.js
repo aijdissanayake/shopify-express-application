@@ -12,6 +12,8 @@ const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = 'read_products';
 const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 
+app.set('port', process.env.PORT || 3000);
+
 //html rendering
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -105,6 +107,6 @@ app.get('/shopify/callback', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(app.get('port'), () => {
   console.log('Example app listening on port 3000!');
 });
