@@ -10,7 +10,7 @@ const request = require('request-promise');
 const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = 'read_products';
-const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
+const forwardingAddress = "https://shopify-tracified.herokuapp.com/"; // Replace this with your HTTPS Forwarding address
 
 app.set('port', process.env.PORT || 3000);
 
@@ -108,5 +108,5 @@ app.get('/shopify/callback', (req, res) => {
 });
 
 app.listen(app.get('port'), () => {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on port '+ app.get('port') + '!');
 });
