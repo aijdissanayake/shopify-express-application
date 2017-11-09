@@ -11,10 +11,11 @@ const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
-
+const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 var tokenSet = true;
 var savedAT = '91d339c8159365e21a24dcb964352b5a';
 
+app.set('port', process.env.PORT || 3000);
 //html rendering
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -152,8 +153,8 @@ app.get('/shopify/callback', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(app.get('port'), () => {
+  console.log('Example app listening on port '+ app.get('port') + '!');
 });
 //https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
 //c3c57e5c8ba4759631bb9769527a702f
