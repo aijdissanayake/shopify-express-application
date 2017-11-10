@@ -85,7 +85,7 @@ app.get('/shopify', (req, res) => {
 
     ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
       if (err) return handleError(err);
-      if (dbshop.access_token) {
+      if (dbshop && dbshop.access_token) {
         res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
       }
       else {
