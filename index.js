@@ -247,8 +247,10 @@ app.get('/uninstall-app', (req, res) => {
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');
 });
+
+//app installation urls
 //https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
-//c3c57e5c8ba4759631bb9769527a702f
+//https://shopify-tracified.herokuapp.com/shopify?shop=99xnsbm.myshopify.com
 
 
 
