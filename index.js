@@ -12,7 +12,6 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var tokenSet = false;
 var savedAT = '427b8f836a793b2a28c7aa83cd14f44d';
 
 //Import the mongoose module
@@ -45,6 +44,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
+//test routes
 app.get('/about', function (req, res) {
   res.render('about.html');
 });
@@ -72,12 +72,13 @@ app.get('/trace', function (req, res) {
     'Data': 'No Tracified Data Found'
   });
 });
-
+//end of test routes
 
 app.get('/', (req, res) => {
   res.send('Tracified - Shopify');
 });
 
+//app url
 app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
   if (shop) {
@@ -105,10 +106,11 @@ app.get('/shopify', (req, res) => {
   } else {
 
     return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
-  
+
   }
 });
 
+//callback url on app installation
 app.get('/shopify/callback', (req, res) => {
   const { shop, hmac, code, state } = req.query;
   const stateCookie = cookie.parse(req.headers.cookie).state;
@@ -158,7 +160,6 @@ app.get('/shopify/callback', (req, res) => {
             return handleError(err);
           }
           console.log('document saved!');
-          tokenSet = false;
         });
 
 
@@ -168,7 +169,7 @@ app.get('/shopify/callback', (req, res) => {
         };
 
         //asset uploading
-        var options = {
+        var assetOptions = {
           method: 'PUT',
           uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
           headers: shopRequestHeaders,
@@ -178,44 +179,78 @@ app.get('/shopify/callback', (req, res) => {
               "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
             }
           },
-          json: true // Automatically stringifies the body to JSON
+          json: true
         };
-        // console.log(window.location.search);
-        // res.render('about.html');
-        request(options)
+
+        request(assetOptions)
           .then(function (parsedBody) {
-            res.render('about.html');
+            console.log('assets uploaded');
+            console.log(parsedBody);
           })
           .catch(function (err) {
             return (err);
           });
 
+        //register uninstallation webhook
+        var uninstallOptions = {
+          method: 'POST',
+          uri: 'https://' + shop + '/admin/webhooks.json',
+          headers: {
+            'X-Shopify-Access-Token': accessToken,
+          },
+          body: {
+            'topic': "app/uninstalled",
+            'address': forwardingAddress + '/uninstall-app',
+            'format': "json"
+          },
+          json: true
+        };
 
-        // res.redirect('https://c4f5c707.ngrok.io/');
-        // request.get(shopRequestUrl, { headers: shopRequestHeaders })
-        //   .then((shopResponse) => {
-        //     res.end(shopResponse);
-        //   })
-        //   .catch((error) => {
-        //     res.status(error.statusCode).send(error.error.error_description);
-        //   });
-        // TODO
-        // Use access token to make API call to 'shop' endpoint
+        request(uninstallOptions)
+          .then(function (parsedBody) {
+            console.log('uninstall webhook registered');
+            console.log(parsedBody);
+          })
+          .catch(function (err) {
+            return (err);
+          });
+
+        res.render('about.html');
       })
       .catch((error) => {
         res.status(error.statusCode).send(error.error.error_description);
       });
-    // TODO
-    // Validate request is from Shopify
-    // Exchange temporary code for a permanent access token
-    // Use access token to make API call to 'shop' endpoint
+
   } else {
     res.status(400).send('Required parameters missing');
   }
 });
+
+//uinstall app webhook handler
+app.get('/uninstall-app', (req, res) => {
+  var shop = req.get('X-Shopify-Shop-Domain');
+  console.log('App is unistalled by' + shop);
+  if (shop) {
+    ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, uninstalledShop) {
+      if (err) return handleError(err);
+      if (uninstalledShop) {
+        uninstalledShop.access_token = null;
+        uninstalledShop.save(function () {
+          if (err) return handleError(err);
+          console.log("access token removed from the app uninstalled shop");
+        });
+      }
+    });
+  }
+});
+
 
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');
 });
 //https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
 //c3c57e5c8ba4759631bb9769527a702f
+
+
+
+
