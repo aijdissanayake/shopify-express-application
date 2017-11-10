@@ -34,7 +34,7 @@ var Schema = mongoose.Schema;
 
 var ShopSchema = new Schema({
   name: String,
-  access_token: String
+  access_token: String 
 });
 
 var ShopModel = mongoose.model('ShopModel', ShopSchema);
@@ -85,7 +85,7 @@ app.get('/shopify', (req, res) => {
 
     ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
       if (err) return handleError(err);
-      if (dbshop["access_token"]) {
+      if (dbshop.access_token) {
         res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
       }
       else {
@@ -207,11 +207,12 @@ app.get('/shopify/callback', (req, res) => {
           .then(function (parsedBody) {
             console.log('uninstall webhook registered');
             console.log(parsedBody);
-            res.render('about.html');
           })
           .catch(function (err) {
             return (err);
           });
+
+        res.render('about.html');
 
         
       })
