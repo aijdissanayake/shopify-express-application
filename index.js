@@ -15,6 +15,42 @@ const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 var tokenSet = true;
 var savedAT = '427b8f836a793b2a28c7aa83cd14f44d';
 
+//Import the mongoose module
+var mongoose = require('mongoose');
+
+//Set up default mongoose connection
+var mongoDB = 'mongodb://shopify:Tracified@ds251435.mlab.com:51435/shopify-db';
+mongoose.connect(mongoDB, {
+  useMongoClient: true
+});
+
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+//Define a schema
+var Schema = mongoose.Schema;
+
+var ShopSchema = new Schema({
+    name: String,
+    access_token: String
+});
+
+var ShopModel = mongoose.model('ShopModel', ShopSchema );
+
+var ShopInstance = new ShopModel({ name: '99xnsbm.myshopify.com' });
+
+ShopInstance.save(function (err) {
+  if (err){ 
+    console.log('db ERROR');
+    console.log(err);
+    return handleError(err);
+  }
+  console.log('document saved!');
+});
+
 app.set('port', process.env.PORT || 3000);
 //html rendering
 app.set('views', __dirname + '/views');
@@ -34,7 +70,7 @@ app.get('/trace', function (req, res) {
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Tracified - Shopify');
 });
 
 app.get('/shopify', (req, res) => {
