@@ -85,7 +85,7 @@ app.get('/shopify', (req, res) => {
 
     ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
       if (err) return handleError(err);
-      if (dbshop[access_token]) {
+      if (dbshop["access_token"]) {
         res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
       }
       else {
@@ -159,11 +159,9 @@ app.get('/shopify/callback', (req, res) => {
             console.log(err);
             return handleError(err);
           }
-          console.log('document saved!');
+          console.log('shop saved with access token!');
         });
 
-
-        const shopRequestUrl = 'https://' + shop + '/admin/orders.json';
         const shopRequestHeaders = {
           'X-Shopify-Access-Token': accessToken,
         };
@@ -171,6 +169,7 @@ app.get('/shopify/callback', (req, res) => {
         //asset uploading
         var assetOptions = {
           method: 'PUT',
+          //need to set get theme id
           uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
           headers: shopRequestHeaders,
           body: {
@@ -195,9 +194,7 @@ app.get('/shopify/callback', (req, res) => {
         var uninstallOptions = {
           method: 'POST',
           uri: 'https://' + shop + '/admin/webhooks.json',
-          headers: {
-            'X-Shopify-Access-Token': accessToken,
-          },
+          headers: shopRequestHeaders,
           body: {
             'topic': "app/uninstalled",
             'address': forwardingAddress + '/uninstall-app',
@@ -210,12 +207,13 @@ app.get('/shopify/callback', (req, res) => {
           .then(function (parsedBody) {
             console.log('uninstall webhook registered');
             console.log(parsedBody);
+            res.render('about.html');
           })
           .catch(function (err) {
             return (err);
           });
 
-        res.render('about.html');
+        
       })
       .catch((error) => {
         res.status(error.statusCode).send(error.error.error_description);
