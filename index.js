@@ -12,7 +12,7 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var tokenSet = true;
+var tokenSet = false;
 var savedAT = '427b8f836a793b2a28c7aa83cd14f44d';
 
 //Import the mongoose module
@@ -34,22 +34,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Schema = mongoose.Schema;
 
 var ShopSchema = new Schema({
-    name: String,
-    access_token: String
+  name: String,
+  access_token: String
 });
 
-var ShopModel = mongoose.model('ShopModel', ShopSchema );
-
-var ShopInstance = new ShopModel({ name: '99xnsbm.myshopify.com' });
-
-ShopInstance.save(function (err) {
-  if (err){ 
-    console.log('db ERROR');
-    console.log(err);
-    return handleError(err);
-  }
-  console.log('document saved!');
-});
+var ShopModel = mongoose.model('ShopModel', ShopSchema);
 
 app.set('port', process.env.PORT || 3000);
 //html rendering
@@ -76,10 +65,10 @@ app.get('/', (req, res) => {
 app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
   //console.log(req);
-  if(tokenSet){
+  if (tokenSet) {
     res.status(200).send("Your shop has been authorized and token is saved. Admin API can be accessed using the token ");
   }
-  else{
+  else {
     if (shop) {
       const state = nonce();
       const redirectUri = forwardingAddress + '/shopify/callback';
@@ -137,6 +126,19 @@ app.get('/shopify/callback', (req, res) => {
         console.log('accessToken');
         console.log(accessToken);
 
+        var ShopInstance = new ShopModel({ name: shop, access_token: accessToken });
+
+        ShopInstance.save(function (err) {
+          if (err) {
+            console.log('db ERROR');
+            console.log(err);
+            return handleError(err);
+          }
+          console.log('document saved!');
+          tokenSet = false;
+        });
+
+
         const shopRequestUrl = 'https://' + shop + '/admin/orders.json';
         const shopRequestHeaders = {
           'X-Shopify-Access-Token': accessToken,
@@ -190,7 +192,7 @@ app.get('/shopify/callback', (req, res) => {
 });
 
 app.listen(app.get('port'), () => {
-  console.log('Example app listening on port '+ app.get('port') + '!');
+  console.log('Example app listening on port ' + app.get('port') + '!');
 });
 //https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
 //c3c57e5c8ba4759631bb9769527a702f
