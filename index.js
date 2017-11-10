@@ -49,6 +49,22 @@ app.get('/about', function (req, res) {
   res.render('about.html');
 });
 
+app.get('/dbtest', function (req, res) {
+  ShopModel.findOne({ 'name': '99xnsbm.myshopify.com' }, 'name access_token', function (err, shop) {
+    if (err) return handleError(err);
+    if (shop) {
+      shop.name = "new name";
+      shop.save(function () {
+        if (err) return handleError(err);
+        console.log("modified");
+      });
+      res.send(shop);
+    }
+    else { res.send("No results found"); }
+
+  });
+});
+
 app.get('/trace', function (req, res) {
   res.send({
     'Order id': req.query.id,
@@ -64,25 +80,32 @@ app.get('/', (req, res) => {
 
 app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
-  //console.log(req);
-  if (tokenSet) {
-    res.status(200).send("Your shop has been authorized and token is saved. Admin API can be accessed using the token ");
-  }
-  else {
-    if (shop) {
-      const state = nonce();
-      const redirectUri = forwardingAddress + '/shopify/callback';
-      const installUrl = 'https://' + shop +
-        '/admin/oauth/authorize?client_id=' + apiKey +
-        '&scope=' + scopes +
-        '&state=' + state +
-        '&redirect_uri=' + redirectUri;
+  if (shop) {
 
-      res.cookie('state', state);
-      res.redirect(installUrl);
-    } else {
-      return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
-    }
+    ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
+      if (err) return handleError(err);
+      if (dbshop[access_token]) {
+        res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
+      }
+      else {
+        const state = nonce();
+        const redirectUri = forwardingAddress + '/shopify/callback';
+        const installUrl = 'https://' + shop +
+          '/admin/oauth/authorize?client_id=' + apiKey +
+          '&scope=' + scopes +
+          '&state=' + state +
+          '&redirect_uri=' + redirectUri;
+
+        res.cookie('state', state);
+        res.redirect(installUrl);
+      }
+
+    });
+
+  } else {
+
+    return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
+  
   }
 });
 
@@ -110,7 +133,7 @@ app.get('/shopify/callback', (req, res) => {
 
     console.log("code");
     console.log(code);
-    var codep = "c3c57e5c8ba4759631bb9769527a702f";
+
     const accessTokenRequestUrl = 'https://' + shop + '/admin/oauth/access_token';
     const accessTokenPayload = {
       client_id: apiKey,
