@@ -34,7 +34,7 @@ var Schema = mongoose.Schema;
 
 var ShopSchema = new Schema({
   name: String,
-  access_token: String 
+  access_token: String
 });
 
 var ShopModel = mongoose.model('ShopModel', ShopSchema);
@@ -151,80 +151,95 @@ app.get('/shopify/callback', (req, res) => {
         console.log('accessToken');
         console.log(accessToken);
 
-        var ShopInstance = new ShopModel({ name: shop, access_token: accessToken });
-
-        ShopInstance.save(function (err) {
-          if (err) {
-            console.log('db ERROR');
-            console.log(err);
-            return handleError(err);
+        ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, installedshop) {
+          if (err) return handleError(err);
+          //to use if the shopnme is alredy there
+          if (installedshop) {
+            installedShop.access_token = accessToken;
+            installedShop.save(function () {
+              if (err) return handleError(err);
+              console.log("new access token saved for existing shop");
+            });
           }
-          console.log('shop saved with access token!');
+          else {
+            var ShopInstance = new ShopModel({ name: shop, access_token: accessToken });
+
+            ShopInstance.save(function (err) {
+              if (err) {
+                console.log('db ERROR');
+                console.log(err);
+                return handleError(err);
+              }
+              console.log('new shop saved with access token!');
+            });
+          }
         });
 
-        const shopRequestHeaders = {
-          'X-Shopify-Access-Token': accessToken,
-        };
 
-        //asset uploading
-        var assetOptions = {
-          method: 'PUT',
-          //need to set get theme id
-          uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
-          headers: shopRequestHeaders,
-          body: {
-            "asset": {
-              "key": "assets\/emputty.gif",
-              "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
-            }
-          },
-          json: true
-        };
 
-        request(assetOptions)
-          .then(function (parsedBody) {
-            console.log('assets uploaded');
-            console.log(parsedBody);
-          })
-          .catch(function (err) {
-            return (err);
+          const shopRequestHeaders = {
+            'X-Shopify-Access-Token': accessToken,
+          };
+
+          //asset uploading
+          var assetOptions = {
+            method: 'PUT',
+            //need to set get theme id
+            uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+            headers: shopRequestHeaders,
+            body: {
+              "asset": {
+                "key": "assets\/emputty.gif",
+                "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+              }
+            },
+            json: true
+          };
+
+          request(assetOptions)
+            .then(function (parsedBody) {
+              console.log('assets uploaded');
+              console.log(parsedBody);
+            })
+            .catch(function (err) {
+              return (err);
+            });
+
+          //register uninstallation webhook
+          console.log('webhook registration');
+          var uninstallOptions = {
+            method: 'POST',
+            uri: 'https://' + shop + '/admin/webhooks.json',
+            headers: shopRequestHeaders,
+            body: {
+              'topic': "app/uninstalled",
+              'address': forwardingAddress + '/uninstall-app',
+              'format': "json"
+            },
+            json: true
+          };
+
+          request(uninstallOptions)
+            .then(function (parsedBody) {
+              console.log('uninstall webhook registered');
+              console.log(parsedBody);
+            })
+            .catch(function (err) {
+              return (err);
+            });
+          console.log('webhook registration request sent');
+
+          res.render('about.html');
+
+
+        })
+          .catch((error) => {
+            res.status(error.statusCode).send(error.error.error_description);
           });
 
-        //register uninstallation webhook
-        console.log('webhook registration');
-        var uninstallOptions = {
-          method: 'POST',
-          uri: 'https://' + shop + '/admin/webhooks.json',
-          headers: shopRequestHeaders,
-          body: {
-            'topic': "app/uninstalled",
-            'address': forwardingAddress + '/uninstall-app',
-            'format': "json"
-          },
-          json: true
-        };
-
-        request(uninstallOptions)
-          .then(function (parsedBody) {
-            console.log('uninstall webhook registered');
-            console.log(parsedBody);
-          })
-          .catch(function (err) {
-            return (err);
-          });
-        console.log('webhook registration request sent');
-
-        res.render('about.html');
-
-        
-      })
-      .catch((error) => {
-        res.status(error.statusCode).send(error.error.error_description);
-      });
-
-  } else {
-    res.status(400).send('Required parameters missing');
-  }
+      } else {
+        res.status(400).send('Required parameters missing');
+      }
 });
 
 //uinstall app webhook handler
