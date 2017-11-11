@@ -191,6 +191,7 @@ app.get('/shopify/callback', (req, res) => {
           });
 
         //register uninstallation webhook
+        console.log('webhook registration');
         var uninstallOptions = {
           method: 'POST',
           uri: 'https://' + shop + '/admin/webhooks.json',
@@ -211,6 +212,7 @@ app.get('/shopify/callback', (req, res) => {
           .catch(function (err) {
             return (err);
           });
+        console.log('webhook registration request sent');
 
         res.render('about.html');
 
