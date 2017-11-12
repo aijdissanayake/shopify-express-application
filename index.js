@@ -151,13 +151,13 @@ app.get('/shopify/callback', (req, res) => {
         console.log('accessToken');
         console.log(accessToken);
 
-        ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, installedshop) {
+        ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
           if (err) return handleError(err);
           console.log('ready to save unistalled shop');
           //to use if the shopnme is alredy there
-          if (installedshop) {
+          if (installedShop) {
             console.log('existing installed shop is');
-            console.log(installedshop)
+            console.log(installedShop)
             installedShop.access_token = accessToken;
             installedShop.save(function () {
               if (err) return handleError(err);
