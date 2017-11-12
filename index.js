@@ -12,7 +12,6 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var savedAT = '427b8f836a793b2a28c7aa83cd14f44d';
 
 //Import the mongoose module
 var mongoose = require('mongoose');
@@ -215,9 +214,12 @@ app.get('/shopify/callback', (req, res) => {
             uri: 'https://' + shop + '/admin/webhooks.json',
             headers: shopRequestHeaders,
             body: {
-              'topic': "app/uninstalled",
-              'address': forwardingAddress + '/uninstall-app',
-              'format': "json"
+              'webhook':
+              {  
+                'topic': "app/uninstalled",
+                'address': forwardingAddress + '/uninstall-app',
+                'format': "json"
+              }
             },
             json: true
           };
@@ -246,7 +248,7 @@ app.get('/shopify/callback', (req, res) => {
 });
 
 //uinstall app webhook handler
-app.get('/uninstall-app', (req, res) => {
+app.post('/uninstall-app', (req, res) => {
   var shop = req.get('X-Shopify-Shop-Domain');
   console.log('App is unistalled by' + shop);
   if (shop) {
