@@ -286,6 +286,7 @@ app.post('/uninstall-app', (req, res) => {
         });
       }
     });
+    res.status(200).send('webhook recieved');
   }
 });
 
