@@ -197,7 +197,7 @@ app.get('/shopify/callback', (req, res) => {
           .then(function (parsedBody) {
 
             var theme_id;
-
+            var themes = parsedBody.themes;
             console.log('getting theme id');
             // themes.forEach(function (theme) {
             //   console.log(theme.role);
