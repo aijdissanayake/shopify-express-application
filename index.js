@@ -212,15 +212,15 @@ app.get('/shopify/callback', (req, res) => {
               }
             }
 
-            
+            var timestamp = new Date().getTime();
             var assetOptions = {
               method: 'PUT',
               //need to set get theme id
-              uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+              uri: 'https://' + shop + '/admin/themes/'+theme_id+'/assets.json',
               headers: shopRequestHeaders,
               body: {
                 "asset": {
-                  "key": "assets\/tracified.gif",
+                  "key": "assets\/tracified"+timestamp+".gif",
                   "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
                 }
               },
