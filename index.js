@@ -199,11 +199,11 @@ app.get('/shopify/callback', (req, res) => {
             console.log(parsedBody);
             var themes = parsedBody.themes;
             console.log(themes);
-            for (let theme in themes) {
+            themes.forEach(function(theme){
               console.log(theme);
               console.log(theme.role);
               console.log(theme.id);
-            }
+            });
 
           })
           .catch(function (err) {
