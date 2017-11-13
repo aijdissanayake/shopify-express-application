@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
-const app = express();
+//const app = express();
 const crypto = require('crypto');
 const cookie = require('cookie');
 const nonce = require('nonce')();
@@ -13,6 +13,7 @@ const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 
+//installation route
 router.get('/', (req, res) => {
     const shop = req.query.shop;
     if (shop) {
@@ -40,6 +41,7 @@ router.get('/', (req, res) => {
     }
 });
 
+//callback url on app installation
 router.get('/callback', (req, res) => {
     const { shop, hmac, code, state } = req.query;
     const stateCookie = cookie.parse(req.headers.cookie).state;
@@ -177,7 +179,7 @@ router.get('/callback', (req, res) => {
               'webhook':
               {
                 'topic': "app/uninstalled",
-                'address': forwardingAddress + '/uninstall-app',
+                'address': forwardingAddress + '/webhook/uninstall-app',
                 'format': "json"
               }
             },
