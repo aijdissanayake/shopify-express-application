@@ -13,9 +13,10 @@ const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 const Shop = require('./models/Shop');
+const mongoose = require('mongoose');
+const install = require('./routes/install');
 
-//Import the mongoose module
-var mongoose = require('mongoose');
+app.use('/install', install);
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://shopify:Tracified@ds251435.mlab.com:51435/shopify-db';
@@ -29,28 +30,14 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-//Define a schema
-//var Schema = mongoose.Schema;
-
-// var ShopSchema = new Schema({
-//   name: String,
-//   access_token: String
-// });
-
-//var ShopModel = mongoose.model('ShopModel', ShopSchema);
 
 app.set('port', process.env.PORT || 3000);
 //html rendering
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-//test routes
-// app.get('/about', function (req, res) {
-//   res.render('about.html');
-// });
-
 // app.get('/dbtest', function (req, res) {
-//   ShopModel.findOne({ 'name': '99xnsbm.myshopify.com' }, 'name access_token', function (err, shop) {
+//   Shop.findOne({ 'name': '99xnsbm.myshopify.com' }, 'name access_token', function (err, shop) {
 //     if (err) return handleError(err);
 //     if (shop) {
 //       shop.name = "new name";
