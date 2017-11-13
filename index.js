@@ -184,6 +184,30 @@ app.get('/shopify/callback', (req, res) => {
           };
 
           //asset uploading
+          //get the theme id
+          var getThemeOptions = {
+            method: 'PUT',
+            //need to set get theme id
+            uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+            headers: shopRequestHeaders,
+            json: true
+          };
+
+          request(getThemeOptions)
+          .then(function (parsedBody) {
+            console.log('getting theme id');
+            console.log(parsedBody);
+            var themes = parsedBody.themes;
+            for (var theme in themes) {
+              console.log(theme.role + theme.id);
+            }
+
+          })
+          .catch(function (err) {
+            return (err);
+          });
+
+
           var assetOptions = {
             method: 'PUT',
             //need to set get theme id
