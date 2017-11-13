@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
             }
             else {
                 const state = nonce();
-                const redirectUri = forwardingAddress + '/shopify/callback';
+                const redirectUri = forwardingAddress + '/install/callback';
                 const installUrl = 'https://' + shop +
                     '/admin/oauth/authorize?client_id=' + apiKey +
                     '&scope=' + scopes +
@@ -129,7 +129,7 @@ router.get('/callback', (req, res) => {
               var theme_id;
               var themes = parsedBody.themes;
               console.log('getting theme id');
-              
+
               for (var i = 0; i < themes.length; i++) {
                 if (themes[i].role == "main"){
                   theme_id = themes[i].id;
