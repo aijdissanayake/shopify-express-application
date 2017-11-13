@@ -186,9 +186,9 @@ app.get('/shopify/callback', (req, res) => {
           //asset uploading
           //get the theme id
           var getThemeOptions = {
-            method: 'PUT',
+            method: 'GET',
             //need to set get theme id
-            uri: 'https://99xnsbm.myshopify.com/admin/themes/4664033312/assets.json',
+            uri: 'https://' + shop + '/admin/themes.json',
             headers: shopRequestHeaders,
             json: true
           };
