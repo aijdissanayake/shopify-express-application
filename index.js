@@ -12,6 +12,7 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 //const forwardingAddress = "https://6c9cce84.ngrok.io"; // Replace this with your HTTPS Forwarding address
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
+const Shop = require('/models/Shop');
 
 //Import the mongoose module
 var mongoose = require('mongoose');
@@ -29,14 +30,14 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 //Define a schema
-var Schema = mongoose.Schema;
+//var Schema = mongoose.Schema;
 
-var ShopSchema = new Schema({
-  name: String,
-  access_token: String
-});
+// var ShopSchema = new Schema({
+//   name: String,
+//   access_token: String
+// });
 
-var ShopModel = mongoose.model('ShopModel', ShopSchema);
+//var ShopModel = mongoose.model('ShopModel', ShopSchema);
 
 app.set('port', process.env.PORT || 3000);
 //html rendering
@@ -44,25 +45,25 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
 //test routes
-app.get('/about', function (req, res) {
-  res.render('about.html');
-});
+// app.get('/about', function (req, res) {
+//   res.render('about.html');
+// });
 
-app.get('/dbtest', function (req, res) {
-  ShopModel.findOne({ 'name': '99xnsbm.myshopify.com' }, 'name access_token', function (err, shop) {
-    if (err) return handleError(err);
-    if (shop) {
-      shop.name = "new name";
-      shop.save(function () {
-        if (err) return handleError(err);
-        console.log("modified");
-      });
-      res.send(shop);
-    }
-    else { res.send("No results found"); }
+// app.get('/dbtest', function (req, res) {
+//   ShopModel.findOne({ 'name': '99xnsbm.myshopify.com' }, 'name access_token', function (err, shop) {
+//     if (err) return handleError(err);
+//     if (shop) {
+//       shop.name = "new name";
+//       shop.save(function () {
+//         if (err) return handleError(err);
+//         console.log("modified");
+//       });
+//       res.send(shop);
+//     }
+//     else { res.send("No results found"); }
 
-  });
-});
+//   });
+// });
 
 app.get('/trace', function (req, res) {
   res.send({
@@ -82,7 +83,7 @@ app.get('/shopify', (req, res) => {
   const shop = req.query.shop;
   if (shop) {
 
-    ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
+    Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
       if (err) return handleError(err);
       if (dbshop && dbshop.access_token) {
         res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
@@ -150,7 +151,7 @@ app.get('/shopify/callback', (req, res) => {
         console.log('accessToken');
         console.log(accessToken);
 
-        ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
+        Shop.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
           if (err) return handleError(err);
           console.log('ready to save unistalled shop');
           //to use if the shopnme is alredy there
@@ -164,7 +165,7 @@ app.get('/shopify/callback', (req, res) => {
             });
           }
           else {
-            var ShopInstance = new ShopModel({ name: shop, access_token: accessToken });
+            var ShopInstance = new Shop({ name: shop, access_token: accessToken });
 
             ShopInstance.save(function (err) {
               if (err) {
@@ -286,7 +287,7 @@ app.post('/uninstall-app', (req, res) => {
   var shop = req.get('X-Shopify-Shop-Domain');
   console.log('App is unistalled by' + shop);
   if (shop) {
-    ShopModel.findOne({ 'name': shop }, 'name access_token', function (err, uninstalledShop) {
+    Shop.findOne({ 'name': shop }, 'name access_token', function (err, uninstalledShop) {
       if (err) return handleError(err);
       if (uninstalledShop) {
         uninstalledShop.access_token = null;
