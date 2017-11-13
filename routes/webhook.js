@@ -19,6 +19,9 @@ router.get('/uninstall-app', (req, res) => {
         });
         res.status(200).send('webhook recieved');
     }
+    else{
+        res.status(200).send('No shop in the header');
+    }
 });
 
 module.exports = router;
