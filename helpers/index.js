@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const querystring = require('querystring');
+const request = require('request-promise');
 
 module.exports = {
 
@@ -13,9 +14,22 @@ module.exports = {
         const generatedHash = crypto
             .createHmac('sha256', apiSecret)
             .update(message)
-            .digest('hex');        
-            
+            .digest('hex');
+
         return generatedHash !== query.hmac ? false : true;
+    },
+
+    shopAdminAPI(method, shop, rel_url, shopRequestHeaders, callback) {
+        var options = {
+            method: method,
+            uri: 'https://' + shop + rel_url,
+            headers: shopRequestHeaders,
+            json: true
+        };
+
+        request(options)
+            .then(callback);
+
     }
 
 }
