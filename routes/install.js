@@ -6,6 +6,7 @@ const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
 const Shop = require('../models/Shop');
+const verifyHMAC = require('../helpers').verifyHMAC;
 const router = express.Router();
 const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
@@ -41,21 +42,21 @@ router.get('/callback', (req, res) => {
     }
   
     if (shop && hmac && code) {
-      const map = Object.assign({}, req.query);
-      console.log("signature");
-      console.log(map['signature']);
-      console.log('hmac');
-      console.log(map['hmac']);
-      delete map['signature'];
-      delete map['hmac'];
-      const message = querystring.stringify(map);
-      const generatedHash = crypto
-        .createHmac('sha256', apiSecret)
-        .update(message)
-        .digest('hex');
+      // const map = Object.assign({}, req.query);
+      // console.log("signature");
+      // console.log(map['signature']);
+      // console.log('hmac');
+      // console.log(map['hmac']);
+      // delete map['signature'];
+      // delete map['hmac'];
+      // const message = querystring.stringify(map);
+      // const generatedHash = crypto
+      //   .createHmac('sha256', apiSecret)
+      //   .update(message)
+      //   .digest('hex');
 
   
-      if (generatedHash !== hmac) {
+      if (verifyHMAC(req.query, apiSecret)) {
         return res.status(400).send('HMAC validation failed');
       }
   
