@@ -3,7 +3,7 @@ const router = express.Router();
 const Shop = require('../models/Shop');
 
 //uinstall app webhook handler
-router.get('/uninstall-app', (req, res) => {
+router.post('/uninstall-app', (req, res) => {
     var shop = req.get('X-Shopify-Shop-Domain');
     console.log('App is unistalled by' + shop);
     if (shop) {
