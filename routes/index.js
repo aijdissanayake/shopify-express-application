@@ -22,14 +22,4 @@ router.get('/', (req, res) => {
     }
 });
 
-//test route
-router.get('/trace', function (req, res) {
-    res.send({
-      'Order id': req.query.id,
-      'Shop': req.query.shop,
-      'Data': 'No Tracified Data Found'
-    });
-  });
-//end of test routes
-
 module.exports = router;

@@ -16,12 +16,6 @@ const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 router.get('/', (req, res) => {
     const shop = req.query.shop;
     if (shop) {
-        // Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
-        //     if (err) return handleError(err);
-        //     if (dbshop && dbshop.access_token) {                
-        //         res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
-        //     }
-        //     else {
                 const state = nonce();
                 const redirectUri = forwardingAddress + '/install/callback';
                 const installUrl = 'https://' + shop +
@@ -32,8 +26,6 @@ router.get('/', (req, res) => {
 
                 res.cookie('state', state);
                 res.redirect(installUrl);
-        //     }
-        // });
     } else {
         return res.status(400).send('Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request');
     }
@@ -50,6 +42,10 @@ router.get('/callback', (req, res) => {
   
     if (shop && hmac && code) {
       const map = Object.assign({}, req.query);
+      console.log("signature");
+      console.log(map['signature']);
+      console.log('hmac');
+      console.log(map['hmac']);
       delete map['signature'];
       delete map['hmac'];
       const message = querystring.stringify(map);
@@ -57,6 +53,7 @@ router.get('/callback', (req, res) => {
         .createHmac('sha256', apiSecret)
         .update(message)
         .digest('hex');
+
   
       if (generatedHash !== hmac) {
         return res.status(400).send('HMAC validation failed');
@@ -83,7 +80,7 @@ router.get('/callback', (req, res) => {
           Shop.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
             if (err) return handleError(err);
             console.log('ready to save unistalled shop');
-            //to use if the shopnme is alredy there
+            //to use if a shop record is alredy there
             if (installedShop) {
               console.log('existing installed shop is');
               console.log(installedShop)

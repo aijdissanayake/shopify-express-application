@@ -6,15 +6,16 @@ const cookie = require('cookie');
 const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
-const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
-const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
-const scopes = 'write_products,write_themes,write_orders';
-const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 const Shop = require('./models/Shop');
 const mongoose = require('mongoose');
 const index = require('./routes/index');
 const install = require('./routes/install');
 const webhook = require('./routes/webhook');
+const adminlink = require('./routes/adminlink');
+const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
+const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
+const scopes = 'write_products,write_themes,write_orders';
+const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 
 app.set('port', process.env.PORT || 3000);
 
@@ -35,6 +36,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
+app.use('/adminlink', adminlink);
 
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');
