@@ -56,7 +56,7 @@ router.get('/callback', (req, res) => {
       //   .digest('hex');
 
   
-      if (verifyHMAC(req.query, apiSecret)) {
+      if (!verifyHMAC(req.query, apiSecret)) {
         return res.status(400).send('HMAC validation failed');
       }
   
