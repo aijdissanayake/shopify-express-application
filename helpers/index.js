@@ -16,7 +16,7 @@ module.exports = {
             .update(message)
             .digest('hex');
         
-        return generatedHash !== hmac ? false : true;        
+        return generatedHash !== query.hmac ? false : true;        
     }
 
 }
