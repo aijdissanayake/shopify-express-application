@@ -9,6 +9,10 @@ module.exports = {
         }
         console.log("Helper HMAC verification in progress");
         const map = Object.assign({}, query);
+        console.log("signature");
+        console.log(map['signature']);
+        console.log('hmac');
+        console.log(map['hmac']);
         delete map['hmac'];
         const message = querystring.stringify(map);
         const generatedHash = crypto
@@ -16,7 +20,11 @@ module.exports = {
             .update(message)
             .digest('hex');
         
-        return generatedHash !== query.hmac ? false : true;        
+        console.log('generatedHash');
+        console.log(generatedHash);
+        
+            
+        return generatedHash !== query.hmac ? false : true;
     }
 
 }
