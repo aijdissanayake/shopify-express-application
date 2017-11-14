@@ -32,16 +32,9 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
-
-
-
-
 app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
-
-;
 
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');

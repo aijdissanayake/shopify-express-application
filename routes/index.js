@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 //test route
-app.get('/trace', function (req, res) {
+router.get('/trace', function (req, res) {
     res.send({
       'Order id': req.query.id,
       'Shop': req.query.shop,
