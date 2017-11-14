@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     //res.send('Tracified - Shopify- modularized');
     const shop = req.query.shop;
     if (shop) {
+        const query = Object.keys(req.query).map((key) => `${key}=${req.query[key]}`).join('&');
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
