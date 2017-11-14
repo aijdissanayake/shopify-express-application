@@ -169,7 +169,7 @@ router.get('/callback', (req, res) => {
 
       })
       .catch((error) => {
-        res.status(400).send(error.error_description);
+        res.status(400).send(error);
       });
 
   } else {
