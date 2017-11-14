@@ -36,19 +36,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 
-//test route
-app.get('/trace', function (req, res) {
-  res.send({
-    'Order id': req.query.id,
-    'Shop': req.query.shop,
-    'Data': 'No Tracified Data Found'
-  });
-});
-
-//end of test routes
-app.get('/', (req, res) => {
-  res.send('Tracified - Shopify');
-})
 
 app.use('/', index);
 app.use('/install', install);
