@@ -83,15 +83,6 @@ router.get('/callback', (req, res) => {
 
         //asset uploading
         //get the theme id
-        // var getThemeOptions = {
-        //   method: 'GET',
-        //   uri: 'https://' + shop + '/admin/themes.json',
-        //   headers: shopRequestHeaders,
-        //   json: true
-        // };
-        // request(getThemeOptions)
-        // .then(
-
         shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders, null, function (parsedBody) {
 
           var theme_id;
@@ -107,34 +98,39 @@ router.get('/callback', (req, res) => {
           }
 
           var timestamp = new Date().getTime();
-          var assetOptions = {
-            method: 'PUT',
-            //need to set get theme id
-            uri: 'https://' + shop + '/admin/themes/' + theme_id + '/assets.json',
-            headers: shopRequestHeaders,
-            body: {
-              "asset": {
-                "key": "assets\/tracified" + timestamp + ".gif",
-                "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
-              }
-            },
-            json: true
-          };
+          // var assetOptions = {
+          //   method: 'PUT',
+          //   //need to set get theme id
+          //   uri: 'https://' + shop + '/admin/themes/' + theme_id + '/assets.json',
+          //   headers: shopRequestHeaders,
+          //   body: {
+          //     "asset": {
+          //       "key": "assets\/tracified" + timestamp + ".gif",
+          //       "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+          //     }
+          //   },
+          //   json: true
+          // };
 
-          request(assetOptions)
-            .then(function (parsedBody) {
+          assetUploadBody =  {
+            "asset": {
+              "key": "assets\/tracified" + timestamp + ".gif",
+              "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+            }
+          };
+          
+
+          // request(assetOptions).then(
+            shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders, assetUploadBody,
+            function (parsedBody) {
               console.log('assets uploaded');
               console.log(parsedBody);
-            })
-            .catch(function (err) {
-              return (err);
             });
+            // .catch(function (err) {
+            //   return (err);
+            // });
 
-        })
-          ;
-        // .catch(function (err) {
-        //   return (err);
-        // });
+        });
 
         //register uninstallation webhook
         uninstallWHBody = {
