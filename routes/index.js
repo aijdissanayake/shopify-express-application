@@ -16,8 +16,6 @@ router.get('/', (req, res) => {
                 const shopRequestHeaders = {
                     'X-Shopify-Access-Token': dbshop.access_token,
                 };
-                //console.log(dbshop.ac);
-
                 shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders, function(orders){
                     res.status(200).send(orders);                
                 });

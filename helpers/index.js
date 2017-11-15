@@ -19,17 +19,15 @@ module.exports = {
         return generatedHash !== query.hmac ? false : true;
     },
 
-    shopAdminAPI(method, shop, rel_url, shopRequestHeaders, callback) {
+    shopAdminAPI(method, shop, rel_url, shopRequestHeaders, body, callback) {
         var options = {
             method: method,
             uri: 'https://' + shop + rel_url,
             headers: shopRequestHeaders,
+            body: body,
             json: true
         };
-
-        request(options)
-            .then(callback);
-
+        request(options).then(callback);
     }
 
 }

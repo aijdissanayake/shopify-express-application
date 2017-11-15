@@ -139,23 +139,33 @@ router.get('/callback', (req, res) => {
 
         //register uninstallation webhook
         console.log('webhook registration');
-        var uninstallOptions = {
-          method: 'POST',
-          uri: 'https://' + shop + '/admin/webhooks.json',
-          headers: shopRequestHeaders,
-          body: {
+        // var uninstallOptions = {
+        //   method: 'POST',
+        //   uri: 'https://' + shop + '/admin/webhooks.json',
+        //   headers: shopRequestHeaders,
+        //   body: {
+        //     'webhook':
+        //     {
+        //       'topic': "app/uninstalled",
+        //       'address': forwardingAddress + '/webhook/uninstall-app',
+        //       'format': "json"
+        //     }
+        //   },
+        //   json: true
+        // };
+        // request(uninstallOptions).then(
+          uninstallWHBody =  {
             'webhook':
             {
               'topic': "app/uninstalled",
               'address': forwardingAddress + '/webhook/uninstall-app',
               'format': "json"
             }
-          },
-          json: true
-        };
-
-        request(uninstallOptions)
-          .then(function (parsedBody) {
+          };
+        
+        shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHBody, 
+        
+          function (parsedBody) {
             console.log('uninstall webhook registered');
             console.log(parsedBody);
           })
