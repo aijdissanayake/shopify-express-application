@@ -45,7 +45,3 @@ app.listen(app.get('port'), () => {
 //app installation urls
 //https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
 //https://shopify-tracified.herokuapp.com/shopify?shop=99xnsbm.myshopify.com
-
-
-
-

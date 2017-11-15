@@ -121,7 +121,8 @@ router.get('/callback', (req, res) => {
           
 
           // request(assetOptions).then(
-            shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders, assetUploadBody,
+            var assetUploadURL = '/admin/themes/' + theme_id + '/assets.json'
+            shopAdminAPI('PUT', shop, assetUploadURL, shopRequestHeaders, assetUploadBody,
             function (parsedBody) {
               console.log('assets uploaded');
               console.log(parsedBody);
