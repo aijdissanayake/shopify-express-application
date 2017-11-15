@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Shop = require('../models/Shop');
+const verifyWebhook = require('../middleware').verifyWebhook;
 
 //uinstall app webhook handler
-router.post('/uninstall-app', (req, res) => {
+router.post('/uninstall-app', verifyWebhook, (req, res) => {
     var shop = req.get('X-Shopify-Shop-Domain');
-    console.log('App is unistalled by' + shop);
+    console.log('App is unistalled by ' + shop);
     if (shop) {
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, uninstalledShop) {
             if (err) return handleError(err);

@@ -4,7 +4,7 @@ const request = require('request-promise');
 
 module.exports = {
 
-    verifyHMAC(query, apiSecret) {
+    verifyQueryHMAC(query, apiSecret) {
         if (!query.hmac) {
             return false;
         }
@@ -17,6 +17,14 @@ module.exports = {
             .digest('hex');
 
         return generatedHash !== query.hmac ? false : true;
+    },
+
+    verifyPayloadHMAC(reqBody, apiSecret){
+        var digest = crypto.createHmac('SHA256', apiSecret)
+        .update(new Buffer(reqBody, 'utf8'))
+        .digest('base64');
+
+        return digest === req.headers['X-Shopify-Hmac-Sha256'] ? true : false;
     },
 
     shopAdminAPI(method, shop, rel_url, shopRequestHeaders, body, callback) {

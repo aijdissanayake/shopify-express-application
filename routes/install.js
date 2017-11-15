@@ -5,7 +5,7 @@ const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
 const Shop = require('../models/Shop');
-const verifyHMAC = require('../helpers').verifyHMAC;
+const verifyQueryHMAC = require('../helpers').verifyQueryHMAC;
 const shopAdminAPI = require('../helpers').shopAdminAPI;
 const router = express.Router();
 const scopes = 'write_products,write_themes,write_orders,read_orders';
@@ -42,7 +42,7 @@ router.get('/callback', (req, res) => {
   }
 
   if (shop && hmac && code) {
-    if (!verifyHMAC(req.query, apiSecret)) {
+    if (!verifyQueryHMAC(req.query, apiSecret)) {
       return res.status(400).send('HMAC validation failed');
     }
     const accessTokenPayload = {
