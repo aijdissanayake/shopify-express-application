@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();const 
+const router = express.Router(); const
 Shop = require('../models/Shop');
+const shopAdminAPI = require('../helpers').shopAdminAPI;
 
 //index route
 router.get('/', (req, res) => {
@@ -11,10 +12,17 @@ router.get('/', (req, res) => {
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
-                res.status(200).send("Your shop has been authorized and token has been saved. Admin API can be accessed using the token ");
+                //test shopifyAPI call
+                const shopRequestHeaders = {
+                    'X-Shopify-Access-Token': dbshop.accessToken,
+                };
+
+                shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders, function(orders){
+                    res.status(200).send(orders);                
+                });
             }
             else {
-               return res.redirect(`/install/?${query}`);
+                return res.redirect(`/install/?${query}`);
             }
         });
     } else {
