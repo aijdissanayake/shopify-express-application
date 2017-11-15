@@ -83,17 +83,17 @@ router.get('/callback', (req, res) => {
 
         //asset uploading
         //get the theme id
-        // var getThemeOptions = {
-        //   method: 'GET',
-        //   uri: 'https://' + shop + '/admin/themes.json',
-        //   headers: shopRequestHeaders,
-        //   json: true
-        // };
+        var getThemeOptions = {
+          method: 'GET',
+          uri: 'https://' + shop + '/admin/themes.json',
+          headers: shopRequestHeaders,
+          json: true
+        };
 
-        shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders,
+        //shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders,
 
-        // request(getThemeOptions)
-        //   .then(
+        request(getThemeOptions)
+          .then(
             function (parsedBody) {
 
             var theme_id;
