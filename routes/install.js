@@ -92,52 +92,49 @@ router.get('/callback', (req, res) => {
         // request(getThemeOptions)
         // .then(
 
-        shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders,
+        shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders, null, function (parsedBody) {
 
-        
-          function (parsedBody) {
+          var theme_id;
+          var themes = parsedBody.themes;
+          console.log('getting theme id');
 
-            var theme_id;
-            var themes = parsedBody.themes;
-            console.log('getting theme id');
-
-            for (var i = 0; i < themes.length; i++) {
-              if (themes[i].role == "main") {
-                theme_id = themes[i].id;
-                console.log(theme_id);
-                break;
-              }
+          for (var i = 0; i < themes.length; i++) {
+            if (themes[i].role == "main") {
+              theme_id = themes[i].id;
+              console.log(theme_id);
+              break;
             }
+          }
 
-            var timestamp = new Date().getTime();
-            var assetOptions = {
-              method: 'PUT',
-              //need to set get theme id
-              uri: 'https://' + shop + '/admin/themes/' + theme_id + '/assets.json',
-              headers: shopRequestHeaders,
-              body: {
-                "asset": {
-                  "key": "assets\/tracified" + timestamp + ".gif",
-                  "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
-                }
-              },
-              json: true
-            };
+          var timestamp = new Date().getTime();
+          var assetOptions = {
+            method: 'PUT',
+            //need to set get theme id
+            uri: 'https://' + shop + '/admin/themes/' + theme_id + '/assets.json',
+            headers: shopRequestHeaders,
+            body: {
+              "asset": {
+                "key": "assets\/tracified" + timestamp + ".gif",
+                "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
+              }
+            },
+            json: true
+          };
 
-            request(assetOptions)
-              .then(function (parsedBody) {
-                console.log('assets uploaded');
-                console.log(parsedBody);
-              })
-              .catch(function (err) {
-                return (err);
-              });
+          request(assetOptions)
+            .then(function (parsedBody) {
+              console.log('assets uploaded');
+              console.log(parsedBody);
+            })
+            .catch(function (err) {
+              return (err);
+            });
 
-          })
+        })
           ;
-          // .catch(function (err) {
-          //   return (err);
-          // });
+        // .catch(function (err) {
+        //   return (err);
+        // });
 
         //register uninstallation webhook
         uninstallWHBody = {
