@@ -53,8 +53,11 @@ router.get('/callback', (req, res) => {
       code,
     };
 
-    request.post(accessTokenRequestUrl, { json: accessTokenPayload })
-      .then((accessTokenResponse) => {
+    // request.post(accessTokenRequestUrl, { json: accessTokenPayload })
+    //   .then((accessTokenResponse) => {
+      shopAdminAPI('POST', shop, '/admin/oauth/access_token', null, accessTokenPayload,
+        function(accessTokenResponse){
+
         const accessToken = accessTokenResponse.access_token;
 
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
@@ -98,27 +101,12 @@ router.get('/callback', (req, res) => {
           }
 
           var timestamp = new Date().getTime();
-          // var assetOptions = {
-          //   method: 'PUT',
-          //   //need to set get theme id
-          //   uri: 'https://' + shop + '/admin/themes/' + theme_id + '/assets.json',
-          //   headers: shopRequestHeaders,
-          //   body: {
-          //     "asset": {
-          //       "key": "assets\/tracified" + timestamp + ".gif",
-          //       "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
-          //     }
-          //   },
-          //   json: true
-          // };
-
           assetUploadBody =  {
             "asset": {
               "key": "assets\/tracified" + timestamp + ".gif",
               "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
             }
-          };
-          
+          };          
 
           // request(assetOptions).then(
             var assetUploadURL = '/admin/themes/' + theme_id + '/assets.json'
@@ -127,10 +115,6 @@ router.get('/callback', (req, res) => {
               console.log('assets uploaded');
               console.log(parsedBody);
             });
-            // .catch(function (err) {
-            //   return (err);
-            // });
-
         });
 
         //register uninstallation webhook
@@ -147,18 +131,14 @@ router.get('/callback', (req, res) => {
 
           function (parsedBody) {
             console.log('uninstall webhook registered');
-            console.log(parsedBody);
           });
 
-        console.log('webhook registration request sent');
-
         res.render('about.html');
-
-
       })
-      .catch((error) => {
-        res.status(400).send(error);
-      });
+      // .catch((error) => {
+      //   res.status(400).send(error);
+      // })
+      ;
 
   } else {
     res.status(400).send('Required parameters missing');
