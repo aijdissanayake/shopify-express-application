@@ -1,4 +1,3 @@
-//const dotenv = require('dotenv').config();
 const express = require('express');
 const crypto = require('crypto');
 const cookie = require('cookie');
@@ -46,23 +45,17 @@ router.get('/callback', (req, res) => {
     if (!verifyHMAC(req.query, apiSecret)) {
       return res.status(400).send('HMAC validation failed');
     }
-    const accessTokenRequestUrl = 'https://' + shop + '/admin/oauth/access_token';
     const accessTokenPayload = {
       client_id: apiKey,
       client_secret: apiSecret,
       code,
     };
 
-    // request.post(accessTokenRequestUrl, { json: accessTokenPayload })
-    //   .then((accessTokenResponse) => {
-      shopAdminAPI('POST', shop, '/admin/oauth/access_token', null, accessTokenPayload,
-        function(accessTokenResponse){
+    shopAdminAPI('POST', shop, '/admin/oauth/access_token', null, accessTokenPayload, function (accessTokenResponse) {
 
         const accessToken = accessTokenResponse.access_token;
-
-        Shop.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) {
+        Shop.findOne({ 'name': shop }, 'name access_token', function (err, installedShop) { //to use if a shop record is alredy there
           if (err) return handleError(err);
-          //to use if a shop record is alredy there
           if (installedShop) {
             installedShop.access_token = accessToken;
             installedShop.save(function () {
@@ -84,14 +77,11 @@ router.get('/callback', (req, res) => {
           'X-Shopify-Access-Token': accessToken,
         };
 
-        //asset uploading
-        //get the theme id
+        //get the theme id for asset uploading
         shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders, null, function (parsedBody) {
 
           var theme_id;
           var themes = parsedBody.themes;
-          console.log('getting theme id');
-
           for (var i = 0; i < themes.length; i++) {
             if (themes[i].role == "main") {
               theme_id = themes[i].id;
@@ -100,45 +90,35 @@ router.get('/callback', (req, res) => {
             }
           }
 
+          //asset uploading
           var timestamp = new Date().getTime();
-          assetUploadBody =  {
+          assetUploadPayload = {
             "asset": {
               "key": "assets\/tracified" + timestamp + ".gif",
               "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
             }
-          };          
-
-          // request(assetOptions).then(
-            var assetUploadURL = '/admin/themes/' + theme_id + '/assets.json'
-            shopAdminAPI('PUT', shop, assetUploadURL, shopRequestHeaders, assetUploadBody,
-            function (parsedBody) {
+          };
+          var assetUploadURL = '/admin/themes/' + theme_id + '/assets.json'
+          shopAdminAPI('PUT', shop, assetUploadURL, shopRequestHeaders, assetUploadPayload, function (parsedBody) {
               console.log('assets uploaded');
               console.log(parsedBody);
             });
         });
 
         //register uninstallation webhook
-        uninstallWHBody = {
-          'webhook':
-          {
+        uninstallWHPayload = {
+          'webhook': {
             'topic': "app/uninstalled",
             'address': forwardingAddress + '/webhook/uninstall-app',
             'format': "json"
           }
         };
-
-        shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHBody,
-
-          function (parsedBody) {
-            console.log('uninstall webhook registered');
-          });
+        shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHPayload, function (parsedBody) {
+          console.log('uninstall webhook registered');
+        });
 
         res.render('about.html');
-      })
-      // .catch((error) => {
-      //   res.status(400).send(error);
-      // })
-      ;
+      });
 
   } else {
     res.status(400).send('Required parameters missing');
