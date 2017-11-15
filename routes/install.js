@@ -168,10 +168,8 @@ router.get('/callback', (req, res) => {
           function (parsedBody) {
             console.log('uninstall webhook registered');
             console.log(parsedBody);
-          })
-          .catch(function (err) {
-            return (err);
           });
+          
         console.log('webhook registration request sent');
 
         res.render('about.html');

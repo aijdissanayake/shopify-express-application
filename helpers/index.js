@@ -27,7 +27,9 @@ module.exports = {
             body: body,
             json: true
         };
-        request(options).then(callback);
+        request(options).then(callback).catch(function (err) {
+            return (err);
+          });;
     }
 
 }
