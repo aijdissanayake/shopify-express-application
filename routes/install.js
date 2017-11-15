@@ -83,18 +83,19 @@ router.get('/callback', (req, res) => {
 
         //asset uploading
         //get the theme id
-        var getThemeOptions = {
-          method: 'GET',
-          uri: 'https://' + shop + '/admin/themes.json',
-          headers: shopRequestHeaders,
-          json: true
-        };
+        // var getThemeOptions = {
+        //   method: 'GET',
+        //   uri: 'https://' + shop + '/admin/themes.json',
+        //   headers: shopRequestHeaders,
+        //   json: true
+        // };
+        // request(getThemeOptions)
+        // .then(
 
-        //shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders,
+        shopAdminAPI('GET', shop, '/admin/themes.json', shopRequestHeaders,
 
-        request(getThemeOptions)
-          .then(
-            function (parsedBody) {
+        
+          function (parsedBody) {
 
             var theme_id;
             var themes = parsedBody.themes;
@@ -133,43 +134,28 @@ router.get('/callback', (req, res) => {
               });
 
           })
-          .catch(function (err) {
-            return (err);
-          });
+          ;
+          // .catch(function (err) {
+          //   return (err);
+          // });
 
         //register uninstallation webhook
-        console.log('webhook registration');
-        // var uninstallOptions = {
-        //   method: 'POST',
-        //   uri: 'https://' + shop + '/admin/webhooks.json',
-        //   headers: shopRequestHeaders,
-        //   body: {
-        //     'webhook':
-        //     {
-        //       'topic': "app/uninstalled",
-        //       'address': forwardingAddress + '/webhook/uninstall-app',
-        //       'format': "json"
-        //     }
-        //   },
-        //   json: true
-        // };
-        // request(uninstallOptions).then(
-          uninstallWHBody =  {
-            'webhook':
-            {
-              'topic': "app/uninstalled",
-              'address': forwardingAddress + '/webhook/uninstall-app',
-              'format': "json"
-            }
-          };
-        
-        shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHBody, 
-        
+        uninstallWHBody = {
+          'webhook':
+          {
+            'topic': "app/uninstalled",
+            'address': forwardingAddress + '/webhook/uninstall-app',
+            'format': "json"
+          }
+        };
+
+        shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHBody,
+
           function (parsedBody) {
             console.log('uninstall webhook registered');
             console.log(parsedBody);
           });
-          
+
         console.log('webhook registration request sent');
 
         res.render('about.html');
