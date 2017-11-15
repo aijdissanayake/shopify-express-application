@@ -19,9 +19,9 @@ module.exports = {
         return generatedHash !== query.hmac ? false : true;
     },
 
-    verifyPayloadHMAC(reqBody, apiSecret){
+    verifyPayloadHMAC(req, apiSecret){
         var digest = crypto.createHmac('SHA256', apiSecret)
-        .update(new Buffer(reqBody, 'utf8'))
+        .update(new Buffer(req.body, 'utf8'))
         .digest('base64');
 
         return digest === req.headers['X-Shopify-Hmac-Sha256'] ? true : false;

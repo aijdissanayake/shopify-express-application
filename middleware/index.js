@@ -5,14 +5,11 @@ module.exports = {
 
     verifyWebhook(req, res, next){
 
-        if(req.get('X-Shopify-Hmac-SHA256') && req.body){            
-            hmac = req.get('X-Shopify-Hmac-SHA256');
-            payload = req.body;
+        if(req.get('X-Shopify-Hmac-SHA256') && req.body){
 
-            if(verifyPayloadHMAC(payload, apiSecret)){
+            if(verifyPayloadHMAC(req, apiSecret)){
                 return next();
             }
-
             return res.status(401).send("Unauthorized Webhook Request!");
         }
 
