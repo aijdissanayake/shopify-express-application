@@ -19,7 +19,7 @@ module.exports = {
         return generatedHash !== query.hmac ? false : true;
     },
 
-    verifyPayloadHMAC(data, hmac , apiSecret){
+    verifyPayloadHMAC(data, hmac , apiSecret, next){
         data = JSON.stringify(data);
         var digest = crypto.createHmac('SHA256', apiSecret)
         //.update(new Buffer(data, 'utf8'))
