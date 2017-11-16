@@ -12,6 +12,7 @@ const index = require('./routes/index');
 const install = require('./routes/install');
 const webhook = require('./routes/webhook');
 const adminlink = require('./routes/adminlink');
+const test = require('./routes/test');
 const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
@@ -37,6 +38,8 @@ app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
 app.use('/adminlink', adminlink);
+//test routes
+app.use('/test', test);
 
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');
