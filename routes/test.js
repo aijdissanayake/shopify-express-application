@@ -15,8 +15,9 @@ const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 
 router.post('/webhook', (req, res) => {
-    console.log(req);
-    console.log(req.headers['X-Shopify-Hmac-Sha256']);
+    //console.log(req);
+    console.log(req.get('X-Shopify-Hmac-Sha256'));
+    console.log(req.get('X-Shopify-Shop-Domain'));
     console.log(req.body);
     if (req.headers['X-Shopify-Hmac-Sha256'] && req.body) {
 
