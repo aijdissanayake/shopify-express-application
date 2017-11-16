@@ -24,7 +24,10 @@ module.exports = {
         var digest = crypto.createHmac('SHA256', apiSecret)
         .update(new Buffer(data, 'utf8'))
         .digest('base64');
-        console.log(digest);       
+        console.log("digest");
+        console.log(digest);
+        console.log("hmac");
+        console.log(hmac);       
         return digest === hmac? true : false;
     },
 
