@@ -10,10 +10,10 @@ module.exports = {
             if(verifyPayloadHMAC(req, apiSecret)){
                 return next();
             }
-            return res.status(401).send("Unauthorized Webhook Request!");
+            return res.status(401).send("Unauthorized Webhook Request! HMAC verification fails");
         }
 
-        return res.status(401).send("Unauthorized Webhook Request!");
+        return res.status(401).send("Unauthorized Webhook Request! body or HMAC header missing.");
     }
 
 }
