@@ -17,6 +17,9 @@ const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
 

@@ -18,10 +18,10 @@ router.post('/webhook', (req, res) => {
     //console.log(req);
     console.log(req.get('X-Shopify-Hmac-Sha256'));
     console.log(req.get('X-Shopify-Shop-Domain'));
-    console.log(req.body);
-    if (req.headers['X-Shopify-Hmac-Sha256'] && req.body) {
+    //console.log(req.body);
+    if (req.get('X-Shopify-Hmac-Sha256') && req.body) {
 
-        if (verifyPayloadHMAC(req, apiSecret)) {
+        if (verifyPayloadHMAC(req.body, req.get('X-Shopify-Hmac-Sha256'), apiSecret)) {
             return res.status(200).send("Webhook Verified!");
         }
         return res.status(401).send("Unauthorized Webhook Request! HMAC verification fails");

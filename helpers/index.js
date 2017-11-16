@@ -19,12 +19,13 @@ module.exports = {
         return generatedHash !== query.hmac ? false : true;
     },
 
-    verifyPayloadHMAC(req, apiSecret){
+    verifyPayloadHMAC(data, hmac , apiSecret){
+        data = JSON.stringify(data);
         var digest = crypto.createHmac('SHA256', apiSecret)
-        .update(new Buffer(req.body, 'utf8'))
+        .update(new Buffer(data, 'utf8'))
         .digest('base64');
-
-        return digest === req.headers['X-Shopify-Hmac-Sha256'] ? true : false;
+        console.log(digest);       
+        return digest === hmac? true : false;
     },
 
     shopAdminAPI(method, shop, rel_url, shopRequestHeaders, body, callback) {
