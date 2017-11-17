@@ -45,6 +45,23 @@ module.exports = {
         request(options).then(callback).catch(function (err) {
             return (err);
           });;
-    }
+    },
+
+    //test
+    verifyHmac(data, hmac) {
+        if (!hmac) {
+          return false;
+        } else if (!data || typeof data !== 'object') {
+          return false;
+        }
+    
+        const sharedSecret = config.SHOPIFY_SHARED_SECRET;
+        const calculatedSignature = crypto.createHmac('sha256', sharedSecret).update(data).digest('hex');
+        console.log("hmac");
+        console.log(hmac);
+        console.log("calculatedSignature");
+        console.log(calculatedSignature);        
+        return calculatedSignature === hmac;
+      }
 
 }

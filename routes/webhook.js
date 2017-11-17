@@ -4,7 +4,7 @@ const Shop = require('../models/Shop');
 const verifyWebhook = require('../middleware').verifyWebhook;
 
 //uinstall app webhook handler
-router.post('/uninstall-app', verifyWebhook, (req, res) => {
+router.post('/uninstall-app', verifyWebhook2, (req, res) => {
     var shop = req.get('X-Shopify-Shop-Domain');
     console.log('App is unistalled by ' + shop);
     if (shop) {
