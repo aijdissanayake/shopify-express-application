@@ -53,7 +53,9 @@ module.exports = {
             console.log("no hmac");
           return false;
         } else if (!data || typeof data !== 'object') {
-            console.log("no data aor incorrect type");            
+            console.log("no data aor incorrect type");
+            console.log(data); 
+            console.log(typeof data !== 'object');           
           return false;
         }
     
