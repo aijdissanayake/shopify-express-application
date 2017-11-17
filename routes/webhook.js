@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Shop = require('../models/Shop');
-const verifyWebhook = require('../middleware').verifyWebhook2;
+const verifyWebhook = require('../middleware').verifyWebhook;
 
 //uinstall app webhook handler
 router.post('/uninstall-app', verifyWebhook, (req, res) => {
