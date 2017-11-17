@@ -21,8 +21,8 @@ module.exports = {
 
     verifyPayloadHMAC(data, hmac , apiSecret, next){
         data = JSON.stringify(data);
-        //var digest = crypto.createHmac('SHA256', apiSecret)
-        var digest = crypto.createHmac('SHA256','b90a3f90ec20de99390e7eeca171b4e9d4e9b3eae5c66b3b66862bbc444d78ff')
+        var digest = crypto.createHmac('SHA256', apiSecret)
+        //var digest = crypto.createHmac('SHA256','b90a3f90ec20de99390e7eeca171b4e9d4e9b3eae5c66b3b66862bbc444d78ff')
         .update(data)
         //.update(new Buffer(data, 'utf8'))
         //.update(data)
@@ -50,12 +50,14 @@ module.exports = {
     //test
     verifyHmac(data, hmac) {
         if (!hmac) {
+            console.log("no hmac");
           return false;
         } else if (!data || typeof data !== 'object') {
+            console.log("no data aor incorrect type");            
           return false;
         }
     
-        const sharedSecret = config.SHOPIFY_SHARED_SECRET;
+        const sharedSecret = apiSecret;
         const calculatedSignature = crypto.createHmac('sha256', sharedSecret).update(data).digest('hex');
         console.log("hmac");
         console.log(hmac);
