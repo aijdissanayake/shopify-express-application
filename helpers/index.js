@@ -59,7 +59,7 @@ module.exports = {
         //     console.log(typeof data !== 'object');           
         //   return false;
         // }
-    
+        const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
         const sharedSecret = apiSecret;
         const calculatedSignature = crypto.createHmac('sha256', sharedSecret).update(data).digest('hex');
         console.log("hmac");
