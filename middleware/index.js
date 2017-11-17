@@ -1,4 +1,5 @@
 const verifyPayloadHMAC = require('../helpers').verifyPayloadHMAC;
+const verifyHmac = require('../helpers').verifyHmac;
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 
 module.exports = {
