@@ -117,7 +117,8 @@ router.get('/callback', (req, res) => {
           console.log('uninstall webhook registered');
         });
 
-        res.render('about.html');
+        //res.render('about.html');
+        res.redirect('https://'+shop+'/admin/apps');
       });
 
   } else {
