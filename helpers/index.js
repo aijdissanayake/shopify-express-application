@@ -21,8 +21,9 @@ module.exports = {
 
     verifyPayloadHMAC(data, hmac , apiSecret, next){
         data = JSON.stringify(data);
-        var digest = crypto.createHmac('SHA256', apiSecret)
-        .update(Buffer.from(data))
+        //var digest = crypto.createHmac('SHA256', apiSecret)
+        var digest = crypto.createHmac('SHA256','b90a3f90ec20de99390e7eeca171b4e9d4e9b3eae5c66b3b66862bbc444d78ff')
+        .update(data)
         //.update(new Buffer(data, 'utf8'))
         //.update(data)
         .digest('base64');
