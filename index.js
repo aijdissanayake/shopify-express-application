@@ -19,14 +19,6 @@ const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 var bodyParser = require('body-parser');
 
-app.use(function (req, res, next) {
-  req.rawBody = '';
-  req.on('data', function (chunk) {
-    req.rawBody += chunk;
-  });
-  next();
-});
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
