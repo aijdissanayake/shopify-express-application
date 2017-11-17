@@ -49,7 +49,6 @@ module.exports = {
 
     //test
     verifyHmac(data, hmac) {
-        data = JSON.parse(data);
         if (!hmac) {
             console.log("no hmac");
           return false;
