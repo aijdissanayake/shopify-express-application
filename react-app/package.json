@@ -1,11 +1,16 @@
 {
-  "name": "react-app",
+  "name": "plugin-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17"
+    "@shopify/polaris": "^1.8.3",
+    "axios": "^0.17.1",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "router": "^1.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -13,5 +18,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3000/"
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
 }

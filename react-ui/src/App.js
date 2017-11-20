@@ -12,12 +12,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/api')
+    fetch('test/api')
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
         }
-        return response.json();
+        console.log(response);
+        var resp = response.json();
+        return resp;
       })
       .then(json => {
         this.setState({
@@ -36,15 +38,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Tracified</h2>
         </div>
-        <p className="App-intro">
-          {'This is '}
-          <a href="https://github.com/mars/heroku-cra-node">
-            {'create-react-app with a custom Node/Express server'}
-          </a><br/>
-        </p>
         <p className="App-intro">
           {this.state.fetching
             ? 'Fetching message from API'

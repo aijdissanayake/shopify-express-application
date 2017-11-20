@@ -116,8 +116,6 @@ router.get('/callback', (req, res) => {
         shopAdminAPI('POST', shop, '/admin/webhooks.json', shopRequestHeaders, uninstallWHPayload, function (parsedBody) {
           console.log('uninstall webhook registered');
         });
-
-        //res.render('about.html');
         res.redirect('https://'+shop+'/admin/apps');
       });
 

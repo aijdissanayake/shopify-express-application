@@ -29,4 +29,8 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/about', (req, res) => { res.render('about.html');});
+router.get('/contact', (req, res) => { res.send("Tracified Contact Details");});
+
+
 module.exports = router;

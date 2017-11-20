@@ -7,6 +7,7 @@ const request = require('request-promise');
 const Shop = require('../models/Shop');
 const verifyQueryHMAC = require('../helpers').verifyQueryHMAC;
 const shopAdminAPI = require('../helpers').shopAdminAPI;
+const getTracifiedItemList = require('../tracified/services').getTracifiedItemList;
 const router = express.Router();
 const verifyPayloadHMAC = require('../helpers').verifyPayloadHMAC;
 const scopes = 'write_products,write_themes,write_orders,read_orders';
@@ -30,6 +31,20 @@ router.post('/webhook', (req, res) => {
     return res.status(401).send("Unauthorized Webhook Request! body or HMAC header missing.");
 });
 
+router.get('/api', (req, res) => {
+    res.send({ 'message': 'Tracified/Shopify API can be used' });
+});
+
+router.get('/services', (req, res) => {
+    
+    getTracifiedItemList().then(function(data){
+        console.log(data);
+        return res.send(data);
+    }).catch(function (err) {
+        return err;
+    });
+});
+
 module.exports = router;
 
 // app.use(function (req, res, next) {
@@ -39,4 +54,3 @@ module.exports = router;
 //     });
 //     next();
 //   });
-  

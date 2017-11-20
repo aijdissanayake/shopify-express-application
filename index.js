@@ -20,8 +20,6 @@ const forwardingAddress = "https://shopify-tracified.herokuapp.com";
 var bodyParser = require('body-parser');
 //react-view
 const path = require('path');
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, './react-ui/build')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,13 +40,15 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// app.use('/', index);
-// app.use('/install', install);
-// app.use('/webhook', webhook);
-// app.use('/adminlink', adminlink);
-// //test routes
-// app.use('/test', test);
+app.use('/', index);
+app.use('/install', install);
+app.use('/webhook', webhook);
+app.use('/adminlink', adminlink);
+//test routes
+app.use('/test', test);
 //react-view
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, './react-ui/build')));
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, './react-ui/build', 'index.html'));
