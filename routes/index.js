@@ -13,12 +13,13 @@ router.get('/', (req, res) => {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
                 //test shopifyAPI call
-                const shopRequestHeaders = {
-                    'X-Shopify-Access-Token': dbshop.access_token,
-                };
-                shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
-                    res.status(200).send(orders);                
-                });
+                // const shopRequestHeaders = {
+                //     'X-Shopify-Access-Token': dbshop.access_token,
+                // };
+                // shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
+                //     res.status(200).send(orders);                
+                // });
+                res.render('about.html');
             }
             else {
                 return res.redirect(`/install/?${query}`);

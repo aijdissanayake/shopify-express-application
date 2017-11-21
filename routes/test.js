@@ -30,6 +30,13 @@ router.post('/webhook', (req, res) => {
     return res.status(401).send("Unauthorized Webhook Request! body or HMAC header missing.");
 });
 
+router.get('/shop-link', (req, res) => {
+    const { session: { shop, accessToken } } = req;
+    console.log("test shop link");
+    console.log(session);
+    res.send(session);
+});
+
 module.exports = router;
 
 // app.use(function (req, res, next) {
