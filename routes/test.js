@@ -31,10 +31,11 @@ router.post('/webhook', (req, res) => {
 });
 
 router.get('/shop-link', (req, res) => {
-    const session = req;
+    var ref = req.headers.referer;
+    //const session = req;
     console.log("test shop link");
-    console.log(session);
-    res.send(session);
+    console.log(ref);
+    res.send(ref);
 });
 
 module.exports = router;
