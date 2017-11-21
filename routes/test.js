@@ -35,7 +35,8 @@ router.get('/shop-link', (req, res) => {
     //const session = req;
     console.log("test shop link");
     console.log(ref);
-    res.send(ref);
+    res.render('about.html');
+    //res.send(ref);
 });
 
 module.exports = router;
