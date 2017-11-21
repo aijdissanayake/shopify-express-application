@@ -31,7 +31,7 @@ router.post('/webhook', (req, res) => {
 });
 
 router.get('/shop-link', (req, res) => {
-    const { session: { shop, accessToken } } = req;
+    const { session} = req;
     console.log("test shop link");
     console.log(session);
     res.send(session);
