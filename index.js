@@ -21,6 +21,7 @@ var bodyParser = require('body-parser');
 //react-view
 const path = require('path');
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -48,10 +49,10 @@ app.use('/adminlink', adminlink);
 app.use('/test', test);
 //react-view
 // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, './react-ui/build')));
+app.use(express.static(path.resolve(__dirname, './react-app/build')));
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, './react-ui/build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, './react-app/build', 'index.html'));
 });
 
 app.listen(app.get('port'), () => {
@@ -59,5 +60,4 @@ app.listen(app.get('port'), () => {
 });
 
 //app installation urls
-//https://6c9cce84.ngrok.io/shopify?shop=99xnsbm.myshopify.com
-//https://shopify-tracified.herokuapp.com/shopify?shop=99xnsbm.myshopify.com
+//https://shopify-tracified.herokuapp.com/?shop=99xnsbm.myshopify.com

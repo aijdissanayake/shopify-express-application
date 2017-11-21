@@ -7,7 +7,7 @@ const request = require('request-promise');
 const Shop = require('../models/Shop');
 const verifyQueryHMAC = require('../helpers').verifyQueryHMAC;
 const shopAdminAPI = require('../helpers').shopAdminAPI;
-const getTracifiedItemList = require('../tracified/services').getTracifiedItemList;
+const {getTracifiedItemList, getOrderTraceabilityData} = require('../tracified/services');
 const router = express.Router();
 const verifyPayloadHMAC = require('../helpers').verifyPayloadHMAC;
 const scopes = 'write_products,write_themes,write_orders,read_orders';
@@ -35,8 +35,8 @@ router.get('/api', (req, res) => {
     res.send({ 'message': 'Tracified/Shopify API can be used' });
 });
 
-router.get('/services', (req, res) => {
-    
+router.get('/services/item-list', (req, res) => {
+
     getTracifiedItemList().then(function(data){
         console.log(data);
         return res.send(data);
@@ -44,6 +44,16 @@ router.get('/services', (req, res) => {
         return err;
     });
 });
+
+router.get('/services/order-details', (req, res) => {
+    
+    getOrderTraceabilityData().then(function(data){
+            console.log(data);
+            return res.send(data);
+        }).catch(function (err) {
+            return err;
+        });
+    });
 
 module.exports = router;
 

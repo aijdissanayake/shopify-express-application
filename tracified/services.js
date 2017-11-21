@@ -1,25 +1,40 @@
 const request = require('request-promise');
+const tracifiedURL = "https://tracified-mock-api.herokuapp.com";
 
 module.exports = {
 
     verifyTracifiedAccount(tempToken) { },
 
     getTracifiedItemList: function (tennantID, accessToken) {
-
         return new Promise((resolve, reject) => {
-
             var options = {
                 method: 'GET',
-                uri: "https://tracified-mock-api.herokuapp.com/traceability_data/Data/tracified_item_list/sort-list"
+                uri: tracifiedURL + "/traceability_data/Data/tracified_item_list/sort-list"
             };
 
             request(options).then(function (data) {
+                type = typeof data;
+                console.log(type);
                 console.log(data);
                 resolve(data);
             })
         })
     },
 
-    getOrderTraceabilityData(orderID, tennantID, accessToken) { }
+    getOrderTraceabilityData: function (orderID, tennantID, accessToken) {
+        return new Promise((resolve, reject) => {
+            var options = {
+                method: 'GET',
+                uri: tracifiedURL + "/Traceability_data/Data/tracified_item_list/Odr_001/traceability-profiles"
+            };
+
+            request(options).then(function (data) {
+                type = typeof data;
+                console.log(type);
+                console.log(data);
+                resolve(data);
+            })
+        })
+    }
 
 }

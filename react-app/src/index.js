@@ -15,10 +15,10 @@ ReactDOM.render(
     <Router>
         <div>
             <Route exact path='/' component={App}/>
-            <Route path='/add-item' component={AddItem}/>
-            <Route path='/index' component={IndexItem}/>
-            <Route path='/edit/:id' component={EditItem}/>
-            <Route path='/product-mapping' component={ProductMapping}/>
+            <Route exact path='/add-item' component={AddItem}/>
+            <Route exact path='/index' component={IndexItem}/>
+            <Route exact path='/edit/:id' component={EditItem}/>
+            <Route exact path='/product-mapping' component={ProductMapping}/>
         </div>
     </Router>,
     document.getElementById('root')
