@@ -26,14 +26,18 @@ router.post('/webhook', (req, res) => {
         }
         return res.status(401).send("Unauthorized Webhook Request! HMAC verification fails");
     }
-
     return res.status(401).send("Unauthorized Webhook Request! body or HMAC header missing.");
 });
 
 router.get('/shop-link', (req, res) => {
     var ref = req.headers.referer;
     //const session = req;
+    var shop = req.get('X-Shopify-Shop-Domain');
+    console.log("shop");
+    console.log(shop);
     console.log("test shop link");
+    console.log("session");
+    console.log(req.session);
     console.log(ref);
     res.render('about.html');
     //res.send(ref);
