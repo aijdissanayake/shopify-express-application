@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
                 // shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
                 //     res.status(200).send(orders);                
                 // });
+                req.session.shop = dbshop;
                 res.render('about.html');
             }
             else {

@@ -17,10 +17,20 @@ const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
 const scopes = 'write_products,write_themes,write_orders';
 const forwardingAddress = "https://shopify-tracified.herokuapp.com";
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const session = require('client-sessions');
 
+//request body-parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'tracified',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 
 app.set('port', process.env.PORT || 3000);
 
@@ -38,6 +48,7 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//routes
 app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
