@@ -36,9 +36,26 @@ router.get('/shop-link', (req, res) => {
         console.log("cookie"); 
         console.log(req.session.shop);
         console.log(req.session.shop.name);
-    }
-    res.render('about.html');
+        res.render('about.html');
+    }   
     //res.send(ref);
+});
+
+router.get('/set-cookie',(req, res) => {
+    req.session.test = {"test":"cookie"};
+    return res.redirect('/test/test-cookie');
+});
+
+router.get('/test-cookie',(req, res) =>{
+    if (req.session && req.session.test) {
+        console.log('cookie enabled');
+        console.log(req.session.test);
+        res.send('cookie enabled');
+    } else {
+        console.log('cookie enabled');
+        console.log(req.session.test);
+        res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
+    }
 });
 
 module.exports = router;
