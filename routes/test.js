@@ -30,7 +30,8 @@ router.post('/webhook', (req, res) => {
 });
 
 router.get('/shop-link', (req, res) => {
-    console.log("cookie-checking"); 
+    console.log("cookie-checking");
+    console.log(req.session);
     if (req.session && req.session.Shop) {
         console.log("cookie"); 
         console.log(req.session.shop);
