@@ -32,7 +32,7 @@ router.post('/webhook', (req, res) => {
 router.get('/shop-link', (req, res) => {
     console.log("cookie-checking");
     console.log(req.session);
-    if (req.session && req.session.Shop) {
+    if (req.session && req.session.shop) {
         console.log("cookie"); 
         console.log(req.session.shop);
         console.log(req.session.shop.name);
