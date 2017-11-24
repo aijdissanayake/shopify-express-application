@@ -27,6 +27,7 @@ router.get('/', (req, res) => {
 router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
         //test shopifyAPI call
+        console.log('cookie enbaled');
         let shop = req.session.shop;
         const shopRequestHeaders = {
             'X-Shopify-Access-Token': shop.access_token,
