@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
+                req.session.shop = dbshop;
                 return res.redirect('/cookie-check');
             } else {
                 return res.redirect(`/install/?${query}`);
@@ -22,11 +23,12 @@ router.get('/', (req, res) => {
     }
 });
 
+//cookie check and request handle route redirected from index route
 router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
         //test shopifyAPI call
         const shopRequestHeaders = {
-            'X-Shopify-Access-Token': dbshop.access_token,
+            'X-Shopify-Access-Token': req.session.shop.access_token,
         };
         shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
             res.status(200).send(orders);                
