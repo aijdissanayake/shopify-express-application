@@ -12,20 +12,28 @@ router.get('/', (req, res) => {
         Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
-                //test shopifyAPI call
-                const shopRequestHeaders = {
-                    'X-Shopify-Access-Token': dbshop.access_token,
-                };
-                shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
-                    res.status(200).send(orders);                
-                });
-            }
-            else {
+                return res.redirect('/cookie-check');
+            } else {
                 return res.redirect(`/install/?${query}`);
             }
         });
     } else {
         return res.status(200).send('App Details and Tracified Details goes here');
+    }
+});
+
+router.get('/cookie-check', (req, res) => {
+    if (req.session && req.session.shop) {
+        //test shopifyAPI call
+        const shopRequestHeaders = {
+            'X-Shopify-Access-Token': dbshop.access_token,
+        };
+        shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
+            res.status(200).send(orders);                
+        });
+    } else {
+        console.log('cookie disabled');
+        res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
     }
 });
 

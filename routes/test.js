@@ -7,7 +7,7 @@ const request = require('request-promise');
 const Shop = require('../models/Shop');
 const verifyQueryHMAC = require('../helpers').verifyQueryHMAC;
 const shopAdminAPI = require('../helpers').shopAdminAPI;
-const {getTracifiedItemList, getOrderTraceabilityData} = require('../tracified/services');
+const { getTracifiedItemList, getOrderTraceabilityData } = require('../tracified/services');
 const router = express.Router();
 const verifyPayloadHMAC = require('../helpers').verifyPayloadHMAC;
 const scopes = 'write_products,write_themes,write_orders,read_orders';
@@ -37,7 +37,7 @@ router.get('/api', (req, res) => {
 
 router.get('/services/item-list', (req, res) => {
 
-    getTracifiedItemList().then(function(data){
+    getTracifiedItemList().then(function (data) {
         console.log(data);
         return res.send(data);
     }).catch(function (err) {
@@ -46,14 +46,43 @@ router.get('/services/item-list', (req, res) => {
 });
 
 router.get('/services/order-details', (req, res) => {
-    
-    getOrderTraceabilityData().then(function(data){
-            console.log(data);
-            return res.send(data);
-        }).catch(function (err) {
-            return err;
-        });
+
+    getOrderTraceabilityData().then(function (data) {
+        console.log(data);
+        return res.send(data);
+    }).catch(function (err) {
+        return err;
     });
+});
+
+router.get('/shop-link', (req, res) => {
+    console.log("cookie-checking");
+    console.log(req.session);
+    if (req.session && req.session.shop) {
+        console.log("cookie");
+        console.log(req.session.shop);
+        console.log(req.session.shop.name);
+        res.render('about.html');
+    }
+    //res.send(ref);
+});
+
+router.get('/set-cookie', (req, res) => {
+    req.session.test = { "test": "cookie" };
+    return res.redirect('/test/test-cookie');
+});
+
+router.get('/test-cookie', (req, res) => {
+    if (req.session && req.session.test) {
+        console.log('cookie enabled');
+        console.log(req.session.test);
+        res.send('cookie enabled');
+    } else {
+        console.log('cookie enabled');
+        console.log(req.session.test);
+        res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
+    }
+});
 
 module.exports = router;
 
