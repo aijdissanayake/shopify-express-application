@@ -27,10 +27,11 @@ router.get('/', (req, res) => {
 router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
         //test shopifyAPI call
+        let shop = req.session.shop;
         const shopRequestHeaders = {
-            'X-Shopify-Access-Token': req.session.shop.access_token,
+            'X-Shopify-Access-Token': shop.access_token,
         };
-        shopAdminAPI('GET', shop, '/admin/orders.json', shopRequestHeaders,null, function(orders){
+        shopAdminAPI('GET', shop.name , '/admin/orders.json', shopRequestHeaders,null, function(orders){
             res.status(200).send(orders);                
         });
     } else {
