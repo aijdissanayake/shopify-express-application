@@ -37,7 +37,7 @@ router.get('/products', (req, res) => {
 });
 
 router.get('/orders', (req, res) => {
-    shopAdminAPI('GET', shop.name, '/admin/orders.json', shopRequestHeaders, null, function (orders) {
+    shopAdminAPI('GET',  req.session.shop.name, '/admin/orders.json', req.shopRequestHeaders, null, function (orders) {
         res.status(200).send(orders);
     });
 });
