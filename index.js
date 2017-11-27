@@ -54,7 +54,7 @@ app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
 app.use('/adminlink', adminlink);
-app.use('shop', shop);
+app.use('/shop', shop);
   //test routes
 app.use('/test', test);
   //react-view
