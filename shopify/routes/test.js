@@ -7,7 +7,7 @@ const request = require('request-promise');
 const Shop = require('../models/Shop');
 const verifyQueryHMAC = require('../helpers').verifyQueryHMAC;
 const shopAdminAPI = require('../helpers').shopAdminAPI;
-const { getTracifiedItemList, getOrderTraceabilityData } = require('../tracified/services');
+const { getTracifiedItemList, getOrderTraceabilityData } = require('../../tracified/services');
 const router = express.Router();
 const verifyPayloadHMAC = require('../helpers').verifyPayloadHMAC;
 const scopes = 'write_products,write_themes,write_orders,read_orders';
@@ -84,12 +84,8 @@ router.get('/test-cookie', (req, res) => {
     }
 });
 
-module.exports = router;
+router.get('/route-check', (req, res) => {
+    return res.send("Route check successful");
+});
 
-// app.use(function (req, res, next) {
-//     req.rawBody = '';
-//     req.on('data', function (chunk) {
-//       req.rawBody += chunk;
-//     });
-//     next();
-//   });
+module.exports = router;

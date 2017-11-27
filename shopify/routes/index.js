@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router(); 
 const Shop = require('../models/Shop');
 const shopAdminAPI = require('../helpers').shopAdminAPI;
+const install = require('./install');
+const webhook = require('./webhook');
+const adminlink = require('./adminlink');
+const shop = require('./shop');
+const test = require('./test');
+
+router.use('/install', install);
+router.use('/webhook', webhook);
+router.use('/adminlink', adminlink);
+router.use('/shop', shop);
+//shopify test routes
+router.use('/test', test);
 
 //index route
 router.get('/', (req, res) => {
