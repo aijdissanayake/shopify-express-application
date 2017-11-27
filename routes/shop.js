@@ -19,26 +19,15 @@ router.all('/*', function (req, res, next) {
 
 router.get('/products', (req, res) => {
     console.log('products');
-    if (req.session && req.session.shop) {
-        console.log('cookie enbaled');
-        let shop = req.session.shop;
-        const shopRequestHeaders = {
-            'X-Shopify-Access-Token': shop.access_token,
-        };
-        console.log('cookie found');
-        shopAdminAPI('GET', shop.name, '/admin/products.json', shopRequestHeaders, null, function (products) {
-            console.log('got products');
-            res.status(200).send(products);
-        });
-    } else {
-        console.log('cookies disabled');
-        res.send('cookies disabled, You need to enable browser cookies to use the plugin without interruptions. Please enable cookies and retry.');
-    }
+    shopAdminAPI('GET', req.session.shop.name, '/admin/products.json', req.shopRequestHeaders, null, function (products) {
+        console.log('got products');
+        res.status(200).send(products);
+    });
 });
 
 router.get('/orders', (req, res) => {
     console.log('orders');
-    shopAdminAPI('GET',  req.session.shop.name, '/admin/orders.json', req.shopRequestHeaders, null, function (orders) {
+    shopAdminAPI('GET', req.session.shop.name, '/admin/orders.json', req.shopRequestHeaders, null, function (orders) {
         console.log('got orders');
         res.status(200).send(orders);
     });
