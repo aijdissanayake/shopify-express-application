@@ -28,13 +28,14 @@ router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
         //test shopifyAPI call
         console.log('cookie enbaled');
-        let shop = req.session.shop;
-        const shopRequestHeaders = {
-            'X-Shopify-Access-Token': shop.access_token,
-        };
-        shopAdminAPI('GET', shop.name , '/admin/orders.json', shopRequestHeaders,null, function(orders){
-            res.status(200).send(orders);                
-        });
+        // let shop = req.session.shop;
+        // const shopRequestHeaders = {
+        //     'X-Shopify-Access-Token': shop.access_token,
+        // };
+        // shopAdminAPI('GET', shop.name , '/admin/orders.json', shopRequestHeaders,null, function(orders){
+        //     res.status(200).send(orders);                
+        // });
+        res.render('apis.html');
     } else {
         console.log('cookie disabled');
         res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
