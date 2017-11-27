@@ -3,19 +3,19 @@ const router = express.Router();
 const Shop = require('../models/Shop');
 const shopAdminAPI = require('../helpers').shopAdminAPI;
 
-router.all('/*', function (req, res, next) {
-    if (req.session && req.session.shop) {
-        console.log('cookie enbaled');
-        req.shopRequestHeaders = {
-            'X-Shopify-Access-Token': req.session.shop.access_token,
-        };
-        next();
-    } else {
-        console.log('cookies disabled');
-        res.send('cookies disabled, You need to enable browser cookies to use the plugin without interruptions. Please enable cookies and retry.');
-    }
+// router.all('/*', function (req, res, next) {
+//     if (req.session && req.session.shop) {
+//         console.log('cookie enbaled');
+//         req.shopRequestHeaders = {
+//             'X-Shopify-Access-Token': req.session.shop.access_token,
+//         };
+//         next();
+//     } else {
+//         console.log('cookies disabled');
+//         res.send('cookies disabled, You need to enable browser cookies to use the plugin without interruptions. Please enable cookies and retry.');
+//     }
 
-});
+// });
 
 router.get('/products', (req, res) => {
     if (req.session && req.session.shop) {
