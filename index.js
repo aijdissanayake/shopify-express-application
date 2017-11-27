@@ -12,6 +12,7 @@ const index = require('./routes/index');
 const install = require('./routes/install');
 const webhook = require('./routes/webhook');
 const adminlink = require('./routes/adminlink');
+const shop = require();
 const test = require('./routes/test');
 const apiKey = "7f3bc78eabe74bdca213aceb9cfcc1f4";
 const apiSecret = "d3141aefd842b5857b2048a3a229f4c8";
@@ -53,6 +54,7 @@ app.use('/', index);
 app.use('/install', install);
 app.use('/webhook', webhook);
 app.use('/adminlink', adminlink);
+app.use();
   //test routes
 app.use('/test', test);
   //react-view
