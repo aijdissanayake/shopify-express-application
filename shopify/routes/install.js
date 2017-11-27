@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
   const shop = req.query.shop;
   if (shop) {
     const state = nonce();
-    const redirectUri = forwardingAddress + '/install/callback';
+    const redirectUri = forwardingAddress + '/shopify/install/callback';
     const installUrl = 'https://' + shop +
       '/admin/oauth/authorize?client_id=' + apiKey +
       '&scope=' + scopes +
@@ -109,7 +109,7 @@ router.get('/callback', (req, res) => {
         uninstallWHPayload = {
           'webhook': {
             'topic': "app/uninstalled",
-            'address': forwardingAddress + '/webhook/uninstall-app',
+            'address': forwardingAddress + '/shopify/webhook/uninstall-app',
             'format': "json"
           }
         };
