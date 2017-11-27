@@ -18,13 +18,16 @@ const shopAdminAPI = require('../helpers').shopAdminAPI;
 // });
 
 router.get('/products', (req, res) => {
+    console.log('products');
     if (req.session && req.session.shop) {
         console.log('cookie enbaled');
         let shop = req.session.shop;
         const shopRequestHeaders = {
             'X-Shopify-Access-Token': shop.access_token,
         };
+        console.log('cookie found');
         shopAdminAPI('GET', shop.name, '/admin/products.json', shopRequestHeaders, null, function (products) {
+            console.log('got products');
             res.status(200).send(products);
         });
     } else {
