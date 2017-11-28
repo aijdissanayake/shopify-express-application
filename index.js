@@ -3,6 +3,7 @@ const app = express();
 const cookie = require('cookie');
 const mongoose = require('mongoose');
 const shopifyRouter = require('./shopify/routes/index');
+const woocommerceRouter = require('./woocommerce/routes/index');
 const bodyParser = require('body-parser');
 const session = require('client-sessions');
 const path = require('path');
@@ -37,6 +38,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 //routes
   //shopify routes
 app.use('/shopify', shopifyRouter);
+  //woocommerce routes
+app.use('/woocommerce', woocommerceRouter);
   //react-view
 app.use(express.static(path.resolve(__dirname, './shopify/react-app/build')));
   // All remaining requests return the React app, so it can handle routing.
