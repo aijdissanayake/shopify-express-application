@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
                 req.session.shop = dbshop;
                 return res.redirect('/cookie-check');
             } else {
-                return res.redirect(`/install/?${query}`);
+                return res.redirect(`/shopify/install/?${query}`);
             }
         });
     } else {
