@@ -25,7 +25,8 @@ router.get('/', (req, res) => {
             if (err) return handleError(err);
             if (dbshop && dbshop.access_token) {
                 req.session.shop = dbshop;
-                return res.redirect('/cookie-check');
+                //return res.redirect('/shopify/cookie-check');
+                return res.redirect('App goes here');
             } else {
                 return res.redirect(`/shopify/install/?${query}`);
             }
