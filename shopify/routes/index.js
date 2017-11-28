@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
             }
         });
     } else {
-        return res.status(200).send('App Details and Tracified Details goes here');
+        return res.status(200).send('Shopify App Details and Tracified Details goes here');
     }
 });
 
@@ -54,8 +54,6 @@ router.get('/cookie-check', (req, res) => {
     }
 });
 
-router.get('/about', (req, res) => { res.render('about.html');});
-router.get('/contact', (req, res) => { res.send("Tracified Contact Details");});
 
 
 module.exports = router;

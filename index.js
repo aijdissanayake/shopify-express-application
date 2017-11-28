@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cookie = require('cookie');
 const mongoose = require('mongoose');
+const generalRouter = require('./routes/index');
 const shopifyRouter = require('./shopify/routes/index');
 const woocommerceRouter = require('./woocommerce/routes/index');
 const bodyParser = require('body-parser');
@@ -36,6 +37,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 //routes
+  //general routes
+app.use('/', generalRouter);
   //shopify routes
 app.use('/shopify', shopifyRouter);
   //woocommerce routes
