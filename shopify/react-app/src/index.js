@@ -14,7 +14,7 @@ import ProductMapping from './components/ProductMappingModule/ProductMapping';
 ReactDOM.render(
     <Router>
         <div>
-            <Route exact path='/' component={App}/>
+            <Route path='/' component={ProductMapping}/>
             <Route exact path='/add-item' component={AddItem}/>
             <Route exact path='/index' component={IndexItem}/>
             <Route exact path='/edit/:id' component={EditItem}/>

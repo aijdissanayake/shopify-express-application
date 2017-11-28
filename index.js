@@ -26,29 +26,29 @@ app.engine('html', require('ejs').renderFile);
 
 
 //db connection
-  //Set up default mongoose connection
+//Set up default mongoose connection
 var mongoDB = 'mongodb://shopify:Tracified@ds251435.mlab.com:51435/shopify-db';
 mongoose.connect(mongoDB, {
   useMongoClient: true
 });
-  //Get the default connection
+//Get the default connection
 var db = mongoose.connection;
-  //Bind connection to error event (to get notification of connection errors)
+//Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-//routes
+//routes and static files
   //general routes
 app.use('/', generalRouter);
-  //shopify routes
+  //shopify
 app.use('/shopify', shopifyRouter);
-  //woocommerce routes
-app.use('/woocommerce', woocommerceRouter);
-  //react-view
 app.use(express.static(path.resolve(__dirname, './shopify/react-app/build')));
-  // All remaining requests return the React app, so it can handle routing.
-app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, './shopify/react-app/build', 'index.html'));
-});
+  //woocommerce-(sample)
+app.use('/woocommerce', woocommerceRouter);
+
+
+//404
+app.get('*', function(req, res) {res.send('404 - Oops! Tracified-Ecommerce could not find that page' );});
+
 
 app.listen(app.get('port'), () => {
   console.log('Example app listening on port ' + app.get('port') + '!');

@@ -7,6 +7,7 @@ const webhook = require('./webhook');
 const adminlink = require('./adminlink');
 const shop = require('./shop');
 const test = require('./test');
+const path = require('path');
 
 router.use('/install', install);
 router.use('/webhook', webhook);
@@ -54,6 +55,12 @@ router.get('/cookie-check', (req, res) => {
     }
 });
 
+//react-view
+  // All remaining requests return the React app, React router will handle the routes
+router.get('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
+  console.log(__dirname);
+});
 
 
 module.exports = router;
