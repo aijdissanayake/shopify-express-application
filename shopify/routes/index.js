@@ -39,15 +39,8 @@ router.get('/', (req, res) => {
 //cookie check and request handle route redirected from index route
 router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
-        //test shopifyAPI call
+        //test shopifyAPI call view
         console.log('cookie enbaled');
-        // let shop = req.session.shop;
-        // const shopRequestHeaders = {
-        //     'X-Shopify-Access-Token': shop.access_token,
-        // };
-        // shopAdminAPI('GET', shop.name , '/admin/orders.json', shopRequestHeaders,null, function(orders){
-        //     res.status(200).send(orders);                
-        // });
         res.render('apis.html');
     } else {
         console.log('cookie disabled');
@@ -58,7 +51,7 @@ router.get('/cookie-check', (req, res) => {
 //react-view
   // All remaining requests return the React app, React router will handle the routes
 router.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   console.log(__dirname);
 });
 

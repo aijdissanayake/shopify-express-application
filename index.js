@@ -41,7 +41,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/', generalRouter);
   //shopify
 app.use('/shopify', shopifyRouter);
-app.use(express.static(path.resolve(__dirname, './shopify/react-app/build')));
+app.use(express.static(path.resolve(__dirname, './shopify/react-ui/build')));
   //woocommerce-(sample)
 app.use('/woocommerce', woocommerceRouter);
 
@@ -55,4 +55,4 @@ app.listen(app.get('port'), () => {
 });
 
 //app installation urls
-//https://shopify-tracified.herokuapp.com/?shop=99xnsbm.myshopify.com
+//https://shopify-tracified.herokuapp.com/shopify?shop=99xnsbm.myshopify.com
