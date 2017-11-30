@@ -109,24 +109,17 @@ class ProductMapping extends Component {
       
     }
 
-
-    
     render() {
       return (
 
        
         <div className="container">
-
-
-        <h1>Mapping Table</h1>
       <Layout>
         <Layout.AnnotatedSection>
         <Card title="Product Mapping Details">
             <table className="table table-striped">
               <thead>
                 <tr>
-               
-                   
                     <td>Product Name</td>
                     <td>Tracified Item ID</td>
                     <td>Tracified Item title</td>
