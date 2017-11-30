@@ -41,7 +41,7 @@ router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
         //test shopifyAPI call view
         console.log('cookie enbaled');
-        res.render('apis.html');
+        return res.redirect('/shopify/product-mapping');
     } else {
         console.log('cookie disabled');
         res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
@@ -51,8 +51,7 @@ router.get('/cookie-check', (req, res) => {
 //react-view
   // All remaining requests return the React app, React router will handle the routes
 router.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-  console.log(__dirname);
+  res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
 });
 
 

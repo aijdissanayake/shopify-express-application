@@ -41,7 +41,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use('/', generalRouter);
   //shopify
 app.use('/shopify', shopifyRouter);
-app.use(express.static(path.resolve(__dirname, './shopify/react-ui/build')));
+app.use(express.static(path.resolve(__dirname, './shopify/react-app/build')));
   //woocommerce-(sample)
 app.use('/woocommerce', woocommerceRouter);
 

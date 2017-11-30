@@ -14,11 +14,11 @@ import ProductMapping from './components/ProductMappingModule/ProductMapping';
 ReactDOM.render(
     <Router basename="/shopify" >
         <div>
-            <Route exact path='/' component={App}/>
-            <Route exact path='/add-item' component={AddItem} />
+            <Route path='/' component={ProductMapping}/>
+            <Route exact path='/add-item' component={AddItem}/>
             <Route exact path='/index' component={IndexItem}/>
-            <Route exact path='/edit/:id' component={EditItem} />
-            <Route exact path='/product-mapping' component={ProductMapping} />
+            <Route exact path='/edit/:id' component={EditItem}/>
+            <Route exact path='/product-mapping' component={ProductMapping}/>
         </div>
     </Router>,
     document.getElementById('root')

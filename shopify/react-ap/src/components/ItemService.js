@@ -1,10 +1,8 @@
 import axios from 'axios';
-const serverAddress = 'https://fd87172a.ngrok.io';
 
-class ProductMappingService{
-    //send mapping data
+class ItemService{
     sendData(data){
-        axios.post(serverAddress+'/items/add/post',{ 
+        axios.post('https://fe5b1685.ngrok.io/items/add/post',{
             item:data
         })
         .then(function(response){
@@ -15,21 +13,19 @@ class ProductMappingService{
         });
     }
 
-    //update mapping data
     updateData(data, id){
-        axios.post(serverAddress+'/items/update/'+id, {
+        axios.post('https://fe5b1685.ngrok.io/items/update/'+id, {
           item: data
         })
         .then(res => this.setState({ items: res.data }))
         .catch(err => console.log(err))
       }
 
-      //remove mapping
       deleteData(id){
-          axios.get(serverAddress+'/items/delete/'+id)
+          axios.get('https://fe5b1685.ngrok.io/items/delete/'+id)
           .then(console.log("deleted"))
           .catch(err=>console.log(err))
       }
 }
 
-export default ProductMappingService;
+export default ItemService;
