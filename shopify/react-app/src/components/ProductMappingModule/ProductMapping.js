@@ -114,8 +114,6 @@ class ProductMapping extends Component {
 
        
         <div style={{width:"1500px"}}>
-      <Layout>
-        <Layout.AnnotatedSection>
         <Card title="Product Mapping Details" >
             <table className="table table-striped" >
               <thead>
@@ -133,10 +131,6 @@ class ProductMapping extends Component {
               </tbody>
             </table>
         </Card>
-
-            
-          </Layout.AnnotatedSection>
-          </Layout>
         </div>
        
 
