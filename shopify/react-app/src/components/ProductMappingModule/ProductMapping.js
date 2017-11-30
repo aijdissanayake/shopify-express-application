@@ -113,11 +113,11 @@ class ProductMapping extends Component {
       return (
 
        
-        <div className="container">
+        <div style={{width:"1500px"}}>
       <Layout>
         <Layout.AnnotatedSection>
-        <Card title="Product Mapping Details">
-            <table className="table table-striped">
+        <Card title="Product Mapping Details" >
+            <table className="table table-striped" >
               <thead>
                 <tr>
                     <td>Product Name</td>
