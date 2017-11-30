@@ -113,7 +113,7 @@ class ProductMapping extends Component {
       return (
 
        
-        <div style={{width:"1500px"}}>
+        <div style={{width:"100%"}}>
         <Card title="Product Mapping Details" >
             <table className="table table-striped" >
               <thead>
