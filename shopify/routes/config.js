@@ -16,8 +16,9 @@ router.all('/*', function (req, res, next) {
 router.get('/mapping', (req, res) => {
     const shop = req.session.shop;
     Mapping.findOne({ 'shop_name': shop.name }, function (err, mapping) {
-        if (err) return handleError(err);
-        return mapping.mapping;
+        //if (err) return handleError(err);
+        if (err) { console.log('error'); return res.send(handleError(err));}
+        return res.send(mapping.mapping);
         // if (mapping && Object.keys(mapping).length) {
         //     return
         // } else {
@@ -27,8 +28,7 @@ router.get('/mapping', (req, res) => {
 
 router.post('/mapping', (req, res) => {
     const shop = req.session.shop;
-    const shop = "test-shop";
-    Mapping.findOne({ 'shop_name': shop }, function (err, mapping) { // use if a mapping record is alredy there
+    Mapping.findOne({ 'shop_name': shop.name }, function (err, mapping) { // use if a mapping record is alredy there
         if (err) return handleError(err);
         if (mapping) {
             mapping.mapping = req.body.mapping;
@@ -37,11 +37,9 @@ router.post('/mapping', (req, res) => {
             });
         }
         else {
-            var mappingInstance = new Mapping({ shop_name: shop, mapping: req.body.mapping });
+            var mappingInstance = new Mapping({ shop_name: shop.name, mapping: req.body.mapping });
             mappingInstance.save(function (err) {
-                if (err) {
-                    return handleError(err);
-                }
+                if (err) { return res.send(handleError(err));}
             });
         }
     });
