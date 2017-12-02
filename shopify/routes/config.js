@@ -27,6 +27,7 @@ router.get('/mapping', (req, res) => {
 
 router.post('/mapping', (req, res) => {
     const shop = req.session.shop;
+    const shop = "test-shop";
     Mapping.findOne({ 'shop_name': shop }, function (err, mapping) { // use if a mapping record is alredy there
         if (err) return handleError(err);
         if (mapping) {
