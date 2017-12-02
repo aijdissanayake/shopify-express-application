@@ -5,14 +5,16 @@ const shopAdminAPI = require('../helpers').shopAdminAPI;
 const install = require('./install');
 const webhook = require('./webhook');
 const adminlink = require('./adminlink');
-const shop = require('./shop');
+const shopAPI = require('./shop-api');
+const config = require('./config');
 const test = require('./test');
 const path = require('path');
 
 router.use('/install', install);
 router.use('/webhook', webhook);
 router.use('/adminlink', adminlink);
-router.use('/shop', shop);
+router.use('/shop-api', shopAPI);
+router.use('/config',config);
 //shopify test routes
 router.use('/test', test);
 
@@ -39,8 +41,7 @@ router.get('/', (req, res) => {
 //cookie check and request handle route redirected from index route
 router.get('/cookie-check', (req, res) => {
     if (req.session && req.session.shop) {
-        //test shopifyAPI call view
-        console.log('cookie enbaled');
+        //temp assigned to mapping table view
         return res.redirect('/shopify/product-mapping');
     } else {
         console.log('cookie disabled');
