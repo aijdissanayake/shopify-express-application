@@ -1,8 +1,10 @@
-import express = require("express");
-const router = express.Router();
-
-router.get('/', (req, res) => {
-    res.send('woocommerce plugin!');
+import { Request, Response, Router } from "express";
+const router = Router();
+/**
+ * sample route
+ */
+router.get("/", (req: Request, res: Response) => {
+    res.send("woocommerce plugin!");
 });
 
 export { router };

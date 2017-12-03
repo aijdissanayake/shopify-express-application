@@ -1,8 +1,8 @@
-import express = require("express");
-const router = express.Router();
+import { Request, Response, Router } from "express";
+const router = Router();
 
-router.get("/", (req, res) => { res.send("Tracified Ecoomerce Home page"); });
-router.get("/about", (req, res) => { res.send("Tracified Ecoomerce About page"); });
-router.get("/contact", (req, res) => { res.send("Tracified Contact Details"); });
+router.get("/", (req: Request, res: Response) => { res.send("Tracified Ecoomerce Home page"); });
+router.get("/about", (req: Request, res: Response) => { res.send("Tracified Ecoomerce About page"); });
+router.get("/contact", (req: Request, res: Response) => { res.send("Tracified Contact Details"); });
 
 export { router };
