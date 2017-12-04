@@ -4,9 +4,9 @@ import ejs = require("ejs");
 import express = require("express");
 import mongoose = require("mongoose");
 import path = require("path");
-import generalRouter = require("./routes/index");
-import shopifyRouter = require("./shopify/routes/index");
-import woocommerceRouter = require("./woocommerce/routes/index");
+import { router as general } from "./routes/index";
+import { router as shopify } from "./shopify/routes/index";
+import { router as woocommerce } from "./woocommerce/routes/index";
 /**
  * initial app config
  */
@@ -50,16 +50,16 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
  * routes and static files
  * -general routes
  */
-app.use("/", generalRouter.router);
+app.use("/", general);
 /**
  * -shopify routes and static files(JS, CSS) for UI
  */
-app.use("/shopify", shopifyRouter.router);
+app.use("/shopify", shopify);
 app.use(express.static(path.resolve(__dirname, "./shopify/react-app/build")));
 /**
  * -woocommerce routes -(sample routes)
  */
-app.use("/woocommerce", woocommerceRouter.router);
+app.use("/woocommerce", woocommerce);
 /**
  * -404 route
  */

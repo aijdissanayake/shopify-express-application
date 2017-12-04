@@ -1,13 +1,13 @@
 import { Request, Response, Router } from "express";
 import { Error } from "mongoose";
 import {Shop, ShopModel} from "../models/Shop";
+import { router as install }  from "./install";
+import { router as webhook }  from "./webhook";
+import { router as adminlink }  from "./adminlink";
+import { router as shopAPI }  from "./shop-api";
+import { router as config }  from "./config";
+import { router as test }  from "./test";
 const shopAdminAPI = require("../helpers").shopAdminAPI;
-const install = require("./install");
-const webhook = require("./webhook");
-const adminlink = require("./adminlink");
-const shopAPI = require("./shop-api");
-const config = require("./config");
-const test = require("./test");
 const path = require("path");
 const router = Router(); 
 /**
