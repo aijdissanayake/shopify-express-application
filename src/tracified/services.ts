@@ -1,4 +1,4 @@
-const request = require("request-promise");
+import request = require("request-promise");
 const tracifiedURL: string = "https://tracified-mock-api.herokuapp.com";
 
 module.exports = {
@@ -8,37 +8,37 @@ module.exports = {
      * @param tempToken - token that will be provided from the tracified-admin
      * will return a promise after the completion
      */
-    verifyTracifiedAccount(tempToken: string) { },
+    verifyTracifiedAccount(tempToken: string) {  /* imlement the function */ },
 
-    getTracifiedItemList: function (tennantID: string, accessToken: string) {
+    getTracifiedItemList(tennantID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
             const options = {
                 method: "GET",
-                uri: tracifiedURL + "/traceability_data/Data/tracified_item_list/sort-list"
+                uri: tracifiedURL + "/traceability_data/Data/tracified_item_list/sort-list",
             };
 
-            request(options).then(function (data: any) {
-                let type: string = typeof data;
+            request(options).then((data: any) => {
+                const type: string = typeof data;
                 console.log(type);
                 console.log(data);
                 resolve(data);
-            })
-        })
+            });
+        });
     },
 
-    getOrderTraceabilityData: function (orderID: string, tennantID: string, accessToken: string) {
+    getOrderTraceabilityData(orderID: string, tennantID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
-            var options = {
+            const options = {
                 method: "GET",
-                uri: tracifiedURL + "/Traceability_data/Data/tracified_item_list/Odr_001/traceability-profiles"
+                uri: tracifiedURL + "/Traceability_data/Data/tracified_item_list/Odr_001/traceability-profiles",
             };
 
-            request(options).then(function (data: any) {
-                let type: string = typeof data;
+            request(options).then((data: any) => {
+                const type: string = typeof data;
                 console.log(type);
                 console.log(data);
                 resolve(data);
-            })
-        })
-    }
-}
+            });
+        });
+    },
+};
