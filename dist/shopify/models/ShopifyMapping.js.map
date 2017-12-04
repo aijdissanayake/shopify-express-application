@@ -1,1 +1,0 @@
-{"version":3,"file":"ShopifyMapping.js","sourceRoot":"","sources":["../../../src/shopify/models/ShopifyMapping.ts"],"names":[],"mappings":";;AAAA,qCAAqC;AAErC,MAAM,oBAAoB,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAC/C,SAAS,EAAE,MAAM;IACjB,OAAO,EAAE,MAAM;CAChB,CAAC,CAAC;AAOH,MAAM,cAAc,GAAG,QAAQ,CAAC,KAAK,CAAC,gBAAgB,EAAE,oBAAoB,CAAC,CAAC;AACtE,wCAAc"}
