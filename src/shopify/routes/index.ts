@@ -42,7 +42,6 @@ router.get("/", (req: Request, res: Response) => {
         return res.status(200).send("Shopify App Details and Tracified Details goes here");
     }
 });
-
 /**
  * -this route is used for detect whether cookies are enabled in the browser calling to the shopify index route 
  */

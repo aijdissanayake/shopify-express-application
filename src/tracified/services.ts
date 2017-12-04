@@ -2,7 +2,12 @@ const request = require("request-promise");
 const tracifiedURL: string = "https://tracified-mock-api.herokuapp.com";
 
 module.exports = {
-
+    /**
+     * this function will verify an Tracified account and connect store with the account
+     * normally this will needed to be invoked once per installation
+     * @param tempToken - token that will be provided from the tracified-admin
+     * will return a promise after the completion
+     */
     verifyTracifiedAccount(tempToken: string) { },
 
     getTracifiedItemList: function (tennantID: string, accessToken: string) {
@@ -36,5 +41,4 @@ module.exports = {
             })
         })
     }
-
 }
