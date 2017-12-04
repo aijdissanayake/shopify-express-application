@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const Shop = require('../models/Shop');
 const Mapping = require('../models/ShopifyMapping');
 
 router.all('/*', function (req, res, next) {

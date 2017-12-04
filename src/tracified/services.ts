@@ -3,7 +3,7 @@ const tracifiedURL: string = "https://tracified-mock-api.herokuapp.com";
 
 module.exports = {
 
-    verifyTracifiedAccount(tempToken) { },
+    verifyTracifiedAccount(tempToken: string) { },
 
     getTracifiedItemList: function (tennantID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ module.exports = {
                 uri: tracifiedURL + "/traceability_data/Data/tracified_item_list/sort-list"
             };
 
-            request(options).then(function (data) {
+            request(options).then(function (data: any) {
                 let type: string = typeof data;
                 console.log(type);
                 console.log(data);
@@ -28,7 +28,7 @@ module.exports = {
                 uri: tracifiedURL + "/Traceability_data/Data/tracified_item_list/Odr_001/traceability-profiles"
             };
 
-            request(options).then(function (data) {
+            request(options).then(function (data: any) {
                 let type: string = typeof data;
                 console.log(type);
                 console.log(data);

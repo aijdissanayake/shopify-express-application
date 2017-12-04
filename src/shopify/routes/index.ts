@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
-const Shop = require('../models/Shop');
+import { Error } from "mongoose";
+import {Shop, ShopModel} from '../models/Shop';
 const shopAdminAPI = require('../helpers').shopAdminAPI;
 const install = require('./install');
 const webhook = require('./webhook');
@@ -25,10 +26,10 @@ router.get('/', (req: Request, res: Response) => {
     const shop = req.query.shop;
     if (shop) {
         const query = Object.keys(req.query).map((key) => `${key}=${req.query[key]}`).join('&');
-        Shop.findOne({ 'name': shop }, 'name access_token', function (err, dbshop) {
+        Shop.findOne({ 'name': shop }, 'name access_token', function (err: Error, exisitingShop: ShopModel) {
             if (err) return res.status(503).send("error with db connection. Plese try again in a while");
-            if (dbshop && dbshop.access_token) {
-                req.session.shop = dbshop;
+            if (exisitingShop && exisitingShop.access_token) {
+                req["session"].shop = exisitingShop;
                 return res.redirect('/shopify/cookie-check');
             } else {
                 return res.redirect(`/shopify/install/?${query}`);
@@ -55,6 +56,7 @@ router.get('/cookie-check', (req: Request, res: Response) => {
 router.get('*', function(req: Request, res: Response) {
   res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
 });
+
 
 
 export { router };
