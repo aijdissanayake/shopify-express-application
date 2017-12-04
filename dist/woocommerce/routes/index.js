@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const router = express.Router();
+const express_1 = require("express");
+const router = express_1.Router();
 exports.router = router;
-router.get('/', (req, res) => {
-    res.send('woocommerce plugin!');
+/**
+ * sample route
+ */
+router.get("/", (req, res) => {
+    res.send("woocommerce plugin!");
 });
 //# sourceMappingURL=index.js.map

@@ -26,24 +26,25 @@ app.use(session({
     activeDuration: 5 * 60 * 1000,
 }));
 /**
- * html rendering - if needed
+ * html rendering - if needed (For shopify react app is served by sending the index.html file.
+ * Can be useful for a general view of Tracified ecommerce and other plugins)
  */
 app.set("views", __dirname + "/views");
 app.engine("html", ejs.renderFile);
 /**
  * db connection
- * -Set up default mongoose connection
+ * -set up default mongoose connection
  */
 const mongoDB = "mongodb://shopify:Tracified@ds251435.mlab.com:51435/shopify-db";
 mongoose.connect(mongoDB, {
     useMongoClient: true,
 });
 /**
- * -Get the default connection
+ * -get the default connection
  */
 const db = mongoose.connection;
 /**
- * -Bind connection to error event (to get notification of connection errors)
+ * -bind connection to error event (to get notification of connection errors)
  */
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 /**

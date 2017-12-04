@@ -1,6 +1,7 @@
-import { Request, Response, Router } from "express";
-import { Error } from "mongoose";
-import {Shop, ShopModel} from '../models/Shop';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const Shop_1 = require("../models/Shop");
 const shopAdminAPI = require('../helpers').shopAdminAPI;
 const install = require('./install');
 const webhook = require('./webhook');
@@ -9,52 +10,51 @@ const shopAPI = require('./shop-api');
 const config = require('./config');
 const test = require('./test');
 const path = require('path');
-
-
-const router = Router(); 
+const router = express_1.Router();
+exports.router = router;
 router.use('/install', install);
 router.use('/webhook', webhook);
 router.use('/adminlink', adminlink);
 router.use('/shop-api', shopAPI);
-router.use('/config',config);
+router.use('/config', config);
 //shopify test routes
 router.use('/test', test);
-
 //index route
-router.get('/', (req: Request, res: Response) => {
+router.get('/', (req, res) => {
     //res.send('Tracified - Shopify- modularized');
     const shop = req.query.shop;
     if (shop) {
         const query = Object.keys(req.query).map((key) => `${key}=${req.query[key]}`).join('&');
-        Shop.findOne({ 'name': shop }, 'name access_token', function (err: Error, exisitingShop: ShopModel) {
-            if (err) return res.status(503).send("error with db connection. Plese try again in a while");
+        Shop_1.Shop.findOne({ 'name': shop }, 'name access_token', function (err, exisitingShop) {
+            if (err)
+                return res.status(503).send("error with db connection. Plese try again in a while");
             if (exisitingShop && exisitingShop.access_token) {
                 req["session"].shop = exisitingShop;
                 return res.redirect('/shopify/cookie-check');
-            } else {
+            }
+            else {
                 return res.redirect(`/shopify/install/?${query}`);
             }
         });
-    } else {
+    }
+    else {
         return res.status(200).send('Shopify App Details and Tracified Details goes here');
     }
 });
-
 //cookie check and request handle route redirected from index route
-router.get('/cookie-check', (req: Request, res: Response) => {
+router.get('/cookie-check', (req, res) => {
     if (req["session"] && req["session"].shop) {
         //temp assigned to mapping table view
         return res.redirect('/shopify/product-mapping');
-    } else {
+    }
+    else {
         console.log('cookie disabled');
         res.send('cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.');
     }
 });
-
 //react-view
-  // All remaining requests return the React app, React router will handle the routes
-router.get('*', function(req: Request, res: Response) {
-  res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
+// All remaining requests return the React app, React router will handle the routes
+router.get('*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
 });
-
-export { router };
+//# sourceMappingURL=index.js.map
