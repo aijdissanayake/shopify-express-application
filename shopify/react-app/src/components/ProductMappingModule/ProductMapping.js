@@ -114,7 +114,7 @@ class ProductMapping extends Component {
 
        
         <div style={{width:"100%"}}>
-        <Card title="Product Mapping Details" >
+        <Card title="Products Mapping Details" ><br/>
             <table className="table table-striped" >
               <thead>
                 <tr>
