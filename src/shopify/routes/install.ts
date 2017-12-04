@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 import { Error } from "mongoose";
 import {Shop, ShopModel} from "../models/Shop";
-const crypto = require("crypto");
 const cookie = require("cookie");
 const nonce = require("nonce")();
 const querystring = require("querystring");
