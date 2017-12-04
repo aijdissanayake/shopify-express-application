@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node dist/index.js",
     "heroku-postbuild": "cd shopify/react-app/ && npm install --only=dev && npm install && npm run build",
-    "build": "node_modules/.bin/webpack --config webpack.config.js",
     "tsc": "tsc",
-    "tslint" : "tslint -c tslint.json 'src/**/*.ts'"
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "start-nodemon": "nodemon dist/index.js",
+    "shopify-ui-production":"npm run shopify-react-build && npm run copy-static-assets",
+    "shopify-react-build": "cd src/shopify/react-app/ && npm install --only=dev && npm install && npm run build",
+    "copy-static-assets": "node copyStaticAssets.js"
   },
-  "author": "",
+  "author": "Tracified E-commerce Team",
   "license": "ISC",
   "dependencies": {
     "client-sessions": "^0.8.0",
@@ -33,6 +35,8 @@
     "@types/mongoose": "^4.7.28",
     "@types/request": "^2.0.8",
     "@types/request-promise": "^4.1.39",
+    "nodemon": "^1.12.1",
+    "shelljs": "^0.7.8",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"
   }

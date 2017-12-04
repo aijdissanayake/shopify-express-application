@@ -1,4 +1,4 @@
-const express = require('express');
+import { Request, Response, Router } from "express";
 const Shop = require('../models/Shop');
 const shopAdminAPI = require('../helpers').shopAdminAPI;
 const install = require('./install');
@@ -10,7 +10,7 @@ const test = require('./test');
 const path = require('path');
 
 
-const router = express.Router(); 
+const router = Router(); 
 router.use('/install', install);
 router.use('/webhook', webhook);
 router.use('/adminlink', adminlink);
@@ -20,7 +20,7 @@ router.use('/config',config);
 router.use('/test', test);
 
 //index route
-router.get('/', (req, res) => {
+router.get('/', (req: Request, res: Response) => {
     //res.send('Tracified - Shopify- modularized');
     const shop = req.query.shop;
     if (shop) {
@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
 });
 
 //cookie check and request handle route redirected from index route
-router.get('/cookie-check', (req, res) => {
+router.get('/cookie-check', (req: Request, res: Response) => {
     if (req.session && req.session.shop) {
         //temp assigned to mapping table view
         return res.redirect('/shopify/product-mapping');
@@ -52,7 +52,7 @@ router.get('/cookie-check', (req, res) => {
 
 //react-view
   // All remaining requests return the React app, React router will handle the routes
-router.get('*', function(req, res) {
+router.get('*', function(req: Request, res: Response) {
   res.sendFile(path.resolve(__dirname, '../react-app/build', 'index.html'));
 });
 
