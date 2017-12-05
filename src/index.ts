@@ -29,7 +29,6 @@ app.use(session({
  */
 app.set("views", __dirname + "/views");
 app.engine("html", ejs.renderFile);
-
 /**
  * db connection
  * -set up default mongoose connection
