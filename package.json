@@ -26,7 +26,8 @@
     "nonce": "^1.0.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.7.8",
+    "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@types/client-sessions": "^0.8.0",
