@@ -37,7 +37,7 @@ class ProductMapping extends Component {
     }
     componentDidMount(){
      
-       axios.get('https://fd87172a.ngrok.io/pluginAdmin/getProducts')
+       axios.get('shopify/shop-api/products')
  
       .then(response => {
         console.log('testngaxio');

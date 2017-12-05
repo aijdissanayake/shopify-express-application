@@ -8,7 +8,7 @@ module.exports = {
      * @param tempToken - token that will be provided from the tracified-admin
      * will return a promise after the completion
      */
-    verifyTracifiedAccount(tempToken: string) {  /* imlement the function */ },
+    verifyTracifiedAccount(tempToken: string) {  /* implement the function */ },
 
     getTracifiedItemList(tennantID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
