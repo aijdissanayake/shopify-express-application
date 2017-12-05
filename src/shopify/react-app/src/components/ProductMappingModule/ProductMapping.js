@@ -100,10 +100,10 @@ class ProductMapping extends Component {
       console.log(this.state.tracedata);
       console.log(trace);
       console.log(this.state.shopifyProducts);
-      if(this.state.shopifyProducts instanceof Array){
+      if(this.state.shopifyProducts.products instanceof Array){
         console.log("array-true");
-        return this.state.shopifyProducts.map(function(object, i){
-            return <ProductMappingTableRow obj={object} key={i} tracelist={trace} />;
+        return this.state.shopifyProducts.map(function(object){
+            return <ProductMappingTableRow obj={object.title} key={object.id} tracelist={trace} />;
             
         }) 
        
