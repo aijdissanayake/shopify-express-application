@@ -16,16 +16,16 @@ router.all("/*", (req: Request, res: Response, next: NextFunction) => {
 
 });
 
-router.get("/products", (req, res) => {
+router.get("/products", (req: Request, res: Response) => {
     console.log("products");
     console.log(req["session"].shop.name);
-    shopAdminAPI("GET", req["session"].shop.name, "/admin/products.json", req["shopRequestHeaders"], null, (products: any) => {
+    shopAdminAPI("GET", req["session"].shop.name, "/admin/products.json", req["shopRequestHeaders"], null, (products: object) => {
         console.log("got products");
         res.status(200).send(products);
     });
 });
 
-router.get("/orders", (req, res) => {
+router.get("/orders", (req: Request, res: Response) => {
     console.log("orders");
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json", req["shopRequestHeaders"], null, (orders: any) => {
         console.log("got orders");
