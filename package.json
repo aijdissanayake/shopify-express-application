@@ -24,7 +24,8 @@
     "mongoose": "^4.13.1",
     "nonce": "^1.0.4",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "shelljs": "^0.7.8"
   },
   "devDependencies": {
     "@types/client-sessions": "^0.8.0",
