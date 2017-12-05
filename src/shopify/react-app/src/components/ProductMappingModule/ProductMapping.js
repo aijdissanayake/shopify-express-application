@@ -37,11 +37,12 @@ class ProductMapping extends Component {
     }
     componentDidMount(){
      
-       axios.get('shopify/shop-api/products')
+       axios.get('https://shopify-tracified.herokuapp.com/shopify/shop-api/products')
  
       .then(response => {
-        console.log('testngaxio');
+        console.log('product-api');
         console.log(typeof response.data);
+        console.log(response.data);
        
         this.setState({ shopifyProducts: response.data });
 

@@ -10,8 +10,9 @@
     "tsc": "tsc",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "start-nodemon": "nodemon dist/index.js",
-    "shopify-ui-production": "npm run shopify-react-build && npm run copy-static-assets",
-    "shopify-react-build": "cd src/shopify/react-app/ && npm install --only=dev && npm install && npm run build",
+    "shopify-ui-production": "npm run shopify-react-full-build && npm run copy-static-assets",
+    "shopify-react-full-build": "cd src/shopify/react-app/ && npm install --only=dev && npm install && npm run build",
+    "react-build": "cd src/shopify/react-app/ && npm run build",
     "copy-static-assets": "node copyStaticAssets.js"
   },
   "author": "Tracified E-commerce Team",
