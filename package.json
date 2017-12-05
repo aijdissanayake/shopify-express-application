@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "heroku-postbuild": "npm run shopify-ui-production",
+    "postinstall": "npm run tsc",
     "tsc": "tsc",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "start-nodemon": "nodemon dist/index.js",
