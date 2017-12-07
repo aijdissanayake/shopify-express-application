@@ -1,6 +1,7 @@
 // ProductMapping.js
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ProductMappingService from './ProductMappingService';
 import axios from 'axios';
 import ProductMappingTableRow from './ProductMappingTableRow';
@@ -24,6 +25,7 @@ import {
   Checkbox
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
+import './AppMP.css'
 
 
 
@@ -31,113 +33,138 @@ import '@shopify/polaris/styles.css';
 class ProductMapping extends Component {
 
   constructor(props) {
-      super(props);
-      this.state = {value: '', shopifyProducts:'' , tracedata: []};
-      this.productMappingService = new ProductMappingService();
-    }
-    componentDidMount(){
-     
-       axios.get('https://shopify-tracified.herokuapp.com/shopify/shop-api/products')
- 
-      .then(response => {
-        console.log('product-api');
-        console.log(typeof response.data);
-        console.log(response.data);
-       
-        this.setState({ shopifyProducts: response.data });
+    super(props);
+    this.state = { value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.productMappingService = new ProductMappingService();
+  }
 
-        console.log(typeof shopifyProducts);
-         
+  componentDidMount() {
+
+    axios.get(' https://236717cb.ngrok.io/pluginAdmin/getProducts')
+      .then(response => {
+        var productJson = JSON.parse(response.data);
+        var products = productJson.products;
+    
+        products = products.reduce(function (reducedJson, product) {
+          reducedJson.push({
+            id: product.id,
+            title: product.title
+
+          });
+          return reducedJson;
+        },[]);
+        this.setState({ shopifyProducts: products });
       })
       .catch(function (error) {
         console.log(error);
-      }); 
-
-      
-      
+      });
     //  axios.get('https://085da154.ngrok.io/pluginAdmin/getTraceData') 
-     // axios.get('https://tracified-mock-api.herokuapp.com/Traceability_data/Data')
-   
-     axios({
+    // axios.get('https://tracified-mock-api.herokuapp.com/Traceability_data/Data')
+
+    axios({
       method: 'get',
-      url:'https://tracified-mock-api.herokuapp.com/Traceability_data/Data/tracified_item_list/sort-list',
+      url: 'https://tracified-mock-api.herokuapp.com/Traceability_data/Data/tracified_item_list/sort-list',
       headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
+        'Content-Type': 'text/plain;charset=utf-8',
       },
+    })
+      .then(response_ => {
+        this.setState({ tracedata: response_.data });
       })
-        .then(response_ => {
-          console.log('testapi');
-          //res = response_.json();
-          console.log(typeof response_.data);
-          console.log(typeof tracedata);
-          
-          this.setState({ tracedata: response_.data });
-          
-          console.log('tracedatacheck');
-          console.log(typeof response_.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
 
-    }
 
-    // componentDidMount(){
-    //   axios.get('https://cc37a427.ngrok.io/pluginAdmin/getTraceData')
-    //   .then(response => {
-    //     this.setState({ tracedata: response.data });
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
-    // }
+  tabRow() {
+    const trace = this.state.tracedata;
+    if (this.state.shopifyProducts instanceof Array) {
+      return this.state.shopifyProducts.map(function (object, i) {
+        return <ProductMappingTableRow obj={object} key={i} tracelist={trace} />;
 
-   
+      })
 
-    tabRow(){
-      const trace = this.state.tracedata;
-      console.log('checkkk');
-      console.log(this.state.tracedata);
-      console.log(trace);
-      console.log(this.state.shopifyProducts);
-      if(this.state.shopifyProducts.products instanceof Array){
-        console.log("array-true");
-        return this.state.shopifyProducts.products.map(function(object){
-            return <ProductMappingTableRow obj={object.title} key={object.id} tracelist={trace} />;
-            
-        }) 
-       
-      }
-      
-    }
-
-    render() {
-      return (
-
-       
-        <div style={{width:"100%"}}>
-        <Card title="Product Mapping Details" >
-            <table className="table table-striped" >
-              <thead>
-                <tr>
-                    <td>Product Name</td>
-                    <td>Tracified Item ID</td>
-                    <td>Tracified Item title</td>
-                    <td>Permission</td>
-                </tr>
-              </thead>
-              <tbody>
-
-                {this.tabRow()}
-
-              </tbody>
-            </table>
-        </Card>
-        </div>
-       
-
-      );
     }
   }
+
+  onChange = (e) => {
+    // Because we named the inputs to match their corresponding values in state, it's
+    // super easy to update the state
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
+
+
+  onSubmit = (e) => {
+    console.log('console');
+    e.preventDefault();
+    // get our form data out of state
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    axios.post('https://tracified-mock-api.herokuapp.com/test/post', { productName, tracifiedItemID, tracifiedItemtitle, permisison })
+      .then((result) => {
+        //access the results here....
+        console.log(result);
+      });
+
+  }
+
+
+
+  render() {
+
+
+
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+
+
+
+    return (
+      <div class="loader" id="productmapping">
+
+        <div className="container">
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+
+
+          
+              <Card title="Product Mapping Details">
+                <form>
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                    <td value="productName" onChange={this.onChange}>Product Name</td>
+                        <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
+                        <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
+                        <td value="permisison" onChange={this.onChange}>Permission</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {this.tabRow()}
+
+                    </tbody>
+                    <tfoot>
+                   
+                      <Button onClick={this.onSubmit}>Add product</Button>
+
+                    </tfoot>
+                    
+                  </table>
+                  
+                </form>
+              </Card>
+        </div>
+      </div>
+
+    );
+
+    <ProductMappingTableRow /> ,
+      document.getElementById('productmapping')
+
+  }
+}
 
 export default ProductMapping;

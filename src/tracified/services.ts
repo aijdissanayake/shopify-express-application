@@ -6,7 +6,8 @@ module.exports = {
      * this function will verify an Tracified account and connect store with the account
      * normally this will needed to be invoked once per installation
      * @param tempToken - token that will be provided from the tracified-admin
-     * a callback url(or to return a promise?) will also need to send and have implemented here to handle te after verification peocess
+     * a callback url(or to return a promise?) will also need to send
+     * and have implemented here to handle te after verification peocess
      */
     verifyTracifiedAccount(tempToken: string) {  /* implement the function */ },
 
