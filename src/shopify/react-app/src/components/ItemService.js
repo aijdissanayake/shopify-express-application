@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class ItemService{
     sendData(data){
-        axios.post(' https://236717cb.ngrok.io/items/add/post',{
+        axios.post('https://fd87172a.ngrok.io/items/add/post',{
             item:data
         })
         .then(function(response){
@@ -14,7 +14,7 @@ class ItemService{
     }
 
     updateData(data, id){
-        axios.post(' https://236717cb.ngrok.io/items/update/'+id, {
+        axios.post('https://fd87172a.ngrok.io/items/update/'+id, {
           item: data
         })
         .then(res => this.setState({ items: res.data }))
@@ -22,7 +22,7 @@ class ItemService{
       }
 
       deleteData(id){
-          axios.get(' https://236717cb.ngrok.io/items/delete/'+id)
+          axios.get('https://fd87172a.ngrok.io/items/delete/'+id)
           .then(console.log("deleted"))
           .catch(err=>console.log(err))
       }
