@@ -110,7 +110,13 @@ class ProductMapping extends Component {
     console.log(productName);
     console.log(tracifiedItemID);
     console.log(tracifiedItemtitle);
-    console.log(permisison);    
+    console.log(permisison); 
+   /**
+    * write functions to adust dynamically a state attribute that holds the current selections by the user.
+    * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
+    * means it should look like " mapping: this.state.mapping"
+    * make sure that state.mapping holds the current selections
+    */  
     axios.post('/shopify/config/mapping', { mapping: {productName, tracifiedItemID, tracifiedItemtitle, permisison } })
       .then((result) => {
         //access the results here....
