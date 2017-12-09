@@ -72,6 +72,7 @@ class ProductMapping extends Component {
       },
     })
       .then(response_ => {
+        console.log(response_.data);
         this.setState({ tracedata: response_.data });
       })
       .catch(function (error) {
