@@ -106,7 +106,7 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-    axios.post('https://tracified-mock-api.herokuapp.com/test/post', { productName, tracifiedItemID, tracifiedItemtitle, permisison })
+    axios.post('/shopify/config/mapping', { productName, tracifiedItemID, tracifiedItemtitle, permisison })
       .then((result) => {
         //access the results here....
         console.log(result);
@@ -133,6 +133,7 @@ class ProductMapping extends Component {
 
           
               <Card title="Product Mapping Details">
+              <br/>
                 <form>
                   <table className="table table-striped">
                     <thead>
@@ -150,7 +151,7 @@ class ProductMapping extends Component {
                     </tbody>
                     <tfoot>
                    
-                      <Button onClick={this.onSubmit}>Add product</Button>
+                      <Button style={{float:"right"}} onClick={this.onSubmit}>Save</Button>
 
                     </tfoot>
                     

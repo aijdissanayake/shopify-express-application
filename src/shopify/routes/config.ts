@@ -27,21 +27,23 @@ router.post("/mapping", (req, res) => {
         if (err) return res.status(503).send("error with db connection. Plese try again in a while");
         if (mapping) {
             mapping.mapping = req.body.mapping;
-            mapping.save(function () {
+            mapping.save((err: Error) => {
                 if (err) return res.status(503).send("error with db connection. Plese try again in a while");
+                res.send("mapping successfully saved");
             });
         }
         else {
             var mappingInstance = new ShopifyMapping({ shop_name: shop.name, mapping: req.body.mapping });
             mappingInstance.save( (err: Error) => {
                 if (err) return res.status(503).send("error with db connection. Plese try again in a while");
+                res.send("mapping successfully saved");
             });
         }
     });
 });
 
 router.get("/mapping", (req: Request, res: Response) => {
-    
+
 });
 
 export { router };
