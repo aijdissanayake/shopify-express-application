@@ -110,7 +110,7 @@ class ProductMapping extends Component {
     console.log(tracifiedItemID);
     console.log(tracifiedItemtitle);
     console.log(permisison);    
-    axios.post('/shopify/config/mapping', { productName, tracifiedItemID, tracifiedItemtitle, permisison })
+    axios.post('/shopify/config/mapping', { mapping: {productName, tracifiedItemID, tracifiedItemtitle, permisison } })
       .then((result) => {
         //access the results here....
         console.log(result);
