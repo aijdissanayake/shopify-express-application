@@ -44,7 +44,7 @@ class ProductMapping extends Component {
       .then(response => {
         console.log(response);
         console.log(response.data);
-        
+
         var products = response.data.products;
     
         products = products.reduce(function (reducedJson, product) {
@@ -66,7 +66,7 @@ class ProductMapping extends Component {
 
     axios({
       method: 'get',
-      url: 'https://tracified-mock-api.herokuapp.com/Traceability_data/Data/tracified_item_list/sort-list',
+      url: '/shopify/tracified/item-list',
       headers: {
         'Content-Type': 'text/plain;charset=utf-8',
       },
