@@ -132,13 +132,15 @@ class ProductMapping extends Component {
 
 
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+
+    if(trace != null && trace.length >0 && this.state.shopifyProducts != null && this.props.shopifyProducts >0 )
+    {
+
+
     return (
       <div class="loader" id="productmapping">
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
-
-
+         
           
               <Card title="Product Mapping Details">
               <br/>
@@ -171,6 +173,12 @@ class ProductMapping extends Component {
 
     );
 
+
+  }
+    else{ 
+    <p> Array is null</p>
+   
+    }
     <ProductMappingTableRow /> ,
       document.getElementById('productmapping')
 
