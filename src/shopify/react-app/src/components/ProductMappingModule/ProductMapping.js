@@ -140,13 +140,19 @@ class ProductMapping extends Component {
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison , loading} = this.state;
      
 
-    if(trace != null && trace.length >0 && this.state.shopifyProducts != null && this.props.shopifyProducts >0 )
+    if(trace != null && trace.length >0 && this.state.shopifyProducts != null && this.state.shopifyProducts.length>0 )
     {
+      console.log('arrays are not null');
 
       if(loading) {
         return null;
+        console.log('return null');
+        console.log('laoding is true');
+        
 
       }
+    
+       console.log('laoding is false');
 
     return (
       <div class="loader" id="productmapping">
@@ -188,7 +194,7 @@ class ProductMapping extends Component {
     <ProductMappingTableRow /> ,
     document.getElementById('productmapping')
 
-
+    console.log("dcmntget element works");
   }
     else{ 
     <p> Array is null</p>
