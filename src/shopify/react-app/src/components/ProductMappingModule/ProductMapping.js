@@ -40,10 +40,12 @@ class ProductMapping extends Component {
 
   componentDidMount() {
 
-    axios.get(' https://236717cb.ngrok.io/pluginAdmin/getProducts')
+    axios.get('/shopify/shop-api/products')
       .then(response => {
+        console.log(response);
         var productJson = JSON.parse(response.data);
         var products = productJson.products;
+        
     
         products = products.reduce(function (reducedJson, product) {
           reducedJson.push({
@@ -58,8 +60,7 @@ class ProductMapping extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    //  axios.get('https://085da154.ngrok.io/pluginAdmin/getTraceData') 
-    // axios.get('https://tracified-mock-api.herokuapp.com/Traceability_data/Data')
+    
 
     axios({
       method: 'get',
