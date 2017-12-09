@@ -106,6 +106,7 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    console.log(this.state);
     console.log(productName);
     console.log(tracifiedItemID);
     console.log(tracifiedItemtitle);
