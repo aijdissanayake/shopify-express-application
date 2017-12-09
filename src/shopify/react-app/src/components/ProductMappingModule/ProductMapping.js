@@ -56,6 +56,8 @@ class ProductMapping extends Component {
           });
           return reducedJson;
         },[]);
+        console.log("reduced products");
+        console.log(products);
         this.setState({ shopifyProducts: products });
       })
       .catch(function (error) {
