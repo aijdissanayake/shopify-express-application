@@ -43,6 +43,7 @@ class ProductMapping extends Component {
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
+        console.log(response.data);
         var productJson = JSON.parse(response.data);
         var products = productJson.products;
         
