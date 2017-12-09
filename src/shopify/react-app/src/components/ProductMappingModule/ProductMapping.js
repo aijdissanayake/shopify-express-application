@@ -121,9 +121,6 @@ class ProductMapping extends Component {
 
 
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-
-
-
     return (
       <div class="loader" id="productmapping">
 
