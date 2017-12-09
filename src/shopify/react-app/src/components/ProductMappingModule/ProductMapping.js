@@ -26,6 +26,7 @@ import {
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import './AppMP.css'
+import { setTimeout } from 'timers';
 
 
 
@@ -37,8 +38,13 @@ class ProductMapping extends Component {
     this.state = { value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
   }
+    state = {
+      loading : true
+    };
 
   componentDidMount() {
+
+    setTimeout(() => this.setState({ loading: false }), 1500);
 
     axios.get('/shopify/shop-api/products')
       .then(response => {
@@ -131,16 +137,22 @@ class ProductMapping extends Component {
 
 
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , loading} = this.state;
+     
 
     if(trace != null && trace.length >0 && this.state.shopifyProducts != null && this.props.shopifyProducts >0 )
     {
 
+      if(loading) {
+        return null;
+
+      }
 
     return (
       <div class="loader" id="productmapping">
 
-         
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
           
               <Card title="Product Mapping Details">
               <br/>
@@ -172,6 +184,9 @@ class ProductMapping extends Component {
       </div>
 
     );
+    
+    <ProductMappingTableRow /> ,
+    document.getElementById('productmapping')
 
 
   }
@@ -179,8 +194,7 @@ class ProductMapping extends Component {
     <p> Array is null</p>
    
     }
-    <ProductMappingTableRow /> ,
-      document.getElementById('productmapping')
+    
 
   }
 }
