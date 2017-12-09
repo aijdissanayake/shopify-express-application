@@ -127,8 +127,6 @@ class ProductMapping extends Component {
     return (
       <div class="loader" id="productmapping">
 
-        <div className="container">
-
           <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
 
@@ -160,7 +158,6 @@ class ProductMapping extends Component {
                   
                 </form>
               </Card>
-        </div>
       </div>
 
     );
