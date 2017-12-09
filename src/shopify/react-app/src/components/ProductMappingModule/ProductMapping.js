@@ -44,8 +44,7 @@ class ProductMapping extends Component {
       .then(response => {
         console.log(response);
         console.log(response.data);
-        // var productJson = JSON.parse(response.data);
-        // var products = productJson.products;
+        
         var products = response.data.products;
     
         products = products.reduce(function (reducedJson, product) {

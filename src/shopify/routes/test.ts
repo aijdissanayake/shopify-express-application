@@ -90,3 +90,10 @@ router.get("/route-check", (req, res) => {
 });
 
 export { router };
+
+
+        // if (mapping && Object.keys(mapping).length) {
+        //     return
+        // } else {
+        // }
+        

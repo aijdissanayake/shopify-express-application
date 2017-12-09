@@ -11,7 +11,7 @@ module.exports = {
      */
     verifyTracifiedAccount(tempToken: string) {  /* implement the function */ },
 
-    getTracifiedItemList(tennantID: string, accessToken: string) {
+    getTracifiedItemList(accessToken: string) {
         return new Promise((resolve, reject) => {
             const options = {
                 method: "GET",
@@ -27,7 +27,7 @@ module.exports = {
         });
     },
 
-    getOrderTraceabilityData(orderID: string, tennantID: string, accessToken: string) {
+    getOrderTraceabilityData(orderID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
             const options = {
                 method: "GET",

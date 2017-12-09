@@ -6,6 +6,7 @@ import { router as webhook }  from "./webhook";
 import { router as adminlink }  from "./adminlink";
 import { router as shopAPI }  from "./shop-api";
 import { router as config }  from "./config";
+import { router as tracified }  from "./tracified";
 import { router as test }  from "./test";
 const shopAdminAPI = require("../helpers").shopAdminAPI;
 const path = require("path");
@@ -18,6 +19,7 @@ router.use("/webhook", webhook);
 router.use("/adminlink", adminlink);
 router.use("/shop-api", shopAPI);
 router.use("/config",config);
+router.use("/tracified",tracified);
 router.use("/test", test);
 /**
  * -shopify index route - all the requests from shopify admin app lists 
