@@ -106,6 +106,10 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    console.log(productName);
+    console.log(tracifiedItemID);
+    console.log(tracifiedItemtitle);
+    console.log(permisison);    
     axios.post('/shopify/config/mapping', { productName, tracifiedItemID, tracifiedItemtitle, permisison })
       .then((result) => {
         //access the results here....
