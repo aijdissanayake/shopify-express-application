@@ -140,7 +140,7 @@ class ProductMapping extends Component {
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison , loading} = this.state;
      
 
-    if(trace != null && trace.length >0 && this.state.shopifyProducts != null && this.state.shopifyProducts.length>0 )
+    if(this.state.tracedata != null && this.state.tracedata.length >0 && this.state.shopifyProducts != null && this.state.shopifyProducts.length>0 )
     {
       console.log('arrays are not null');
 
