@@ -3,7 +3,9 @@ import { Error } from "mongoose";
 const router = Router();
 const shopAdminAPI = require("../helpers").shopAdminAPI;
 const shopName = "99xnsbm.myshopify.com";
-const shopRequestHeaders = "94687cbe08d0e4024c74f8adbffa94ca";
+const shopRequestHeaders = {
+    "X-Shopify-Access-Token": "94687cbe08d0e4024c74f8adbffa94ca",
+};
 
 // router.all("/*", (req: Request, res: Response, next: NextFunction) => {
 //     if (req["session"] && req["session"].shop) {
@@ -22,10 +24,10 @@ router.get("/products", (req: Request, res: Response) => {
     console.log("products");
     // console.log(req["session"].shop.name);
     // const shopName = req["session"].shop.name;
-    const shopRequestHeaders = req["shopRequestHeaders"];
+    // const shopRequestHeaders = req["shopRequestHeaders"];
     shopAdminAPI("GET", shopName, "/admin/products.json", shopRequestHeaders, null, (products: object) => {
         console.log("got products");
-        res.status(200).send(products);
+        return res.status(200).send(products);
     });
 });
 

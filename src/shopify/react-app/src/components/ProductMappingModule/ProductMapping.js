@@ -39,9 +39,10 @@ class ProductMapping extends Component {
   }
 
   componentDidMount() {
-
+    console.log("componenet did mount");
     axios.get('/shopify/shop-api/products')
       .then(response => {
+        console.log("fetching products");
         console.log(response);
         console.log(response.data);
 

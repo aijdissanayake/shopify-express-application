@@ -39,7 +39,10 @@ module.exports = {
             body,
             json: true,
         };
+        console.log("sending request");
+        console.log(shopRequestHeaders);
         request(options).then(callback).catch((err: Error) => {
+            console.log("admin api error");
             return (err);
           } );
     },
