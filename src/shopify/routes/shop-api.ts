@@ -2,24 +2,28 @@ import { NextFunction, Request, Response, Router } from "express";
 import { Error } from "mongoose";
 const router = Router();
 const shopAdminAPI = require("../helpers").shopAdminAPI;
+const shopName = "99xnsbm.myshopify.com";
+const shopRequestHeaders = "94687cbe08d0e4024c74f8adbffa94ca";
 
-router.all("/*", (req: Request, res: Response, next: NextFunction) => {
-    if (req["session"] && req["session"].shop) {
-        req["shopRequestHeaders"] = {
-            "X-Shopify-Access-Token": req["session"].shop.access_token,
-        };
-        next();
-    } else {
-        console.log("cookies disabled");
-        res.send("cookies not found, Please try re-openning the app.");
-    }
+// router.all("/*", (req: Request, res: Response, next: NextFunction) => {
+//     if (req["session"] && req["session"].shop) {
+//         req["shopRequestHeaders"] = {
+//             "X-Shopify-Access-Token": req["session"].shop.access_token,
+//         };
+//         next();
+//     } else {
+//         console.log("cookies disabled");
+//         res.send("cookies not found, Please try re-openning the app.");
+//     }
 
-});
+// });
 
 router.get("/products", (req: Request, res: Response) => {
     console.log("products");
-    console.log(req["session"].shop.name);
-    shopAdminAPI("GET", req["session"].shop.name, "/admin/products.json", req["shopRequestHeaders"], null, (products: object) => {
+    // console.log(req["session"].shop.name);
+    // const shopName = req["session"].shop.name;
+    const shopRequestHeaders = req["shopRequestHeaders"];
+    shopAdminAPI("GET", shopName, "/admin/products.json", shopRequestHeaders, null, (products: object) => {
         console.log("got products");
         res.status(200).send(products);
     });
@@ -27,7 +31,9 @@ router.get("/products", (req: Request, res: Response) => {
 
 router.get("/orders", (req: Request, res: Response) => {
     console.log("orders");
-    shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json", req["shopRequestHeaders"], null, (orders: any) => {
+    // const shopName = req["session"].shop.name;
+    // const shopRequestHeaders = req["shopRequestHeaders"];
+    shopAdminAPI("GET", shopName, "/admin/orders.json", shopRequestHeaders, null, (orders: any) => {
         console.log("got orders");
         res.status(200).send(orders);
     });
