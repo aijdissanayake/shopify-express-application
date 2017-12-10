@@ -13,7 +13,8 @@
     "shopify-ui-production": "npm run shopify-react-full-build && npm run copy-static-assets",
     "shopify-react-full-build": "cd src/shopify/react-app/ && npm install --only=dev && npm install && npm run build",
     "react-build": "cd src/shopify/react-app/ && npm run build",
-    "copy-static-assets": "node copyStaticAssets.js"
+    "copy-static-assets": "node copyStaticAssets.js",
+    "local-start":"npm run tsc && npm run react-build && npm run copy-static-assets"
   },
   "author": "Tracified E-commerce Team",
   "license": "ISC",
