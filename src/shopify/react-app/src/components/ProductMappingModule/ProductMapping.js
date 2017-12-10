@@ -26,7 +26,6 @@ import {
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import './AppMP.css'
-import { setTimeout } from 'timers';
 
 
 
@@ -38,13 +37,8 @@ class ProductMapping extends Component {
     this.state = { value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
   }
-    state = {
-      loading : true
-    };
 
   componentDidMount() {
-
-    setTimeout(() => this.setState({ loading: false }), 1500);
 
     axios.get('/shopify/shop-api/products')
       .then(response => {
@@ -137,28 +131,14 @@ class ProductMapping extends Component {
 
 
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , loading} = this.state;
-     
-
-    if(this.state.tracedata != null && this.state.tracedata.length >0 && this.state.shopifyProducts != null && this.state.shopifyProducts.length>0 )
-    {
-      console.log('arrays are not null');
-
-      if(!loading) {
-        return null;
-        console.log('return null');
-        console.log('laoding is false');
-        
-
-      }
-    
-       console.log('laoding is true');
-
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
     return (
       <div class="loader" id="productmapping">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+
+
           
               <Card title="Product Mapping Details">
               <br/>
@@ -190,17 +170,9 @@ class ProductMapping extends Component {
       </div>
 
     );
-    
-    <ProductMappingTableRow /> ,
-    document.getElementById('productmapping')
 
-    console.log("dcmntget element works");
-  }
-    else{ 
-    <p> Array is null</p>
-   
-    }
-    
+    <ProductMappingTableRow /> ,
+      document.getElementById('productmapping')
 
   }
 }
