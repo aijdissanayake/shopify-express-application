@@ -144,15 +144,15 @@ class ProductMapping extends Component {
     {
       console.log('arrays are not null');
 
-      if(loading) {
+      if(!loading) {
         return null;
         console.log('return null');
-        console.log('laoding is true');
+        console.log('laoding is false');
         
 
       }
     
-       console.log('laoding is false');
+       console.log('laoding is true');
 
     return (
       <div class="loader" id="productmapping">
