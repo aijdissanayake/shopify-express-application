@@ -193,7 +193,7 @@ class ProductMapping extends Component {
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
+        
           
               <Card title="Product Mapping Details">
               <br/>
