@@ -27,7 +27,8 @@ import {
 import '@shopify/polaris/styles.css';
 import './AppMP.css'
 import { setTimeout } from 'timers';
-
+import Spinner from '../../lib/components/Spinner';
+import { request } from 'http';
 
 
 
@@ -35,21 +36,37 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
+    
   }
-    state = {
-      loading : true
-    };
-
+  
+  
+  
+    // state= {
+    //   isLoading :true
+    // };
+   
+  
+   
   componentDidMount() {
 
-    setTimeout(() => this.setState({ loading: false }), 1500);
+    if(request.status==200){
+      this.state.isLoading =false;
+     
+      }
+
 
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
         console.log(response.data);
+    
+        if(response.status==200){
+          this.state.isLoading =false;
+         
+          }
+    
 
         var products = response.data.products;
     
@@ -64,6 +81,7 @@ class ProductMapping extends Component {
         console.log("reduced products");
         console.log(products);
         this.setState({ shopifyProducts: products });
+        console.log(this.state.shopifyProducts);
       })
       .catch(function (error) {
         console.log(error);
@@ -80,7 +98,19 @@ class ProductMapping extends Component {
       .then(response_ => {
         console.log(response_.data);
         this.setState({ tracedata: response_.data });
+
+
+        if(response_.status==200){
+          this.state.isLoading =false;
+         
+          }
+    
+
+
       })
+
+      
+
       .catch(function (error) {
         console.log(error);
       })
@@ -89,6 +119,7 @@ class ProductMapping extends Component {
 
   tabRow() {
     const trace = this.state.tracedata;
+    console.log(this.state.tracedata);
     if (this.state.shopifyProducts instanceof Array) {
       return this.state.shopifyProducts.map(function (object, i) {
         return <ProductMappingTableRow obj={object} key={i} tracelist={trace} />;
@@ -136,23 +167,27 @@ class ProductMapping extends Component {
   render() {
 
 
+    console.log('render starts');
+    console.log(this.state.shopifyProducts.length);
+    console.log(this.state.shopifyProducts);
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , loading} = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , isLoading} = this.state;
      
 
-    if(this.state.tracedata != null && this.state.tracedata.length >0 && this.state.shopifyProducts != null && this.state.shopifyProducts.length>0 )
-    {
+    //if(this.state.shopifyProducts.length>0 )
+   // {
       console.log('arrays are not null');
 
-      if(!loading) {
-        return null;
-        console.log('return null');
-        console.log('laoding is false');
-        
-
-      }
     
-       console.log('laoding is true');
+    
+       console.log(isLoading);
+
+      if(isLoading){
+          return <Spinner/>; 
+        console.log('spinner');
+      }else
+       console.log('not spinner');
+
 
     return (
       <div class="loader" id="productmapping">
@@ -189,20 +224,26 @@ class ProductMapping extends Component {
               </Card>
       </div>
 
+      
+  
     );
+    <ProductMapping />, document.getElementById('productmapping')
+    console.log('document thing works');
     
-    <ProductMappingTableRow /> ,
-    document.getElementById('productmapping')
-
-    console.log("dcmntget element works");
-  }
-    else{ 
-    <p> Array is null</p>
+  //}
+  // else{ 
    
-    }
+  //     <p> Array is null</p>
+  //  console.log('array is null');
+  //   }
     
 
   }
+
+
 }
+
+
+  
 
 export default ProductMapping;
