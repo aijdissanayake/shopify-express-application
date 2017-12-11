@@ -26,7 +26,9 @@ import {
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import './AppMP.css'
-
+import { setTimeout } from 'timers';
+import Spinner from '../../lib/components/Spinner';
+import { request } from 'http';
 
 
 
@@ -34,17 +36,37 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
+    
   }
-
+  
+  
+  
+    // state= {
+    //   isLoading :true
+    // };
+   
+  
+   
   componentDidMount() {
-    console.log("componenet did mount");
+
+    if(request.status==200){
+      this.state.isLoading =false;
+     
+      }
+
+
     axios.get('/shopify/shop-api/products')
       .then(response => {
-        console.log("fetching products");
         console.log(response);
         console.log(response.data);
+    
+        if(response.status==200){
+          this.state.isLoading =false;
+         
+          }
+    
 
         var products = response.data.products;
     
@@ -59,6 +81,7 @@ class ProductMapping extends Component {
         console.log("reduced products");
         console.log(products);
         this.setState({ shopifyProducts: products });
+        console.log(this.state.shopifyProducts);
       })
       .catch(function (error) {
         console.log(error);
@@ -75,7 +98,19 @@ class ProductMapping extends Component {
       .then(response_ => {
         console.log(response_.data);
         this.setState({ tracedata: response_.data });
+
+
+        if(response_.status==200){
+          this.state.isLoading =false;
+         
+          }
+    
+
+
       })
+
+      
+
       .catch(function (error) {
         console.log(error);
       })
@@ -84,6 +119,7 @@ class ProductMapping extends Component {
 
   tabRow() {
     const trace = this.state.tracedata;
+    console.log(this.state.tracedata);
     if (this.state.shopifyProducts instanceof Array) {
       return this.state.shopifyProducts.map(function (object, i) {
         return <ProductMappingTableRow obj={object} key={i} tracelist={trace} />;
@@ -131,15 +167,33 @@ class ProductMapping extends Component {
   render() {
 
 
+    console.log('render starts');
+    console.log(this.state.shopifyProducts.length);
+    console.log(this.state.shopifyProducts);
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , isLoading} = this.state;
+     
+
+    //if(this.state.shopifyProducts.length>0 )
+   // {
+      console.log('arrays are not null');
+
+    
+    
+       console.log(isLoading);
+
+      if(isLoading){
+          return <Spinner/>; 
+        console.log('spinner');
+      }else
+       console.log('not spinner');
+
+
     return (
       <div class="loader" id="productmapping">
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
-
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
           
               <Card title="Product Mapping Details">
               <br/>
@@ -170,12 +224,26 @@ class ProductMapping extends Component {
               </Card>
       </div>
 
+      
+  
     );
-
-    <ProductMappingTableRow /> ,
-      document.getElementById('productmapping')
+    <ProductMapping />, document.getElementById('productmapping')
+    console.log('document thing works');
+    
+  //}
+  // else{ 
+   
+  //     <p> Array is null</p>
+  //  console.log('array is null');
+  //   }
+    
 
   }
+
+
 }
+
+
+  
 
 export default ProductMapping;

@@ -25,9 +25,14 @@ router.get("/products", (req: Request, res: Response) => {
     // console.log(req["session"].shop.name);
     // const shopName = req["session"].shop.name;
     // const shopRequestHeaders = req["shopRequestHeaders"];
+    
     shopAdminAPI("GET", shopName, "/admin/products.json", shopRequestHeaders, null, (products: object) => {
+      
+        
         console.log("got products");
         return res.status(200).send(products);
+        
+        
     });
 });
 

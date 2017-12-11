@@ -14,7 +14,7 @@
     "shopify-react-full-build": "cd src/shopify/react-app/ && npm install --only=dev && npm install && npm run build",
     "react-build": "cd src/shopify/react-app/ && npm run build",
     "copy-static-assets": "node copyStaticAssets.js",
-    "local-start":"npm run tsc && npm run react-build && npm run copy-static-assets && npm run start"
+    "local-start": "npm run tsc && npm run react-build && npm run copy-static-assets && npm run start"
   },
   "author": "Tracified E-commerce Team",
   "license": "ISC",
@@ -50,6 +50,8 @@
     "@types/request-promise": "^4.1.39",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "file-loader": "^1.1.5",
+    "image-webpack-loader": "^3.4.2",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.1",
     "shelljs": "^0.7.8",
