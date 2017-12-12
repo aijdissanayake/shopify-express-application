@@ -94,7 +94,8 @@ router.get("/callback", (req: Request, res: Response) => {
           var timestamp = new Date().getTime();
           const assetUploadPayload = {
             "asset": {
-              "key": "assets\/tracified" + timestamp + ".gif",
+              // "key": "assets\/tracified" + timestamp + ".gif",
+              "key": "snippets\/tracified_snippet" + timestamp + ".gif",
               "attachment": "R0lGODlhAQABAPABAP\/\/\/wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==\n"
             }
           };
