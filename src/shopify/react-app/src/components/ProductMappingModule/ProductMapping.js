@@ -36,40 +36,32 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = { isTraceListLoading: true, isProductListLoading: true, value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
-    
-  }
-  
-  
-  
-    // state= {
-    //   isLoading :true
-    // };
-   
-  
-   
-  componentDidMount() {
 
-    if(request.status==200){
-      this.state.isLoading =false;
-     
-      }
+  }
+
+
+
+  // state= {
+  //   isLoading :true
+  // };
+
+
+
+  componentDidMount() {
 
 
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
         console.log(response.data);
-    
-        if(response.status==200){
-          this.state.isLoading =false;
-         
-          }
-    
+
+
+
 
         var products = response.data.products;
-    
+
         products = products.reduce(function (reducedJson, product) {
           reducedJson.push({
             id: product.id,
@@ -77,16 +69,22 @@ class ProductMapping extends Component {
 
           });
           return reducedJson;
-        },[]);
+        }, []);
         console.log("reduced products");
         console.log(products);
         this.setState({ shopifyProducts: products });
         console.log(this.state.shopifyProducts);
+
+        if (response.status == 200) {
+          this.state.isProductListLoading = false;
+
+        }
+
       })
       .catch(function (error) {
         console.log(error);
       });
-    
+
 
     axios({
       method: 'get',
@@ -100,16 +98,16 @@ class ProductMapping extends Component {
         this.setState({ tracedata: response_.data });
 
 
-        if(response_.status==200){
-          this.state.isLoading =false;
-         
-          }
-    
+        if (response_.status == 200) {
+          this.state.isTraceListLoading = false;
+
+        }
+
 
 
       })
 
-      
+
 
       .catch(function (error) {
         console.log(error);
@@ -147,14 +145,14 @@ class ProductMapping extends Component {
     console.log(productName);
     console.log(tracifiedItemID);
     console.log(tracifiedItemtitle);
-    console.log(permisison); 
-   /**
-    * write functions to adust dynamically a state attribute that holds the current selections by the user.
-    * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
-    * means it should look like " mapping: this.state.mapping"
-    * make sure that state.mapping holds the current selections
-    */  
-    axios.post('/shopify/config/mapping', { mapping: {productName, tracifiedItemID, tracifiedItemtitle, permisison } })
+    console.log(permisison);
+    /**
+     * write functions to adust dynamically a state attribute that holds the current selections by the user.
+     * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
+     * means it should look like " mapping: this.state.mapping"
+     * make sure that state.mapping holds the current selections
+     */
+    axios.post('/shopify/config/mapping', { mapping: { productName, tracifiedItemID, tracifiedItemtitle, permisison } })
       .then((result) => {
         //access the results here....
         console.log(result);
@@ -171,72 +169,71 @@ class ProductMapping extends Component {
     console.log(this.state.shopifyProducts.length);
     console.log(this.state.shopifyProducts);
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , isLoading} = this.state;
-     
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isLoading } = this.state;
+
 
     //if(this.state.shopifyProducts.length>0 )
-   // {
-      console.log('arrays are not null');
+    // {
+    console.log('arrays are not null');
 
-    
-    
-       console.log(isLoading);
 
-      if(isLoading){
-          return <Spinner/>; 
-        console.log('spinner');
-      }else
-       console.log('not spinner');
+
+
+    if (isTraceListLoading || isProductListLoading) {
+      return <Spinner />;
+      console.log('spinner');
+    } else
+      console.log('not spinner');
 
 
     return (
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-        
-          
-              <Card title="Product Mapping Details">
-              <br/>
-                <form>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                    <td value="productName" onChange={this.onChange}>Product Name</td>
-                        <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
-                        <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
-                        <td value="permisison" onChange={this.onChange}>Permission</td>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                      {this.tabRow()}
 
-                    </tbody>
-                    <tfoot>
-                   
-                      <Button style={{float:"right"}} onClick={this.onSubmit}>Save</Button>
+        <Card title="Product Mapping Details">
+          <br />
+          <form>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <td value="productName" onChange={this.onChange}>Product Name</td>
+                  <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
+                  <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
+                  <td value="permisison" onChange={this.onChange}>Permission</td>
+                </tr>
+              </thead>
+              <tbody>
 
-                    </tfoot>
-                    
-                  </table>
-                  
-                </form>
-              </Card>
+                {this.tabRow()}
+
+              </tbody>
+              <tfoot>
+
+                <Button style={{ float: "right" }} onClick={this.onSubmit}>Save</Button>
+
+              </tfoot>
+
+            </table>
+
+          </form>
+        </Card>
       </div>
 
-      
-  
+
+
     );
-    <ProductMapping />, document.getElementById('productmapping')
+    <ProductMapping /> , document.getElementById('productmapping')
     console.log('document thing works');
-    
-  //}
-  // else{ 
-   
-  //     <p> Array is null</p>
-  //  console.log('array is null');
-  //   }
-    
+
+    //}
+    // else{ 
+
+    //     <p> Array is null</p>
+    //  console.log('array is null');
+    //   }
+
 
   }
 
@@ -244,6 +241,6 @@ class ProductMapping extends Component {
 }
 
 
-  
+
 
 export default ProductMapping;
