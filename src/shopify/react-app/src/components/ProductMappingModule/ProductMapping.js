@@ -170,7 +170,7 @@ class ProductMapping extends Component {
               <thead>
                 <tr>
                   <td value="productName" onChange={this.onChange}>Product Name</td>
-                  <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
+                  <td value="tracifiedItemID" onChange={this.onChange}>Product Item ID</td>
                   <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
                   <td value="permisison" onChange={this.onChange}>Permission</td>
                 </tr>
