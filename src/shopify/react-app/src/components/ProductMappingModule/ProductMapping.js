@@ -77,7 +77,7 @@ class ProductMapping extends Component {
 
         console.log("isProductListLoading checking");
         if (response.status == 200) {
-          this.state.isProductListLoading = false;
+          this.setState({isProductListLoading : false});
           console.log("isProductListLoading false");
           console.log(this.state.isProductListLoading);
           
@@ -103,14 +103,11 @@ class ProductMapping extends Component {
 
         console.log("isTraceListLoading checking");
         if (response_.status == 200) {
-          this.state.isTraceListLoading = false;
+          this.setState({isTraceListLoading : false});
           console.log("isTraceListLoading false");
           console.log(this.state.isTraceListLoading);
 
         }
-
-
-
       })
 
 
