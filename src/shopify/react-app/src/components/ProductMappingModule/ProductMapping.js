@@ -174,11 +174,10 @@ class ProductMapping extends Component {
 
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isTraceListLoading, isProductListLoading } = this.state;
 
-
-    //if(this.state.shopifyProducts.length>0 )
-    // {
-    console.log('arrays are not null');
-
+    console.log("render state");
+    console.log(isTraceListLoading);
+    console.log(isProductListLoading);
+    
 
 
 
