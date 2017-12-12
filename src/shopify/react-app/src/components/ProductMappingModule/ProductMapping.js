@@ -169,7 +169,7 @@ class ProductMapping extends Component {
     console.log(this.state.shopifyProducts.length);
     console.log(this.state.shopifyProducts);
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isLoading } = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isTraceListLoading, isProductListLoading } = this.state;
 
 
     //if(this.state.shopifyProducts.length>0 )
