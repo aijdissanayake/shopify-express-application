@@ -42,13 +42,6 @@ class ProductMapping extends Component {
   }
 
 
-
-  // state= {
-  //   isLoading :true
-  // };
-
-
-
   componentDidMount() {
 
 
@@ -70,16 +63,12 @@ class ProductMapping extends Component {
           });
           return reducedJson;
         }, []);
-        console.log("reduced products");
         console.log(products);
         this.setState({ shopifyProducts: products });
         console.log(this.state.shopifyProducts);
 
-        console.log("isProductListLoading checking");
         if (response.status == 200) {
           this.setState({isProductListLoading : false});
-          console.log("isProductListLoading false");
-          console.log(this.state.isProductListLoading);
           
 
         }
@@ -101,11 +90,8 @@ class ProductMapping extends Component {
         console.log(response_.data);
         this.setState({ tracedata: response_.data });
 
-        console.log("isTraceListLoading checking");
         if (response_.status == 200) {
           this.setState({isTraceListLoading : false});
-          console.log("isTraceListLoading false");
-          console.log(this.state.isTraceListLoading);
 
         }
       })
@@ -144,11 +130,7 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-    console.log(this.state);
-    console.log(productName);
-    console.log(tracifiedItemID);
-    console.log(tracifiedItemtitle);
-    console.log(permisison);
+    
     /**
      * write functions to adust dynamically a state attribute that holds the current selections by the user.
      * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
@@ -166,20 +148,7 @@ class ProductMapping extends Component {
 
 
   render() {
-
-
-    console.log('render starts');
-    console.log(this.state.shopifyProducts.length);
-    console.log(this.state.shopifyProducts);
-
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isTraceListLoading, isProductListLoading } = this.state;
-
-    console.log("render state");
-    console.log(isTraceListLoading);
-    console.log(isProductListLoading);
-    
-
-
 
     if (isTraceListLoading || isProductListLoading) {
       return <Spinner />;
@@ -228,13 +197,6 @@ class ProductMapping extends Component {
     );
     <ProductMapping /> , document.getElementById('productmapping')
     console.log('document thing works');
-
-    //}
-    // else{ 
-
-    //     <p> Array is null</p>
-    //  console.log('array is null');
-    //   }
 
 
   }
