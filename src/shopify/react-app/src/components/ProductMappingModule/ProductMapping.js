@@ -36,17 +36,11 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', productItemID: '', permisison: '' , mapping:''
+    };
     this.productMappingService = new ProductMappingService();
     
   }
-  
-  
-  
-    // state= {
-    //   isLoading :true
-    // };
-   
   
    
   componentDidMount() {
@@ -104,13 +98,7 @@ class ProductMapping extends Component {
           this.state.isLoading =false;
          
           }
-    
-
-
       })
-
-      
-
       .catch(function (error) {
         console.log(error);
       })
@@ -143,13 +131,13 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-    console.log(this.state);
-    console.log(productName);
-    console.log(tracifiedItemID);
+    console.log(this.state.productItemID);
+    console.log(this.state.productName);
+    console.log(this.state.tracifiedItemID);
     console.log(tracifiedItemtitle);
-    console.log(permisison); 
+    console.log(this.state.permisison); 
    /**
-    * write functions to adust dynamically a state attribute that holds the current selections by the user.
+    * write functions to adjust dynamically a state attribute that holds the current selections by the user.
     * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
     * means it should look like " mapping: this.state.mapping"
     * make sure that state.mapping holds the current selections
@@ -172,7 +160,7 @@ class ProductMapping extends Component {
     console.log(this.state.shopifyProducts);
 
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison , isLoading} = this.state;
-     
+     console.log(this.state.productName);
 
     //if(this.state.shopifyProducts.length>0 )
    // {
@@ -201,9 +189,9 @@ class ProductMapping extends Component {
                   <table className="table table-striped">
                     <thead>
                       <tr>
-                    <td value="productName" onChange={this.onChange}>Product Name</td>
+                        <td value="productName" onChange={this.onChange}>Product Name</td>
+                        <td value="productItemID" onChange={this.onChange}>Product Item ID</td>
                         <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
-                        <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
                         <td value="permisison" onChange={this.onChange}>Permission</td>
                       </tr>
                     </thead>
@@ -213,8 +201,8 @@ class ProductMapping extends Component {
 
                     </tbody>
                     <tfoot>
-                   
-                      <Button style={{float:"right"}} onClick={this.onSubmit}>Save</Button>
+                  
+                      <Button className="button" onClick={this.onSubmit}>Save</Button>
 
                     </tfoot>
                     
@@ -227,6 +215,7 @@ class ProductMapping extends Component {
       
   
     );
+    
     <ProductMapping />, document.getElementById('productmapping')
     console.log('document thing works');
     

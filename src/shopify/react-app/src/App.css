@@ -8,18 +8,28 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  height: 400px;
+  width: 100%;
+  text-align: center;
+  color: rgb(14, 1, 1);
+  
 }
 
+.App-body{
+  color: rgb(14, 1, 1);
+  text-align: center;
+
+}
 .App-title {
   font-size: 1.5em;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.Buttonclass {
+  float: left;
 }
 
 @keyframes App-logo-spin {
@@ -32,3 +42,5 @@
   text-align: center;
   margin-top: 20em;
 }
+
+
