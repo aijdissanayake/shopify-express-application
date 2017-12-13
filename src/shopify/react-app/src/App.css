@@ -9,7 +9,7 @@
 
 .App-header {
   height: 400px;
-  width: 100%;
+  width: 90%;
   text-align: center;
   color: rgb(14, 1, 1);
   
@@ -18,6 +18,8 @@
 .App-body{
   color: rgb(14, 1, 1);
   text-align: center;
+  width: 100%;
+  height: 400px;
 
 }
 .App-title {

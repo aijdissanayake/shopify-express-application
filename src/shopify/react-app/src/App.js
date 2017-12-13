@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     //var bg=require('./background_image.png')
     var sectionStyle = {
-      width: "90%",
+      width: "400%",
       height: "257px",
   
      backgroundImage: "url(" + Background + ")",
@@ -30,9 +30,6 @@ class App extends React.Component {
           };
       
     return (
-
-      
-      
        <div  >
        
       
@@ -45,7 +42,7 @@ class App extends React.Component {
          
         
       
-        
+    
        
 
         {
