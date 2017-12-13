@@ -89,6 +89,8 @@ router.get("/callback", (req: Request, res: Response) => {
             break;
           }
         }
+        console.log("theme_id");
+        console.log(theme_id);
 
         /**
          * asset uploading
