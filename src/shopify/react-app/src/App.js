@@ -37,13 +37,6 @@ class App extends React.Component {
   text-align= "center">
        <section 
       style={ sectionStyle }>
-    
-
-         
-        
-      
-    
-       
 
         {
         

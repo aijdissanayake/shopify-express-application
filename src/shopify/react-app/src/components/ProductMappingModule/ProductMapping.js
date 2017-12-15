@@ -36,34 +36,36 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true ,value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', productItemID: '', permisison: '' , mapping:''
+    this.state = {
+      isLoading: true, value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', productItemID: '', permisison: '', mapping: ''
     };
     this.productMappingService = new ProductMappingService();
-    
+    this.onSubmit = this.onSubmit.bind(this);
+
   }
-  
-   
+
+
   componentDidMount() {
 
-    if(request.status==200){
-      this.state.isLoading =false;
-     
-      }
+    if (request.status == 200) {
+      this.state.isLoading = false;
+
+    }
 
 
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
         console.log(response.data);
-    
-        if(response.status==200){
-          this.state.isLoading =false;
-         
-          }
-    
+
+        if (response.status == 200) {
+          this.state.isLoading = false;
+
+        }
+
 
         var products = response.data.products;
-    
+
         products = products.reduce(function (reducedJson, product) {
           reducedJson.push({
             id: product.id,
@@ -71,7 +73,7 @@ class ProductMapping extends Component {
 
           });
           return reducedJson;
-        },[]);
+        }, []);
         console.log("reduced products");
         console.log(products);
         this.setState({ shopifyProducts: products });
@@ -80,7 +82,7 @@ class ProductMapping extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    
+
 
     axios({
       method: 'get',
@@ -94,16 +96,15 @@ class ProductMapping extends Component {
         this.setState({ tracedata: response_.data });
 
 
-        if(response_.status==200){
-          this.state.isLoading =false;
-         
-          }
+        if (response_.status == 200) {
+          this.state.isLoading = false;
+
+        }
       })
       .catch(function (error) {
         console.log(error);
       })
   }
-
 
   tabRow() {
     const trace = this.state.tracedata;
@@ -118,11 +119,10 @@ class ProductMapping extends Component {
   }
 
   onChange = (e) => {
-    // Because we named the inputs to match their corresponding values in state, it's
-    // super easy to update the state
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
+    console.log(e.target.vaue);
   }
 
 
@@ -131,18 +131,15 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-    console.log(this.state.productItemID);
-    console.log(this.state.productName);
-    console.log(this.state.tracifiedItemID);
-    console.log(tracifiedItemtitle);
-    console.log(this.state.permisison); 
-   /**
-    * write functions to adjust dynamically a state attribute that holds the current selections by the user.
-    * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
-    * means it should look like " mapping: this.state.mapping"
-    * make sure that state.mapping holds the current selections
-    */  
-    axios.post('/shopify/config/mapping', { mapping: {productName, tracifiedItemID, tracifiedItemtitle, permisison } })
+
+    
+    /**
+     * write functions to adjust dynamically a state attribute that holds the current selections by the user.
+     * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
+     * means it should look like " mapping: this.state.mapping"
+     * make sure that state.mapping holds the current selections
+     */
+    axios.post('/shopify/config/mapping', { mapping: { productName, tracifiedItemID, tracifiedItemtitle, permisison } })
       .then((result) => {
         //access the results here....
         console.log(result);
@@ -153,28 +150,23 @@ class ProductMapping extends Component {
 
 
   render() {
-
-
     console.log('render starts');
     console.log(this.state.shopifyProducts.length);
     console.log(this.state.shopifyProducts);
 
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison , isLoading} = this.state;
-     console.log(this.state.productName);
+    const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isLoading } = this.state;
+    console.log(this.state.productName);
+    console.log('arrays are not null');
 
-    //if(this.state.shopifyProducts.length>0 )
-   // {
-      console.log('arrays are not null');
 
-    
-    
-       console.log(isLoading);
 
-      if(isLoading){
-          return <Spinner/>; 
-        console.log('spinner');
-      }else
-       console.log('not spinner');
+    console.log(isLoading);
+
+    if (isLoading) {
+      return <Spinner />;
+      console.log('spinner');
+    } else
+      console.log('not spinner');
 
 
     return (
@@ -182,57 +174,34 @@ class ProductMapping extends Component {
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.js"></script>
-          
-              <Card title="Product Mapping Details">
-              <br/>
-                <form>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <td value="productName" onChange={this.onChange}>Product Name</td>
-                        <td value="productItemID" onChange={this.onChange}>Product Item ID</td>
-                        <td value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
-                        <td value="permisison" onChange={this.onChange}>Permission</td>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                      {this.tabRow()}
+        <Card title="Product Mapping Details">
+          <br />
+          <form>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <td  value="productName" >Product Name</td>
+                  <td value="productItemID" onChange={this.onChange}>Product Item ID</td>
+                  <td  value="tracifiedItemID" onChange={this.onChange}>Tracified Item ID</td>
+                  <td value="permisison" onChange={this.onChange}>Permission</td>
+                </tr>
+              </thead>
+              <tbody>
 
-                    </tbody>
-                    <tfoot>
-                  
-                      <Button className="button" onClick={this.onSubmit}>Save</Button>
+                {this.tabRow()}
 
-                    </tfoot>
-                    
-                  </table>
-                  
-                </form>
-              </Card>
+              </tbody>
+              <tfoot>
+                <Button className="button" onClick={this.onSubmit}>Save</Button>
+              </tfoot>
+            </table>
+          </form>
+        </Card>
       </div>
-
-      
-  
     );
-    
-    <ProductMapping />, document.getElementById('productmapping')
-    console.log('document thing works');
-    
-  //}
-  // else{ 
-   
-  //     <p> Array is null</p>
-  //  console.log('array is null');
-  //   }
-    
-
+    <ProductMapping /> , document.getElementById('productmapping');
   }
-
-
 }
-
-
-  
 
 export default ProductMapping;
