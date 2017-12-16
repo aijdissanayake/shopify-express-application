@@ -5,6 +5,8 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './AppMP.css';
 import ReactDOM  from 'react-dom';
+import axios from 'axios';
+
 
 
 import {
@@ -31,7 +33,8 @@ import '@shopify/polaris/styles.css';
 class ProductMappingTableRow extends Component {
     constructor(props){
         super(props);
-        
+        this.state = {isToggleOn: true , typed: ''};     
+            
 //        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
         let arraytestlist = testlist.split(" ");
@@ -49,16 +52,21 @@ class ProductMappingTableRow extends Component {
     //     });
     // }
 
-   
-    
-
-
-    
-    handleSubmit(event){
-        event.preventDefault();
-        this.productMappingService.deleteData(this.props.obj.id);
+    getInitialState(){
+      return {mapped: ''};
     }
+   
+
+
+    onChange  (event) {
+      // Because we named the inputs to match their corresponding values in state, it's super easy to update the state
+      this.setState({mapped: event.target.value});
+    }
+  
+
+
     
+   
    
     
 
@@ -82,19 +90,22 @@ render() {
 
     return (   
       
+     
       
 
         <tr>
          
           <td>
+           
             {this.props.obj.title}
+            
           </td>
           <td>
           {this.props.obj.id}
           </td>   
                   <td>  
                    <Badge>
-                  <select>
+                  <select onBlur={this.onBlur.bind(this)}>
                     {options}
                   </select>
                   </Badge>
@@ -118,17 +129,16 @@ render() {
 
           
       
-        <form onSubmit={this.handleSubmit}>
        
-        </form>
+       
+        
 
          
 
         </tr>
 
    
-
-        
+      
 
     );
    
@@ -137,7 +147,10 @@ render() {
   
   }
 }
-
+ReactDOM.render(
+  <ProductMappingTableRow />,
+  document.getElementById('root')
+);
 
 
 export default ProductMappingTableRow;
