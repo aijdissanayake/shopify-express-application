@@ -58,7 +58,27 @@ class ProductMappingTableRow extends Component {
 
     
 
+    changeIt(e){
+      
+          const final = e.target.value;
+          console.log(e.target)
 
+            console.log('Hi');
+            console.log(final);
+            
+          } 
+          
+          
+    // changeTht(e){
+            
+    //            const target = e.target;
+    //         //   const final = target.type == 'checkbox' ? target.checked : target.value;
+
+    //            //const final = e.target.checked;
+    //               console.log('Hi');
+    //               console.log(final);
+                  
+    //             }
     
    
    
@@ -99,7 +119,7 @@ render() {
           </td>   
                   <td>  
                    <Badge>
-                  <select onChange={this.props.toggle}>
+                  <select  type= "dropdown" onChange={this.changeIt.bind(this)}>
                     {options}
                   </select>
                   </Badge>
@@ -112,7 +132,7 @@ render() {
             
               
           <td>
-           <Checkbox label="Traceability Enabled " onChange={this.props.toggle}/>
+           <Checkbox label="Traceability Enabled " onChange={this.changeIt.bind(this)}/>
           </td>
 
          

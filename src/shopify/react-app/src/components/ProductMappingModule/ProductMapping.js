@@ -116,6 +116,13 @@ class ProductMapping extends Component {
     }
   }
 
+  onChange = (e) => {
+    // Because we named the inputs to match their corresponding values in state, it's super easy to update the state
+    const state = this.state
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
+
 
   onSubmit = (e) => {
     console.log('console');
@@ -137,9 +144,6 @@ class ProductMapping extends Component {
 
   }
 
-  toggle(){
-    console.log('Hi');
-  }
 
 
   render() {
@@ -172,12 +176,7 @@ class ProductMapping extends Component {
               </thead>
               <tbody>
 
-                {this.tabRow().map((object, i) =>
-                  <ProductMappingTableRow obj={object} key={i} toggle= {this.toggle.bind(this)} />
-
-
-
-                )}
+                {this.tabRow()}
 
               </tbody>
               <tfoot>
@@ -195,11 +194,9 @@ class ProductMapping extends Component {
 
 
     );
-    ReactDOM.render(
     <ProductMapping /> , document.getElementById('productmapping')
-    
+    console.log('document thing works');
 
-    );
 
   }
 
