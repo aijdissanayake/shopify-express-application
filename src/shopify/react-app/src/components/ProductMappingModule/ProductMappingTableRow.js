@@ -40,8 +40,8 @@ class ProductMappingTableRow extends Component {
         let arraytestlist = testlist.split(" ");
 
         this.productMappingService = new ProductMappingService();
-        this.handleSubmit=this.handleSubmit.bind(this);
-    }
+     
+    }  
 
     // getOptions = (input) => {
     //   return fetch('https://085da154.ngrok.io/pluginAdmin/getTraceData')
@@ -52,17 +52,11 @@ class ProductMappingTableRow extends Component {
     //     });
     // }
 
-    getInitialState(){
-      return {mapped: ''};
-    }
+  
    
 
 
-    onChange  (event) {
-      // Because we named the inputs to match their corresponding values in state, it's super easy to update the state
-      this.setState({mapped: event.target.value});
-    }
-  
+    
 
 
     
@@ -105,7 +99,7 @@ render() {
           </td>   
                   <td>  
                    <Badge>
-                  <select onBlur={this.onBlur.bind(this)}>
+                  <select onChange={this.props.toggle}>
                     {options}
                   </select>
                   </Badge>
@@ -118,7 +112,7 @@ render() {
             
               
           <td>
-           <Checkbox label="Traceability Enabled " />
+           <Checkbox label="Traceability Enabled " onChange={this.props.toggle}/>
           </td>
 
          
@@ -142,15 +136,12 @@ render() {
 
     );
    
-
-
-  
+<ProductMappingTableRow />,
+  document.getElementById('root')
   }
 }
-ReactDOM.render(
-  <ProductMappingTableRow />,
-  document.getElementById('root')
-);
+
+
 
 
 export default ProductMappingTableRow;

@@ -116,13 +116,6 @@ class ProductMapping extends Component {
     }
   }
 
-  onChange = (e) => {
-    // Because we named the inputs to match their corresponding values in state, it's super easy to update the state
-    const state = this.state
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-  }
-
 
   onSubmit = (e) => {
     console.log('console');
@@ -144,6 +137,9 @@ class ProductMapping extends Component {
 
   }
 
+  toggle(){
+    console.log('Hi');
+  }
 
 
   render() {
@@ -168,15 +164,20 @@ class ProductMapping extends Component {
             <table className="table table-striped">
               <thead>
                 <tr>
-                  <td value="productName" onChange={this.onChange}>Product Name</td>
-                  <td value="tracifiedItemID" onChange={this.onChange}>Product Item ID</td>
-                  <td value="tracifiedItemtitle" onChange={this.onChange}>Tracified Item title</td>
-                  <td value="permisison" onChange={this.onChange}>Permission</td>
+                  <td >Product Name</td>
+                  <td >Product Item ID</td>
+                  <td >Tracified Item title</td>
+                  <td >Permission</td>
                 </tr>
               </thead>
               <tbody>
 
-                {this.tabRow()}
+                {this.tabRow().map((object, i) =>
+                  <ProductMappingTableRow obj={object} key={i} toggle= {this.toggle.bind(this)} />
+
+
+
+                )}
 
               </tbody>
               <tfoot>
@@ -194,9 +195,11 @@ class ProductMapping extends Component {
 
 
     );
+    ReactDOM.render(
     <ProductMapping /> , document.getElementById('productmapping')
-    console.log('document thing works');
+    
 
+    );
 
   }
 
