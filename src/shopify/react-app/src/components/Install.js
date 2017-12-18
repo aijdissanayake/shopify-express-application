@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Card,DisplayText,Button} from '@shopify/polaris';
-import './install.css';
 
 class Installation extends Component{
     render(){
