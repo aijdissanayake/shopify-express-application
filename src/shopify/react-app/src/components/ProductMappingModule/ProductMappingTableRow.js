@@ -33,7 +33,7 @@ import '@shopify/polaris/styles.css';
 class ProductMappingTableRow extends Component {
     constructor(props){
         super(props);
-        this.state = {isToggleOn: true , typed: ''};     
+        this.state = {isToggleOn: true , typed: '', permissionObject: '', mappingObject: ''};     
             
 //        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
@@ -62,23 +62,39 @@ class ProductMappingTableRow extends Component {
       
           const final = e.target.value;
           console.log(e.target)
+          console.log(e.checked)
 
             console.log('Hi');
+            
             console.log(final);
+            console.log(this.props.obj.id);
+            console.log(this.props.obj.title);
+
+          
             
           } 
           
           
-    // changeTht(e){
-            
-    //            const target = e.target;
-    //         //   const final = target.type == 'checkbox' ? target.checked : target.value;
+    changeTht(newValue, id){
+                console.log("moda achala");
+                console.log(newValue);
+                console.log(id);
+                console.log(title);
+                  // const final = e.target.checked;
+                  console.log('Hi');
+               
+                  const permissionObject = {}
+                  permissionObject[id] = newValue;
+                  console.log(permissionObject);
 
-    //            //const final = e.target.checked;
-    //               console.log('Hi');
-    //               console.log(final);
+
+                  const mappingObject ={}
+                  const submappingObject =
+
+                  mappingObject[title] = newValue;
                   
-    //             }
+                  console.log(mappingObject);
+                }
     
    
    
@@ -96,12 +112,6 @@ render() {
     for (let i = 0; i <arraytestlist.length; i=i+4) {
       options.push(<option key={arraytestlist[i].id} value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
     }
-
-    
-  
-
-
-
     return (   
       
      
@@ -132,7 +142,7 @@ render() {
             
               
           <td>
-           <Checkbox label="Traceability Enabled " onChange={this.changeIt.bind(this)}/>
+           <Checkbox id={this.props.obj.id} label="Traceability Enabled " onChange={this.changeTht.bind(this)}/>
           </td>
 
          

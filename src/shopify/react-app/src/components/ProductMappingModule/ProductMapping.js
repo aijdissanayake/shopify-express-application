@@ -36,7 +36,7 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isTraceListLoading: true, isProductListLoading: true, value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = { permissionObject: '' , isTraceListLoading: true, isProductListLoading: true, value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
     this.productMappingService = new ProductMappingService();
 
   }
