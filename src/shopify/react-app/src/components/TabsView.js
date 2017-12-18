@@ -3,6 +3,7 @@ import {Tabs} from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import SubTabs from './subTabs';
 import Installation from './Install';
+import Mapping from './ProductMappingModule/ProductMapping';
 
 class TabsView extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class TabsView extends Component {
       ),
       (
         <Tabs.Panel id="panel2">
-          write something
+          <Mapping/>
         </Tabs.Panel>
       ),
       (
