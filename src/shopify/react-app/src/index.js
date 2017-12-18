@@ -16,7 +16,7 @@ import '@shopify/polaris/styles.css';
 ReactDOM.render(
     <Router basename="/shopify" >
         <div>
-            <Route path='/' component={Tabs}/>
+            <Route path='/main-view' component={Tabs}/>
             <Route exact path='/add-item' component={AddItem} />
             <Route exact path='/index' component={IndexItem}/>
             <Route exact path='/edit/:id' component={EditItem} />
