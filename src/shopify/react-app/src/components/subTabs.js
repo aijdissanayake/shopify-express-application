@@ -38,7 +38,6 @@ class SubTabs extends Component {
     const tabPanels = [
       (
         <Tabs.Panel id="panel1">
-          <Mapping/>
           <Part2Cards/>
         </Tabs.Panel>
       ),
