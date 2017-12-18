@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CollapaseCards from './collapase';
-import Order from './images/order_icon.png';
 import * as axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { Thumbnail, Card, Page } from '@shopify/polaris';

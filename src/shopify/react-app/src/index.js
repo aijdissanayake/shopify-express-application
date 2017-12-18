@@ -11,6 +11,7 @@ import EditItem from './components/EditItem';
 import Tabs from './components/TabsView';
 
 import ProductMapping from './components/ProductMappingModule/ProductMapping';
+import '@shopify/polaris/styles.css';
 
 ReactDOM.render(
     <Router basename="/shopify" >
