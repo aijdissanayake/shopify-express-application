@@ -53,4 +53,15 @@ router.get("/orders", (req: Request, res: Response) => {
     });
 });
 
+router.get("/products/:id/images", (req: Request, res: Response) => {
+    console.log("orders");
+    // const shopName = req["session"].shop.name;
+    // const shopRequestHeaders = req["shopRequestHeaders"];
+    const url = "/admin/products/"+req.params.id+"/images.json"
+    shopAdminAPI("GET", shopName, url, shopRequestHeaders, null, (images: any) => {
+        console.log("got orders");
+        res.status(200).send(images);
+    });
+});
+
 export { router };
