@@ -64,7 +64,6 @@ router.get("/callback", (req: Request, res: Response) => {
         }
         else {
           var ShopInstance = new Shop({ name: shop, access_token: accessToken });
-
           ShopInstance.save((err: Error) => {
             if (err) {
               if (err) return res.status(503).send("error with db connection. Plese try again in a while");

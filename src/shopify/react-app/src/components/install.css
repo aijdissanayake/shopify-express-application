@@ -1,0 +1,66 @@
+.InstallTitle .Polaris-DisplayText{
+    font-size: 3.3rem;
+    font-family: calibri;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.InstallDescription{
+    font-size: 120%;
+    font-family: calibri;
+    margin-left: 10%;
+    margin-top: 1%;
+    width: 80%;
+}
+
+li{
+   padding-bottom: 2%;
+    color: #637381;
+    font-size: 1em !important;
+}
+
+code{
+    color: gray;
+}
+
+.lastLine code{
+    background-color:  #27ae60 ;
+    color: white;
+}
+
+.lastLine{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.lastInst{
+    margin-left: 4%;     
+    color: #637381;
+    font-size: 1em !important;
+}
+
+.lastInst p{
+    margin-bottom: 1% !important;
+}
+
+.Polaris-Button.Polaris-Button--primary {
+    background-color: #2ecc71 !important;
+    color: white !important;;
+    height: 20% !important;
+    font-size: 130% !important;
+/*     width: 30%; */
+    text-align: center;
+    margin-left: 35%;
+    margin-top: 30px;
+}
+
+.InstallVideo{
+    margin-left: 10%;
+    width: 48.5% !important;
+}
+
+.InstallVideo iframe{    
+    width: 165% !important;
+}
