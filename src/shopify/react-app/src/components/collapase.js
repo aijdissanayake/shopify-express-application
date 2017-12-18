@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Collapse } from 'reactstrap';
 import { Button, Card, ResourceList, Thumbnail } from '@shopify/polaris';
 import * as axios from 'axios';
-import './collapase.css';
 import { isUndefined } from 'util';
 
 class CollapaseCard extends Component {
