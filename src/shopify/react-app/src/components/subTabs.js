@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Tabs} from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
-import Part1Title from './part1_title';
+import Mapping from './ProductMappingModule/ProductMapping';
 import Part2Cards from './part2_cards';
 
 class SubTabs extends Component {
@@ -38,7 +38,7 @@ class SubTabs extends Component {
     const tabPanels = [
       (
         <Tabs.Panel id="panel1">
-          <Part1Title/>
+          <Mapping/>
           <Part2Cards/>
         </Tabs.Panel>
       ),
