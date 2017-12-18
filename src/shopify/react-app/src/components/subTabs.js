@@ -43,7 +43,7 @@ class SubTabs extends Component {
       ),
       (
         <Tabs.Panel id="panel2">
-        
+        fullfilled orders view after the OTP is finalized
         </Tabs.Panel>
       )
     ];
@@ -51,6 +51,7 @@ class SubTabs extends Component {
     return (
       <div>
         <Tabs
+          fitted
           selected={selectedTab}
           tabs={tabs}
           onSelect={this.handleTabChange}
