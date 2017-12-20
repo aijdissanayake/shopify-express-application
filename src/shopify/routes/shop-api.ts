@@ -33,10 +33,13 @@ router.get("/orders", (req: Request, res: Response) => {
     });
 });
 
-router.get("/fullfilled-orders", (req: Request, res: Response) => {
+router.get("/fulfilled-orders", (req: Request, res: Response) => {
     console.log("orders");
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json?status=any", req["shopRequestHeaders"], null, (orders: any) => {
-        console.log("got orders");
+        console.log("got all orders");
+        orders = this.props.orders.filter((order: object) => {
+            return order["fulfillment_status"] == "fulfilled"
+        });
         res.status(200).send(orders);
     });
 });
