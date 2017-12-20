@@ -59,9 +59,7 @@ class ProductMapping extends Component {
     this.state.permisison[shopifyProductID] = permission;
     console.log(this.state.permisison);
   }
-  updateMapping(shopifyProductID, e) {
-    const tracifiedItemID = e.target.value;
-    console.log(e);
+  updateMapping(tracifiedItemID, shopifyProductID) {
     console.log(shopifyProductID);
 
     this.state.mapping[shopifyProductID] =[tracifiedItemID , false];

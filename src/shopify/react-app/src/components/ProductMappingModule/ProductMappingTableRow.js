@@ -34,7 +34,7 @@ import '@shopify/polaris/styles.css';
 class ProductMappingTableRow extends Component {
     constructor(props){
         super(props);
-        this.state = {isToggleOn: true , typed: '', permissionObject: {} , mappingObject: {} , isDisabled:true};     
+        this.state = {isToggleOn: true , typed: '', permissionObject: {} , mappingObject: {} , isDisabled:false};     
             
 //        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
@@ -147,13 +147,12 @@ render() {
           </td>   
                   <td>  
                    
-                  <Badge>
                   <Select
-                  label="One"
                   options={traceOptions}
                   placeholder="Select"
+                  id={this.props.obj.id}
+                  onChange={this.props.updateMapping}
                   />
-                  </Badge>
 
                   </td>
                  
@@ -164,9 +163,7 @@ render() {
               
           <td>
            <Checkbox 
-           disabled={this.state.isDisabled}  
-           option={options} 
-           id={this.props.obj.id} 
+           disabled = {false}
            label="Traceability Enabled " 
            onChange={this.props.updatePermission}/>
            {/* onChange={this.changeTht.bind(this)}/> */}
