@@ -41,14 +41,14 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
         //     console.log("inside fulfilled function");
         //     return order["fulfillment_status"] == "fulfilled"
         // });
-        let fulfilledOrders = [];
-        for(let order of orders){
-            console.log("inside fulfilled function");
-            if( order["fulfillment_status"] == "fulfilled"){
-                fulfilledOrders.push(order);
-            }
-        }
-        res.status(200).send(fulfilledOrders);
+        // let fulfilledOrders = [];
+        // for(let order of orders){
+        //     console.log("inside fulfilled function");
+        //     if( order["fulfillment_status"] == "fulfilled"){
+        //         fulfilledOrders.push(order);
+        //     }
+        // }
+        res.status(200).send(orders);
     });
 });
 
