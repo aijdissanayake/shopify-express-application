@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ProductMappingService from './ProductMappingService';
-import Select from 'react-select';
+//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './AppMP.css';
 import ReactDOM  from 'react-dom';
@@ -26,6 +26,7 @@ import {
   PageActions,
   Checkbox,
   ResourceList,
+  Select
 
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
@@ -105,11 +106,30 @@ render() {
   let arraytestlist = testlist.split(" ");
   
     let options = [<option  disabled selected>Select Trace ID</option>];
-    let traceList = this.props.tracelist;
-   
+    // let traceList = this.props.tracelist;
+   console.log(arraytestlist);
     for (let i = 0; i <arraytestlist.length; i=i+4) {
-      options.push(<option key={arraytestlist[i].id} value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
+      console.log("arraytestlist");
+      console.log(arraytestlist[i].id);
+      console.log(arraytestlist[i].title);
+      options.push(<option 
+        key={arraytestlist[i].id} 
+        value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
     }
+
+    let traceList = this.props.tracelist.split(" ");
+    let traceOptions = [];
+    console.log(traceList);
+    
+    for (let i = 0; i <traceList.length; i=i+4) {
+      console.log("traceList");
+      console.log(traceList[i]);
+      console.log(traceList[i+2]);
+      traceOptions.push({
+        key:traceList[i], 
+        label:traceList[i+2]});
+    }
+
     return (   
       
      
@@ -126,10 +146,13 @@ render() {
           {this.props.obj.id}
           </td>   
                   <td>  
-                   <Badge>
-                  <select  type= "dropdown" onChange={this.changeIt.bind(this)}>
-                    {options}
-                  </select>
+                   
+                  <Badge>
+                  <Select
+                  label="One"
+                  options={traceOptions}
+                  placeholder="Select"
+                  />
                   </Badge>
 
                   </td>
@@ -140,7 +163,13 @@ render() {
             
               
           <td>
-           <Checkbox disabled={this.state.isDisabled}  option={options} id={this.props.obj.id} label="Traceability Enabled " onChange={this.changeTht.bind(this)}/>
+           <Checkbox 
+           disabled={this.state.isDisabled}  
+           option={options} 
+           id={this.props.obj.id} 
+           label="Traceability Enabled " 
+           onChange={this.props.updatePermission}/>
+           {/* onChange={this.changeTht.bind(this)}/> */}
           </td>
 
          

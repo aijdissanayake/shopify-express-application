@@ -46,16 +46,27 @@ class ProductMapping extends Component {
       productName: '',
       tracifiedItemID: '',
       tracifiedItemtitle: '',
-      permisison: '',
+      permisison: {},
       mapping: {}
     };
     this.productMappingService = new ProductMappingService();
     this.updateMapping = this.updateMapping.bind(this);
+    this.updatePermission = this.updatePermission.bind(this);
 
   }
 
-  updateMapping(id, val) {
-      this.state.mapping[id] = val;
+  updatePermission(permission, shopifyProductID) {
+    this.state.permisison[shopifyProductID] = permission;
+    console.log(this.state.permisison);
+  }
+  updateMapping(shopifyProductID, e) {
+    const tracifiedItemID = e.target.value;
+    console.log(e);
+    console.log(shopifyProductID);
+
+    this.state.mapping[shopifyProductID] =[tracifiedItemID , false];
+    console.log(this.state.mapping);
+
   }
 
 
@@ -123,8 +134,14 @@ class ProductMapping extends Component {
     const trace = this.state.tracedata;
     console.log(this.state.tracedata);
     if (this.state.shopifyProducts instanceof Array) {
-      return this.state.shopifyProducts.map(function (object, i) {
-        return <ProductMappingTableRow updateMapping={this.updateMapping} obj={object} key={i} tracelist={trace} />;
+      return this.state.shopifyProducts.map((object, i) => {
+        return <ProductMappingTableRow
+          updateMapping={this.updateMapping}
+          updatePermission={this.updatePermission}
+          obj={object}
+          key={i}
+          tracelist={trace}
+        />;
 
       })
 
