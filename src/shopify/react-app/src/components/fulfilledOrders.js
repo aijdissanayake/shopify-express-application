@@ -59,14 +59,12 @@ class Part2Cards extends Component {
 
         return (
             <Page title="Fulfilled Orders" separator>
-
                 {orderArray.map((order, index) => {
                     const qrValue = order.order_number.toString();
                     const title = "Order ID: " + order.order_number;
                     return (
                         <Card key={order.order_number} title={title} sectioned subdued={false}>
                             <Row>
-
                                 <Col sm="10">
                                 </Col>
                                 <Col sm="2">

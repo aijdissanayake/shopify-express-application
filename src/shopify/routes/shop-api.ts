@@ -38,6 +38,7 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json?status=any", req["shopRequestHeaders"], null, (orders: any) => {
         console.log("got all orders");
         orders = orders.filter((order: object) => {
+            console.log("inside fulfilled function");
             return order["fulfillment_status"] == "fulfilled"
         });
         res.status(200).send(orders);
