@@ -37,11 +37,18 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
     console.log("orders");
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json?status=any", req["shopRequestHeaders"], null, (orders: any) => {
         console.log("got all orders");
-        orders = orders.filter((order: object) => {
+        // orders = orders.filter((order: object) => {
+        //     console.log("inside fulfilled function");
+        //     return order["fulfillment_status"] == "fulfilled"
+        // });
+        let fulfilledOrders = [];
+        for(let order of orders){
             console.log("inside fulfilled function");
-            return order["fulfillment_status"] == "fulfilled"
-        });
-        res.status(200).send(orders);
+            if( order["fulfillment_status"] == "fulfilled"){
+                fulfilledOrders.push(order);
+            }
+        }
+        res.status(200).send(fulfilledOrders);
     });
 });
 
