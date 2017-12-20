@@ -24,7 +24,7 @@ class Part2Cards extends Component {
             });
         axios.get('/shopify/shop-api/fulfilled-orders')
             .then(response => {
-                this.setState({ orders: response.data.orders });
+                this.setState({ orders: response.data.fulfilledOrders });
             });
     }
 

@@ -49,12 +49,12 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
         //     }
         // }
         let fulfilledOrders: object[]= [];
-        orders.forEach((order: object) => {
+        orders.orders.forEach((order: object) => {
             console.log();
             console.log(order);
             fulfilledOrders.push(order);
         });
-        res.status(200).send(orders);
+    res.status(200).send({fulfilledOrders});
     });
 });
 
