@@ -102,20 +102,20 @@ class ProductMappingTableRow extends Component {
 
 render() {
 
-  let testlist = this.props.tracelist;
-  let arraytestlist = testlist.split(" ");
+  // let testlist = this.props.tracelist;
+  // let arraytestlist = testlist.split(" ");
   
-    let options = [<option  disabled selected>Select Trace ID</option>];
-    // let traceList = this.props.tracelist;
-   console.log(arraytestlist);
-    for (let i = 0; i <arraytestlist.length; i=i+4) {
-      console.log("arraytestlist");
-      console.log(arraytestlist[i].id);
-      console.log(arraytestlist[i].title);
-      options.push(<option 
-        key={arraytestlist[i].id} 
-        value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
-    }
+  //   let options = [<option  disabled selected>Select Trace ID</option>];
+  //   // let traceList = this.props.tracelist;
+  //  console.log(arraytestlist);
+  //   for (let i = 0; i <arraytestlist.length; i=i+4) {
+  //     console.log("arraytestlist");
+  //     console.log(arraytestlist[i].id);
+  //     console.log(arraytestlist[i].title);
+  //     options.push(<option 
+  //       key={arraytestlist[i].id} 
+  //       value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
+  //   }
 
     let traceList = this.props.tracelist.split(" ");
     let traceOptions = [];
@@ -129,6 +129,8 @@ render() {
         key:traceList[i], 
         label:traceList[i+2]});
     }
+
+    const CheckboxID = "CB" + this.props.obj.id
 
     return (   
       
@@ -148,10 +150,11 @@ render() {
                   <td>  
                    
                   <Select
+                  label="tracified items"
                   options={traceOptions}
-                  placeholder="Select"
-                  id={this.props.obj.id}
                   onChange={this.props.updateMapping}
+                  labelHidden
+                  id={this.props.obj.id}
                   />
 
                   </td>
@@ -165,7 +168,8 @@ render() {
            <Checkbox 
            disabled = {false}
            label="Traceability Enabled " 
-           onChange={this.props.updatePermission}/>
+           onChange={this.props.updatePermission}
+           id={CheckboxID}/>
            {/* onChange={this.changeTht.bind(this)}/> */}
           </td>
 

@@ -56,7 +56,7 @@ class ProductMapping extends Component {
   }
 
   updatePermission(permission, shopifyProductID) {
-    this.state.permisison[shopifyProductID] = permission;
+    this.state.permisison[shopifyProductID.substring(2)] = permission;
     console.log(this.state.permisison);
   }
   updateMapping(tracifiedItemID, shopifyProductID) {
@@ -182,8 +182,10 @@ class ProductMapping extends Component {
     if (isTraceListLoading || isProductListLoading) {
       return <Spinner />;
       console.log('spinner');
-    } else
+    } else{
       console.log('not spinner');
+    }
+    console.log("rendering...");
 
 
     return (
