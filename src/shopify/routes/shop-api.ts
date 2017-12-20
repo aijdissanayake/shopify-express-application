@@ -48,6 +48,11 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
         //         fulfilledOrders.push(order);
         //     }
         // }
+        const testarray = ["s", "d"];
+        testarray.forEach(element => {
+            console.log();
+            console.log(element);
+        });
         res.status(200).send(orders);
     });
 });
