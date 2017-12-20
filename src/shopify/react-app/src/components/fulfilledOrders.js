@@ -32,7 +32,6 @@ class Part2Cards extends Component {
     render() {
 
 
-        // All the order details
         var orders = this.state.orders;
         console.log(orders);
 
