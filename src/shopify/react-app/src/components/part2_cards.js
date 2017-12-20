@@ -17,19 +17,12 @@ class Part2Cards extends Component {
 
 
     componentDidMount() {
-        axios.get('https://tracified-local-test.herokuapp.com/shopify/shop-api/products')
-        .then(response => {
-            const products = response.data.products;
-            console.log(response.data.products);
-            const imageSRC = products.filter((product) => {
-               return product.title == "Apple"
+        axios.get('/shopify/shop-api/products')
+            .then(response => {
+                const products = response.data.products;
+                this.setState({ products: response.data.products });
             });
-            console.log("Apple image");
-            console.log(imageSRC[0].images[0].src);
-            
-            this.setState({ products: response.data.products });
-        });
-        axios.get('https://tracified-local-test.herokuapp.com/shopify/shop-api/orders')
+        axios.get('/shopify/shop-api/orders')
             .then(response => {
                 this.setState({ orders: response.data.orders });
             });
@@ -53,7 +46,7 @@ class Part2Cards extends Component {
                     title: item.title,
                     quantity: item.quantity,
                     variant_title: item.variant_title,
-                    product_id:item.product_id
+                    product_id: item.product_id
                 });
             });
             orderArray.push({
@@ -81,8 +74,8 @@ class Part2Cards extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                            <Col sm="12">
-                                    <CollapaseCards itemArray={order.lineItems} products={this.state.products}/>
+                                <Col sm="12">
+                                    <CollapaseCards itemArray={order.lineItems} products={this.state.products} />
                                 </Col>
                             </Row>
                         </Card>
