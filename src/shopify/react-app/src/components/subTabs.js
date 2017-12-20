@@ -3,7 +3,7 @@ import {Tabs} from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 import Mapping from './ProductMappingModule/ProductMapping';
 import Part2Cards from './part2_cards';
-import FulfilledOrders from './FulfilledOrders';
+import FulfilledOrders from './fulfilledOrders';
 
 class SubTabs extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class SubTabs extends Component {
       ),
       (
         <Tabs.Panel id="panel2">
-        fullfilled orders view after the OTP is finalized
+        <FulfilledOrders/>
         </Tabs.Panel>
       )
     ];
