@@ -33,13 +33,14 @@ import '@shopify/polaris/styles.css';
 class ProductMappingTableRow extends Component {
     constructor(props){
         super(props);
-        this.state = {isToggleOn: true , typed: '', permissionObject: '', mappingObject: ''};     
+        this.state = {isToggleOn: true , typed: '', permissionObject: {} , mappingObject: {} , isDisabled:true};     
             
 //        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
-        let arraytestlist = testlist.split(" ");
+        let arraytestlist = testlist.split("");
 
         this.productMappingService = new ProductMappingService();
+      
      
     }  
 
@@ -59,7 +60,9 @@ class ProductMappingTableRow extends Component {
     
 
     changeIt(e){
-      
+           
+          this.setState({isDisabled: false});
+        
           const final = e.target.value;
           console.log(e.target)
           console.log(e.checked)
@@ -70,35 +73,30 @@ class ProductMappingTableRow extends Component {
             console.log(this.props.obj.id);
             console.log(this.props.obj.title);
 
-          
+            this.state.mappingObject[this.props.obj.id] =[final , false];
+            console.log(this.state.mappingObject);
             
           } 
           
           
     changeTht(newValue, id){
-                console.log("moda achala");
+                
                 console.log(newValue);
                 console.log(id);
-                console.log(title);
-                  // const final = e.target.checked;
-                  console.log('Hi');
                
-                  const permissionObject = {}
-                  permissionObject[id] = newValue;
-                  console.log(permissionObject);
+                // const final = e.target.checked;
+                  console.log('Hi map');
+               
+                  this.state.permissionObject[id] = newValue;
+                  console.log(this.state.permissionObject);
 
-
-                  const mappingObject ={}
-                  const submappingObject =
-
-                  mappingObject[title] = newValue;
-                  
-                  console.log(mappingObject);
+                  this.state.mappingObject[this.props.obj.id][1] = newValue;
+                  console.log(this.state.mappingObject);
                 }
+
     
    
-   
-    
+               
 
 
 render() {
@@ -142,7 +140,7 @@ render() {
             
               
           <td>
-           <Checkbox id={this.props.obj.id} label="Traceability Enabled " onChange={this.changeTht.bind(this)}/>
+           <Checkbox disabled={this.state.isDisabled}  option={options} id={this.props.obj.id} label="Traceability Enabled " onChange={this.changeTht.bind(this)}/>
           </td>
 
          

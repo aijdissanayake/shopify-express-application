@@ -36,15 +36,30 @@ class ProductMapping extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { permissionObject: '' , isTraceListLoading: true, isProductListLoading: true, value: '', shopifyProducts: [], tracedata: [], productName: '', tracifiedItemID: '', tracifiedItemtitle: '', permisison: '' };
+    this.state = {
+      permissionObject: '',
+      isTraceListLoading: true,
+      isProductListLoading: true,
+      value: '',
+      shopifyProducts: [],
+      tracedata: [],
+      productName: '',
+      tracifiedItemID: '',
+      tracifiedItemtitle: '',
+      permisison: '',
+      mapping: {}
+    };
     this.productMappingService = new ProductMappingService();
+    this.updateMapping = this.updateMapping.bind(this);
 
+  }
+
+  updateMapping(id, val) {
+      this.state.mapping[id] = val;
   }
 
 
   componentDidMount() {
-
-
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
@@ -68,8 +83,8 @@ class ProductMapping extends Component {
         console.log(this.state.shopifyProducts);
 
         if (response.status == 200) {
-          this.setState({isProductListLoading : false});
-          
+          this.setState({ isProductListLoading: false });
+
 
         }
 
@@ -91,7 +106,7 @@ class ProductMapping extends Component {
         this.setState({ tracedata: response_.data });
 
         if (response_.status == 200) {
-          this.setState({isTraceListLoading : false});
+          this.setState({ isTraceListLoading: false });
 
         }
       })
@@ -109,7 +124,7 @@ class ProductMapping extends Component {
     console.log(this.state.tracedata);
     if (this.state.shopifyProducts instanceof Array) {
       return this.state.shopifyProducts.map(function (object, i) {
-        return <ProductMappingTableRow obj={object} key={i} tracelist={trace} />;
+        return <ProductMappingTableRow updateMapping={this.updateMapping} obj={object} key={i} tracelist={trace} />;
 
       })
 
@@ -129,7 +144,7 @@ class ProductMapping extends Component {
     e.preventDefault();
     // get our form data out of state
     const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
-    
+
     /**
      * write functions to adust dynamically a state attribute that holds the current selections by the user.
      * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
