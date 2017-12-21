@@ -39,6 +39,7 @@ class ProductMappingTableRow extends Component {
           permissionObject: {} , 
           mappingObject: {} , 
           CBdisabled : true,
+          CBchecked : false,
           selectVal : ""
         };     
             
@@ -79,6 +80,10 @@ onItemChange(tracifiedItemID, shopifyProductID){
     });
     console.log("false");
   }
+}
+
+onPermissionChange(){
+  this.setState({CBchecked : !this.state.CBchecked});
 }
 
 
@@ -128,8 +133,9 @@ render() {
            <Checkbox 
            disabled = {this.state.CBdisabled}
            label="Traceability Enabled" 
-           onChange={this.changePermission}
-           id={CheckboxID}/>
+           onChange={this.onPermissionChange}
+           id={CheckboxID}
+           checked = {this.state.CBchecked}/>
           </td>
         </tr>
     );
