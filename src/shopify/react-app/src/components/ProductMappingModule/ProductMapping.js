@@ -87,8 +87,9 @@ class ProductMapping extends Component {
       console.log(response);
       console.log(response.data);
       console.log(response.data.mapping);
-      this.setState({initialMapping:response.data.mapping});
+      this.setState({initialMapping:response.data});
       console.log(this.state.initialMapping);
+      console.log("end of mapping");
 
     });
     axios.get('/shopify/shop-api/products')
