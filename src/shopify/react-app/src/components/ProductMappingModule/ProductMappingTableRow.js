@@ -66,7 +66,10 @@ changePermission(value, id){
 
 render() {
     let traceList = this.props.tracelist.split(" ");
-    let traceOptions = [];
+    let traceOptions = [{
+      key:"noItem",
+      label:"No Item"
+    }];
     let permission = false;
     let tracifiedItemId = "";
     

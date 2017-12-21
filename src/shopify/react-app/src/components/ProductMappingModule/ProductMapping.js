@@ -38,15 +38,10 @@ class ProductMapping extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      permissionObject: '',
       isTraceListLoading: true,
       isProductListLoading: true,
-      value: '',
       shopifyProducts: [],
       tracedata: [],
-      productName: '',
-      tracifiedItemID: '',
-      tracifiedItemtitle: '',
       permission: {},
       mapping: {},
       initialMapping: {}
