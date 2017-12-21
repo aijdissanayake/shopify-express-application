@@ -29,6 +29,7 @@ import './AppMP.css'
 import { setTimeout } from 'timers';
 import Spinner from '../../lib/components/Spinner';
 import { request } from 'http';
+import { Row, Col } from 'reactstrap';
 
 
 
