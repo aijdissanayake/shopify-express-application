@@ -148,7 +148,23 @@ render() {
           {this.props.obj.id}
           </td>   
                   <td>  
-                   
+                  <Select
+  label="One"
+  options={[
+    'two',
+    'three',
+    {
+      label: 'four',
+      value: '4',
+    },
+  ]}
+  placeholder="Select"
+  value="two"
+  onChange={this.props.updateMapping}
+  labelHidden
+  id="h"
+/>
+
                   <Select
                   label="tracified items"
                   options={traceOptions}
@@ -156,6 +172,8 @@ render() {
                   labelHidden
                   id={this.props.obj.id}
                   />
+
+
 
                   </td>
                  
