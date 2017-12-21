@@ -65,7 +65,7 @@ changePermission(value, id){
 
 onItemChange(tracifiedItemID, shopifyProductID){
   console.log(tracifiedItemID);
-  if(!tracifiedItemID=="noItem"){
+  if(!(tracifiedItemID=="noItem")){
     this.setState({
       CBdisabled : false,
       selectVal : tracifiedItemID
