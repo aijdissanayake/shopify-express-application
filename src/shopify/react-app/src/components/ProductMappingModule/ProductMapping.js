@@ -50,6 +50,8 @@ class ProductMapping extends Component {
     this.productMappingService = new ProductMappingService();
     this.updateMapping = this.updateMapping.bind(this);
     this.updatePermission = this.updatePermission.bind(this);
+    this.onItemChange = this.onItemChange.bind(this);
+    this.onPermissionChange = this.onPermissionChange.bind(this);
 
   }
 
@@ -71,6 +73,16 @@ class ProductMapping extends Component {
     }
 
     console.log(this.state.mapping);
+
+  }
+
+  onItemChange(tracifiedItemID, shopifyProductID){
+    if(this.state.mapping.hasOwnProperty(shopifyProductID)) {
+      
+    }
+  }
+  
+  onPermissionChange(){
 
   }
 
