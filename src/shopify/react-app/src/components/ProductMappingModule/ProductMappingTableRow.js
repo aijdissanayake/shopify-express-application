@@ -53,12 +53,6 @@ class ProductMappingTableRow extends Component {
     //     });
     // }
 
-  
-   
-
-
-    
-
     changeIt(e){
            
           this.setState({isDisabled: false});

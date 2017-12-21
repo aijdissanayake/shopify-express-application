@@ -58,16 +58,11 @@ class ProductMapping extends Component {
       this.state.mapping[id] = val;
   }
 
-
   componentDidMount() {
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);
         console.log(response.data);
-
-
-
-
         var products = response.data.products;
 
         products = products.reduce(function (reducedJson, product) {
@@ -126,7 +121,7 @@ class ProductMapping extends Component {
       return this.state.shopifyProducts.map(function (object, i) {
         return <ProductMappingTableRow updateMapping={this.updateMapping} obj={object} key={i} tracelist={trace} />;
 
-      })
+      },this)
 
     }
   }
