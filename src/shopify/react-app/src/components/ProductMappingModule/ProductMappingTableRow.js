@@ -86,7 +86,9 @@ class ProductMappingTableRow extends Component {
                
                 // const final = e.target.checked;
                   console.log('Hi map');
-               
+                 
+                  let updateMap= this.props.updateMapping;
+                  console.log(updateMap);
                   this.state.permissionObject[id] = newValue;
                   console.log(this.state.permissionObject);
 
