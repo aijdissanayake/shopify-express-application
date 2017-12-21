@@ -72,12 +72,18 @@ render() {
 
     let traceList = this.props.tracelist.split(" ");
     let traceOptions = [];
+    let permission = false;
+    let tracifiedItemId = "";
     
     for (let i = 0; i <traceList.length; i=i+4) {
       traceOptions.push({
         key:traceList[i], 
         label:traceList[i+2]
       });
+    }
+
+    if (this.props.initialMapping.hasOwnProperty(this.props.obj.id)) {
+      permission = this.props.initialMapping[this.props.obj.id][1]
     }
 
     const CheckboxID = "CB" + this.props.obj.id
@@ -103,6 +109,7 @@ render() {
           <td>
            <Checkbox 
            disabled = {false}
+           value = {permission}
            label="Traceability Enabled " 
            onChange={this.changePermission}
            id={CheckboxID}/>

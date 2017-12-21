@@ -83,13 +83,8 @@ class ProductMapping extends Component {
   componentDidMount() {
     axios.get('/shopify/config/mapping')
     .then(response => {
-      console.log("mapping");
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data.mapping);
       this.setState({initialMapping:response.data});
       console.log(this.state.initialMapping);
-      console.log("end of mapping");
 
     });
     axios.get('/shopify/shop-api/products')
@@ -159,6 +154,7 @@ class ProductMapping extends Component {
           obj={object}
           key={i}
           tracelist={trace}
+          initialMapping={this.state.initialMapping}
         />;
 
       })
@@ -211,8 +207,6 @@ class ProductMapping extends Component {
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-
-
         <Card title="Product Mapping Details">
           <br />
           <form>
