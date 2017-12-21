@@ -79,8 +79,8 @@ render() {
 
     console.log("initial mapping");
     console.log(this.props.initialMapping);
-    if (this.props.initialMapping.hasOwnProperty(this.props.obj.id)) {
-      permission = this.props.initialMapping[this.props.obj.id][1]
+    if (this.props.mapping.hasOwnProperty(this.props.obj.id)) {
+      permission = this.props.mapping[this.props.obj.id][1]
     }
     console.log(permission);
 

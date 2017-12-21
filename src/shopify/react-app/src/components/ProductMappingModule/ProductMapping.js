@@ -83,7 +83,10 @@ class ProductMapping extends Component {
   componentDidMount() {
     axios.get('/shopify/config/mapping')
     .then(response => {
-      this.setState({initialMapping:response.data});
+      this.setState({
+        initialMapping:response.data,
+        mapping:response.data        
+      });
       console.log(this.state.initialMapping);
 
     });
@@ -154,7 +157,7 @@ class ProductMapping extends Component {
           obj={object}
           key={i}
           tracelist={trace}
-          initialMapping={this.state.initialMapping}
+          mapping={this.state.mapping}
         />;
 
       })
