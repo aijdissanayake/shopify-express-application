@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import ProductMappingService from './ProductMappingService';
-//import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './AppMP.css';
 import ReactDOM  from 'react-dom';
@@ -45,7 +44,6 @@ class ProductMappingTableRow extends Component {
             
         let testlist = this.props.tracelist;
         let arraytestlist = testlist.split("");
-
         this.productMappingService = new ProductMappingService();
         this.changeMapping = this.changeMapping.bind(this);
         this.changePermission = this.changePermission.bind(this);
@@ -67,9 +65,6 @@ changePermission(value, id){
 
 
 render() {
-
-
-
     let traceList = this.props.tracelist.split(" ");
     let traceOptions = [];
     let permission = false;
@@ -82,9 +77,12 @@ render() {
       });
     }
 
+    console.log("initial mapping");
+    console.log(this.props.initialMapping);
     if (this.props.initialMapping.hasOwnProperty(this.props.obj.id)) {
       permission = this.props.initialMapping[this.props.obj.id][1]
     }
+    console.log(permission);
 
     const CheckboxID = "CB" + this.props.obj.id
 
@@ -109,7 +107,7 @@ render() {
           <td>
            <Checkbox 
            disabled = {false}
-           value = {permission}
+           checked = {permission}
            label="Traceability Enabled " 
            onChange={this.changePermission}
            id={CheckboxID}/>
