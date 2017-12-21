@@ -34,13 +34,21 @@ import '@shopify/polaris/styles.css';
 class ProductMappingTableRow extends Component {
     constructor(props){
         super(props);
-        this.state = {isToggleOn: true , typed: '', permissionObject: {} , mappingObject: {} , isDisabled:false};     
+        this.state = {
+          isToggleOn: true , 
+          typed: '', 
+          permissionObject: {} , 
+          mappingObject: {} , 
+          isDisabled:false,
+          selectVal : ""
+        };     
             
 //        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
         let arraytestlist = testlist.split("");
 
         this.productMappingService = new ProductMappingService();
+        this.changeMappingRow = this.changeMappingRow.bind(this);
       
      
     }  
@@ -97,7 +105,11 @@ class ProductMappingTableRow extends Component {
 
     
    
-               
+changeMappingRow(value, id){
+  this.props.updateMapping(value, id);
+  this.setState({selectVal : value});
+}
+
 
 
 render() {
@@ -159,8 +171,8 @@ render() {
     },
   ]}
   placeholder="Select"
-  value="two"
   onChange={this.props.updateMapping}
+  value="two"
   labelHidden
   id="h"
 />
@@ -168,13 +180,11 @@ render() {
                   <Select
                   label="tracified items"
                   options={traceOptions}
-                  onChange={this.props.updateMapping}
+                  onChange={this.changeMappingRow}
+                  value = {this.state.selectVal}
                   labelHidden
                   id={this.props.obj.id}
                   />
-
-
-
                   </td>
                  
                  
