@@ -48,7 +48,8 @@ class ProductMapping extends Component {
       tracifiedItemID: '',
       tracifiedItemtitle: '',
       permission: {},
-      mapping: {}
+      mapping: {},
+      initialMapping: {}
     };
 
     this.productMappingService = new ProductMappingService();
@@ -80,6 +81,16 @@ class ProductMapping extends Component {
 
 
   componentDidMount() {
+    axios.get('/shopify/config/mapping')
+    .then(response => {
+      console,log("mapping");
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data.mapping);
+      this.setState({initialMapping:response.data.mapping});
+      console.log(this.state.initialMapping);
+
+    });
     axios.get('/shopify/shop-api/products')
       .then(response => {
         console.log(response);

@@ -21,7 +21,7 @@ router.get("/mapping", (req: Request, res: Response) => {
     });
 });
 
-router.post("/mapping", (req, res) => {
+router.post("/mapping", (req: Request, res: Response) => {
     const shop = req["session"].shop;
     ShopifyMapping.findOne({ "shop_name": shop.name }, (err: Error, mapping: ShopifyMappingModel) => { // use if a mapping record is alredy there
         if (err) return res.status(503).send("error with db connection. Plese try again in a while");
@@ -42,8 +42,8 @@ router.post("/mapping", (req, res) => {
     });
 });
 
-router.get("/mapping", (req: Request, res: Response) => {
+// router.get("/mapping", (req: Request, res: Response) => {
 
-});
+// });
 
 export { router };
