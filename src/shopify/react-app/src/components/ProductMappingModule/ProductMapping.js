@@ -58,7 +58,7 @@ class ProductMapping extends Component {
 
   updatePermission(permission, shopifyProductID) {
     this.state.permission[shopifyProductID] = permission;
-    if(this.state.permission.hasOwnProperty(shopifyProductID)){
+    if (this.state.permission.hasOwnProperty(shopifyProductID)) {
       this.state.mapping[shopifyProductID][1] = permission;
     }
 
@@ -66,13 +66,13 @@ class ProductMapping extends Component {
   }
   updateMapping(tracifiedItemID, shopifyProductID) {
     console.log(shopifyProductID);
-    if(this.state.permission.hasOwnProperty(shopifyProductID)){
-      this.state.mapping[shopifyProductID] =[tracifiedItemID, true];
+    if (this.state.permission.hasOwnProperty(shopifyProductID)) {
+      this.state.mapping[shopifyProductID] = [tracifiedItemID, true];
     }
-    else{
-      this.state.mapping[shopifyProductID] =[tracifiedItemID, false];
+    else {
+      this.state.mapping[shopifyProductID] = [tracifiedItemID, false];
     }
-    
+
     console.log(this.state.mapping);
 
   }
@@ -189,7 +189,7 @@ class ProductMapping extends Component {
     if (isTraceListLoading || isProductListLoading) {
       return <Spinner />;
       console.log('spinner');
-    } else{
+    } else {
       console.log('not spinner');
     }
 
@@ -218,8 +218,14 @@ class ProductMapping extends Component {
 
               </tbody>
               <tfoot>
+                <Row>
+                  <Col sm="10">
+                  </Col>
+                  <Col sm="2">
+                    <Button primary onClick={this.onSubmit}>Save</Button>
+                  </Col>
+                </Row>
 
-                <Button style={{ float: "right" }} onClick={this.onSubmit}>Save</Button>
 
               </tfoot>
 
