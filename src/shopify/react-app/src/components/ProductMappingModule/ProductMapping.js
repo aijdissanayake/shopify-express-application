@@ -166,7 +166,7 @@ class ProductMapping extends Component {
     console.log('console');
     e.preventDefault();
     // get our form data out of state
-    const { productName, tracifiedItemID, tracifiedItemtitle, permission } = this.state;
+    const mapping = this.state.mapping;
 
     /**
      * write functions to adust dynamically a state attribute that holds the current selections by the user.
@@ -174,7 +174,7 @@ class ProductMapping extends Component {
      * means it should look like " mapping: this.state.mapping"
      * make sure that state.mapping holds the current selections
      */
-    axios.post('/shopify/config/mapping', { mapping: { productName, tracifiedItemID, tracifiedItemtitle, permission } })
+    axios.post('/shopify/config/mapping', { mapping })
       .then((result) => {
         //access the results here....
         console.log(result);
@@ -218,12 +218,6 @@ class ProductMapping extends Component {
                 {this.tabRow()}
 
               </tbody>
-              <tfoot>
-                
-
-
-              </tfoot>
-
             </table>
             <Row>
                   <Col sm="10">
