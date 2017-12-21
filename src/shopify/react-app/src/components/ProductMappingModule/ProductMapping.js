@@ -219,19 +219,19 @@ class ProductMapping extends Component {
 
               </tbody>
               <tfoot>
-                <Row>
+                
+
+
+              </tfoot>
+
+            </table>
+            <Row>
                   <Col sm="10">
                   </Col>
                   <Col sm="2">
                     <Button primary onClick={this.onSubmit}>Save</Button>
                   </Col>
                 </Row>
-
-
-              </tfoot>
-
-            </table>
-
           </form>
         </Card>
       </div>
