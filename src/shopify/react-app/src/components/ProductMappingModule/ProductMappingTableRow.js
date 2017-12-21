@@ -43,116 +43,48 @@ class ProductMappingTableRow extends Component {
           selectVal : ""
         };     
             
-//        this.props.tracelist.forEach(v=>console.log(v.Apple.crop.name));
         let testlist = this.props.tracelist;
         let arraytestlist = testlist.split("");
 
         this.productMappingService = new ProductMappingService();
-        this.changeMappingRow = this.changeMappingRow.bind(this);
+        this.changeMapping = this.changeMapping.bind(this);
+        this.changePermission = this.changePermission.bind(this);
       
      
     }  
 
-    // getOptions = (input) => {
-    //   return fetch('https://085da154.ngrok.io/pluginAdmin/getTraceData')
-    //     .then((response) => {
-    //       return response.json();
-    //     }).then((json) => {
-    //       return { options: json };
-    //     });
-    // }
-
-  
    
-
-
-    
-
-    changeIt(e){
-           
-          this.setState({isDisabled: false});
-        
-          const final = e.target.value;
-          console.log(e.target)
-          console.log(e.checked)
-
-            console.log('Hi');
-            
-            console.log(final);
-            console.log(this.props.obj.id);
-            console.log(this.props.obj.title);
-
-            this.state.mappingObject[this.props.obj.id] =[final , false];
-            console.log(this.state.mappingObject);
-            
-          } 
-          
-          
-    changeTht(newValue, id){
-                
-                console.log(newValue);
-                console.log(id);
-               
-                // const final = e.target.checked;
-                  console.log('Hi map');
-               
-                  this.state.permissionObject[id] = newValue;
-                  console.log(this.state.permissionObject);
-
-                  this.state.mappingObject[this.props.obj.id][1] = newValue;
-                  console.log(this.state.mappingObject);
-                }
-
-    
-   
-changeMappingRow(value, id){
+changeMapping(value, id){
   this.props.updateMapping(value, id);
   this.setState({selectVal : value});
+}
+
+changePermission(value, id){
+  id = id.substring(2);
+  this.props.updatePermission(value, id);
 }
 
 
 
 render() {
 
-  // let testlist = this.props.tracelist;
-  // let arraytestlist = testlist.split(" ");
-  
-  //   let options = [<option  disabled selected>Select Trace ID</option>];
-  //   // let traceList = this.props.tracelist;
-  //  console.log(arraytestlist);
-  //   for (let i = 0; i <arraytestlist.length; i=i+4) {
-  //     console.log("arraytestlist");
-  //     console.log(arraytestlist[i].id);
-  //     console.log(arraytestlist[i].title);
-  //     options.push(<option 
-  //       key={arraytestlist[i].id} 
-  //       value={arraytestlist[i].title}>{arraytestlist[i]}</option>);
-  //   }
+
 
     let traceList = this.props.tracelist.split(" ");
     let traceOptions = [];
-    console.log(traceList);
     
     for (let i = 0; i <traceList.length; i=i+4) {
-      console.log("traceList");
-      console.log(traceList[i]);
-      console.log(traceList[i+2]);
       traceOptions.push({
         key:traceList[i], 
-        label:traceList[i+2]});
+        label:traceList[i+2]
+      });
     }
 
     const CheckboxID = "CB" + this.props.obj.id
 
     return (   
-      
-     
-      
-
         <tr>
-         
-          <td>
-           
+          <td>  
             {this.props.obj.title}
             
           </td>
@@ -160,74 +92,27 @@ render() {
           {this.props.obj.id}
           </td>   
                   <td>  
-                  <Select
-  label="One"
-  options={[
-    'two',
-    'three',
-    {
-      label: 'four',
-      value: '4',
-    },
-  ]}
-  placeholder="Select"
-  onChange={this.props.updateMapping}
-  value="two"
-  labelHidden
-  id="h"
-/>
-
-                  <Select
-                  label="tracified items"
+                  <Select 
+                  placeholder="Select"
                   options={traceOptions}
-                  onChange={this.changeMappingRow}
+                  onChange={this.changeMapping}
                   value = {this.state.selectVal}
-                  labelHidden
                   id={this.props.obj.id}
                   />
-                  </td>
-                 
-                 
-                  
-               
-            
-              
+                  </td>      
           <td>
            <Checkbox 
            disabled = {false}
            label="Traceability Enabled " 
-           onChange={this.props.updatePermission}
+           onChange={this.changePermission}
            id={CheckboxID}/>
-           {/* onChange={this.changeTht.bind(this)}/> */}
           </td>
-
-         
-      
-         
-       
-          
-
-          
-      
-       
-       
-        
-
-         
-
         </tr>
-
-   
-      
-
     );
    
 <ProductMappingTableRow />,
   document.getElementById('root')
   }
 }
-
-
-
 
 export default ProductMappingTableRow;

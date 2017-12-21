@@ -46,9 +46,10 @@ class ProductMapping extends Component {
       productName: '',
       tracifiedItemID: '',
       tracifiedItemtitle: '',
-      permisison: {},
+      permission: {},
       mapping: {}
     };
+
     this.productMappingService = new ProductMappingService();
     this.updateMapping = this.updateMapping.bind(this);
     this.updatePermission = this.updatePermission.bind(this);
@@ -56,13 +57,22 @@ class ProductMapping extends Component {
   }
 
   updatePermission(permission, shopifyProductID) {
-    this.state.permisison[shopifyProductID.substring(2)] = permission;
-    console.log(this.state.permisison);
+    this.state.permission[shopifyProductID] = permission;
+    if(this.state.permission.hasOwnProperty(shopifyProductID)){
+      this.state.mapping[shopifyProductID][1] = permission;
+    }
+
+    console.log(this.state.permission);
   }
   updateMapping(tracifiedItemID, shopifyProductID) {
     console.log(shopifyProductID);
-
-    this.state.mapping[shopifyProductID] =[tracifiedItemID , false];
+    if(this.state.permission.hasOwnProperty(shopifyProductID)){
+      this.state.mapping[shopifyProductID] =[tracifiedItemID, true];
+    }
+    else{
+      this.state.mapping[shopifyProductID] =[tracifiedItemID, false];
+    }
+    
     console.log(this.state.mapping);
 
   }
@@ -119,9 +129,6 @@ class ProductMapping extends Component {
 
         }
       })
-
-
-
       .catch(function (error) {
         console.log(error);
       })
@@ -158,15 +165,15 @@ class ProductMapping extends Component {
     console.log('console');
     e.preventDefault();
     // get our form data out of state
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison } = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permission } = this.state;
 
     /**
      * write functions to adust dynamically a state attribute that holds the current selections by the user.
-     * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permisison }"
+     * then assign that attribute to the following "mapping:" instead of "{productName, tracifiedItemID, tracifiedItemtitle, permission }"
      * means it should look like " mapping: this.state.mapping"
      * make sure that state.mapping holds the current selections
      */
-    axios.post('/shopify/config/mapping', { mapping: { productName, tracifiedItemID, tracifiedItemtitle, permisison } })
+    axios.post('/shopify/config/mapping', { mapping: { productName, tracifiedItemID, tracifiedItemtitle, permission } })
       .then((result) => {
         //access the results here....
         console.log(result);
@@ -177,7 +184,7 @@ class ProductMapping extends Component {
 
 
   render() {
-    const { productName, tracifiedItemID, tracifiedItemtitle, permisison, isTraceListLoading, isProductListLoading } = this.state;
+    const { productName, tracifiedItemID, tracifiedItemtitle, permission, isTraceListLoading, isProductListLoading } = this.state;
 
     if (isTraceListLoading || isProductListLoading) {
       return <Spinner />;
@@ -185,7 +192,6 @@ class ProductMapping extends Component {
     } else{
       console.log('not spinner');
     }
-    console.log("rendering...");
 
 
     return (
@@ -231,7 +237,6 @@ class ProductMapping extends Component {
 
 
   }
-
 
 }
 
