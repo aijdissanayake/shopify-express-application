@@ -64,17 +64,20 @@ changePermission(value, id){
 }
 
 onItemChange(tracifiedItemID, shopifyProductID){
+  console.log(tracifiedItemID);
   if(!tracifiedItemID=="noItem"){
     this.setState({
       CBdisabled : false,
       selectVal : tracifiedItemID
     });
+    console.log("true");
   }
   else{
     this.setState({
       CBdisabled : true,
       selectVal : tracifiedItemID
     });
+    console.log("false");
   }
 }
 
@@ -96,8 +99,6 @@ render() {
       });
     }
 
-    console.log(" mapping");
-    console.log(this.props.mapping);
     if (this.props.mapping.hasOwnProperty(this.props.obj.id)) {
       permission = this.props.mapping[this.props.obj.id][1]
     }
