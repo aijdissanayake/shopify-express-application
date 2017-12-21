@@ -77,8 +77,8 @@ render() {
       });
     }
 
-    console.log("initial mapping");
-    console.log(this.props.initialMapping);
+    console.log(" mapping");
+    console.log(this.props.mapping);
     if (this.props.mapping.hasOwnProperty(this.props.obj.id)) {
       permission = this.props.mapping[this.props.obj.id][1]
     }
