@@ -159,8 +159,8 @@ class ProductMapping extends Component {
     if (this.state.shopifyProducts instanceof Array) {
       return this.state.shopifyProducts.map((object, i) => {
         return <ProductMappingTableRow
-          updateMapping={this.updateMapping}
-          updatePermission={this.updatePermission}
+          onItemChange={this.onItemChange}
+          onPermissionChange={this.onPermissionChange}
           obj={object}
           key={i}
           tracelist={trace}

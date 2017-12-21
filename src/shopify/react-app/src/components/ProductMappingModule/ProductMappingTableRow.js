@@ -49,6 +49,7 @@ class ProductMappingTableRow extends Component {
         this.changeMapping = this.changeMapping.bind(this);
         this.changePermission = this.changePermission.bind(this);
         this.onItemChange = this.onItemChange.bind(this);
+        this.onPermissionChange = this.onPermissionChange.bind(this);
       
      
     }  
@@ -80,10 +81,12 @@ onItemChange(tracifiedItemID, shopifyProductID){
     });
     console.log("false");
   }
+  this.props.onItemChange();
 }
 
-onPermissionChange(){
-  this.setState({CBchecked : !this.state.CBchecked});
+onPermissionChange(permission, shopifyProductID){
+    this.setState({CBchecked : !this.state.CBchecked});
+    this.props.onPermissionChange();
 }
 
 
