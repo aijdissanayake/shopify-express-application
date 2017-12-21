@@ -83,7 +83,7 @@ class ProductMapping extends Component {
   componentDidMount() {
     axios.get('/shopify/config/mapping')
     .then(response => {
-      console,log("mapping");
+      console.log("mapping");
       console.log(response);
       console.log(response.data);
       console.log(response.data.mapping);
