@@ -95,6 +95,9 @@ class ProductMapping extends Component {
   }
   
   onPermissionChange(permission, shopifyProductID){
+    console.log(this.state.mapping[shopifyProductID]);
+    console.log(permission);
+    console.log(shopifyProductID);
     this.state.mapping[shopifyProductID][1] = permission;
     console.log(this.state.mapping);
   }
