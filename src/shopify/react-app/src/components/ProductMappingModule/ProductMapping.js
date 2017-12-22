@@ -77,13 +77,25 @@ class ProductMapping extends Component {
   }
 
   onItemChange(tracifiedItemID, shopifyProductID){
+    
     if(this.state.mapping.hasOwnProperty(shopifyProductID)) {
-      
+      if(!(tracifiedItemID=="noItem")){
+        let tempMapping = this.state.mapping;
+        delete tempMapping[shopifyProductID];
+        this.state.mapping = tempMapping;
+      }
+      else{
+        this.state.mapping[shopifyProductID][0] = tracifiedItemID;
+      }
     }
+    else{
+      this.state.mapping[shopifyProductID] = [tracifiedItemID, false];
+    }
+    console.log(this.state.mapping);
   }
   
-  onPermissionChange(){
-
+  onPermissionChange(permission, shopifyProductID){
+    this.state.mapping[shopifyProductID][1] = permission;
   }
 
 
@@ -99,12 +111,6 @@ class ProductMapping extends Component {
     });
     axios.get('/shopify/shop-api/products')
       .then(response => {
-        console.log(response);
-        console.log(response.data);
-
-
-
-
         var products = response.data.products;
 
         products = products.reduce(function (reducedJson, product) {
@@ -115,9 +121,7 @@ class ProductMapping extends Component {
           });
           return reducedJson;
         }, []);
-        console.log(products);
         this.setState({ shopifyProducts: products });
-        console.log(this.state.shopifyProducts);
 
         if (response.status == 200) {
           this.setState({ isProductListLoading: false });
@@ -139,7 +143,6 @@ class ProductMapping extends Component {
       },
     })
       .then(response_ => {
-        console.log(response_.data);
         this.setState({ tracedata: response_.data });
 
         if (response_.status == 200) {
@@ -155,7 +158,6 @@ class ProductMapping extends Component {
 
   tabRow() {
     const trace = this.state.tracedata;
-    console.log(this.state.tracedata);
     if (this.state.shopifyProducts instanceof Array) {
       return this.state.shopifyProducts.map((object, i) => {
         return <ProductMappingTableRow
@@ -181,7 +183,6 @@ class ProductMapping extends Component {
 
 
   onSubmit = (e) => {
-    console.log('console');
     e.preventDefault();
     // get our form data out of state
     const mapping = this.state.mapping;

@@ -82,12 +82,12 @@ onItemChange(tracifiedItemID, shopifyProductID){
     });
     console.log("false");
   }
-  this.props.onItemChange();
+  this.props.onItemChange(tracifiedItemID, shopifyProductID);
 }
 
 onPermissionChange(permission, shopifyProductID){
     this.setState({CBchecked : !this.state.CBchecked});
-    this.props.onPermissionChange();
+    this.props.onPermissionChange(permission, shopifyProductID);
 }
 
 
