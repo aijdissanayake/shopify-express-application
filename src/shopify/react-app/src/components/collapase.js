@@ -53,10 +53,10 @@ class CollapaseCard extends Component {
         return (
             <div>
                 <Row>
-                    <Col sm={{ size: 3, offset: 1 }}>
+                    <Col sm={{ size: 2, offset: 1 }}>
                 <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? "Show Items" : "Hide Items"}</Button>
                     </Col>
-                    <Col sm={{ size: 3, offset: 1 }}>
+                    <Col sm={{ size: 2, offset: 1 }}>
                 <Button primary>Fulfill Order</Button>
                     </Col>
                 </Row>
