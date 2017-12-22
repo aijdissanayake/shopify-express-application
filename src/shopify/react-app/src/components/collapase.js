@@ -53,6 +53,7 @@ class CollapaseCard extends Component {
         return (
             <div>
                 <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? "Show Items" : "Hide Items"}</Button>
+                <Button primary>Fulfill Order</Button>
                 <Collapse isOpen={!this.state.collapsed}>
                     <ResourceList
                         items={resourceList}
