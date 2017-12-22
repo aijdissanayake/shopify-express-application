@@ -87,6 +87,7 @@ onItemChange(tracifiedItemID, shopifyProductID){
 
 onPermissionChange(permission, shopifyProductID){
     this.setState({CBchecked : !this.state.CBchecked});
+    shopifyProductID = shopifyProductID.substring(2);
     this.props.onPermissionChange(permission, shopifyProductID);
 }
 
