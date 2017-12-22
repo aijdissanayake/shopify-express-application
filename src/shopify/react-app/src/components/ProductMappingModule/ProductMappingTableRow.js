@@ -77,7 +77,8 @@ onItemChange(tracifiedItemID, shopifyProductID){
   else{
     this.setState({
       CBdisabled : true,
-      selectVal : tracifiedItemID
+      selectVal : tracifiedItemID,
+      CBchecked : false
     });
     console.log("false");
   }
@@ -110,7 +111,6 @@ render() {
     if (this.props.mapping.hasOwnProperty(this.props.obj.id)) {
       permission = this.props.mapping[this.props.obj.id][1]
     }
-    console.log(permission);
 
     const CheckboxID = "CB" + this.props.obj.id
 
