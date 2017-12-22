@@ -48,7 +48,13 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
 
 router.get("/orders/:id/fulfill", (req: Request, res: Response) => {
     const url: string = "/admin/orders/"+ req.params.id +"/fulfillments.json";
-    shopAdminAPI("POST", req["session"].shop.name, url , req["shopRequestHeaders"], null, (orders: any) => {
+    const body: object = {
+        "fulfillment": {
+          "tracking_number": null,
+          "notify_customer": true
+        }
+      }
+    shopAdminAPI("POST", req["session"].shop.name, url , req["shopRequestHeaders"], body, (orders: any) => {
         console.log("order fulfilled");
         res.status(200).send(orders);
     });
