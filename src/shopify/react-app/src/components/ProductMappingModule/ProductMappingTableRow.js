@@ -110,10 +110,12 @@ render() {
     }
 
     if (this.props.mapping.hasOwnProperty(this.props.obj.id)) {
-      this.setState({
-        CBchecked : this.props.mapping[this.props.obj.id][1],
-        CBdisabled : false
-      });
+      // this.setState({
+      //   CBchecked : this.props.mapping[this.props.obj.id][1],
+      //   CBdisabled : false
+      // });
+      this.state.CBchecked = this.props.mapping[this.props.obj.id][1];
+      this.state.CBdisabled = false;
     }
 
     const CheckboxID = "CB" + this.props.obj.id
