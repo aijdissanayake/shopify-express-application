@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse } from 'reactstrap';
+import { Collapse, Row, Col} from 'reactstrap';
 import { Button, Card, ResourceList, Thumbnail } from '@shopify/polaris';
 import * as axios from 'axios';
 import { isUndefined } from 'util';
@@ -52,8 +52,14 @@ class CollapaseCard extends Component {
 
         return (
             <div>
+                <Row>
+                    <Col sm={{ size: 3, offset: 1 }}>
                 <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? "Show Items" : "Hide Items"}</Button>
+                    </Col>
+                    <Col sm={{ size: 3, offset: 1 }}>
                 <Button primary>Fulfill Order</Button>
+                    </Col>
+                </Row>
                 <Collapse isOpen={!this.state.collapsed}>
                     <ResourceList
                         items={resourceList}
