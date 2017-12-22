@@ -79,13 +79,13 @@ class ProductMapping extends Component {
   onItemChange(tracifiedItemID, shopifyProductID){
     
     if(this.state.mapping.hasOwnProperty(shopifyProductID)) {
-      if(!(tracifiedItemID=="noItem")){
+      if(!(tracifiedItemID=="noItem")){        
+        this.state.mapping[shopifyProductID][0] = tracifiedItemID;
+      }
+      else{
         let tempMapping = this.state.mapping;
         delete tempMapping[shopifyProductID];
         this.state.mapping = tempMapping;
-      }
-      else{
-        this.state.mapping[shopifyProductID][0] = tracifiedItemID;
       }
     }
     else{
