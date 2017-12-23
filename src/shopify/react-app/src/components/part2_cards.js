@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CollapaseCards from './collapase';
 import * as axios from 'axios';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { Thumbnail, Card, Page } from '@shopify/polaris';
+import { Thumbnail, Card, Page, List } from '@shopify/polaris';
 const QRCode = require('qrcode.react');
 
 class Part2Cards extends Component {
@@ -82,8 +82,10 @@ class Part2Cards extends Component {
                             <Row>
 
                                 <Col sm="10">
-                                    Customer : {order.customer} <br/>
-                                    Created At: {order.created_at}
+                                <List type="bullet">
+                                <List.Item>Customer  : {order.customer}</List.Item>
+                                <List.Item>Created At: {order.created_at}</List.Item>
+                            </List>
                                 </Col>
                                 <Col sm="2">
                                     <QRCode value={qrValue} />
