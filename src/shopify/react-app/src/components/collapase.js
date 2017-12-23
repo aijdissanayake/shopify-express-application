@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Row, Col } from 'reactstrap';
+import { Container, Collapse, Row, Col } from 'reactstrap';
 import { Button, Card, ResourceList, Thumbnail } from '@shopify/polaris';
 import * as axios from 'axios';
 import { isUndefined } from 'util';
