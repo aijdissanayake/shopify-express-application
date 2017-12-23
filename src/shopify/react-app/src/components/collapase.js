@@ -40,12 +40,18 @@ class CollapaseCard extends Component {
 
                 if (!isUndefined(product[0])) {
                     productImage = product[0].images[0].src;
-                    resourceThumbnails.push(                        
-                        <Thumbnail
-                        source={product[0].images[0].src}
-                        alt={" Image"}
-                    />
-                    );
+                    if(resourceThumbnails.length < 5){
+                        resourceThumbnails.push(                        
+                            <Thumbnail
+                            source={product[0].images[0].src}
+                            alt={" Image"}
+                        />
+                        );
+                    }
+                    else if (resourceThumbnails.length == 5) {
+                        resourceThumbnails.push(<p><b>...</b></p>);                            
+                    }
+                    
                 }
             }
 
