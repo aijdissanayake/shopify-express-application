@@ -201,7 +201,7 @@ class ProductMapping extends Component {
      */
     axios.post('/shopify/config/mapping', { mapping })
       .then((result) => {
-        //access the results here....
+        alert("Mapping Successfully Saved!");
         console.log(result);
       });
 
