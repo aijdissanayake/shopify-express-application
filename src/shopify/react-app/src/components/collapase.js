@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Collapse, Row, Col } from 'reactstrap';
-import { Button, Card, ResourceList, Thumbnail } from '@shopify/polaris';
+import { Button, Card, ResourceList, Thumbnail, Stack } from '@shopify/polaris';
 import * as axios from 'axios';
 import { isUndefined } from 'util';
 
@@ -29,8 +29,7 @@ class CollapaseCard extends Component {
     render() {
 
         console.log("collapse products");
-        console.log(this.props.products);
-        console.log(typeof this.props.products);
+        let resourceThumbnails = [];
         let resourceList = this.props.itemArray.map((resItem, index) => {
             let productImage = "no/image";
             if (!isUndefined(this.props.products.length) && !isUndefined(this.props.products)) {
@@ -41,7 +40,12 @@ class CollapaseCard extends Component {
 
                 if (!isUndefined(product[0])) {
                     productImage = product[0].images[0].src;
-                    console.log(productImage);
+                    resourceThumbnails.push(                        
+                        <Thumbnail
+                        source={product[0].images[0].src}
+                        alt={" Image"}
+                    />
+                    );
                 }
             }
 
@@ -65,7 +69,7 @@ class CollapaseCard extends Component {
             <div>
                 <Container>
                 <Collapse isOpen={this.state.collapsed}>
-                 Thumbnail array goes here
+                <Stack> {resourceThumbnails} </Stack>
                 </Collapse>
                     <Row>
                         <Col sm="7">
