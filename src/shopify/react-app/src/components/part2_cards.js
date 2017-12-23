@@ -64,7 +64,7 @@ class Part2Cards extends Component {
                 order_number: order.order_number,
                 lineItems: lineItems,
                 customer: customer,
-                created_at: order.created_at.substring(0,10);
+                created_at: order.created_at.substring(0,10)
 
             });
         });
