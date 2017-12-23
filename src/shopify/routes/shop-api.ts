@@ -64,4 +64,18 @@ router.get("/products/:id/images", (req: Request, res: Response) => {
     });
 });
 
+router.get("/orders/:id/fulfill", (req: Request, res: Response) => {
+    const url: string = "/admin/orders/"+ req.params.id +"/fulfillments.json";
+    const body: object = {
+        "fulfillment": {
+          "tracking_number": null,
+          "notify_customer": true
+        }
+      }
+    shopAdminAPI("POST", req["session"].shop.name, url , req["shopRequestHeaders"], body, (orders: any) => {
+        console.log("order fulfilled");
+        res.status(200).send(orders);
+    });
+});
+
 export { router };
