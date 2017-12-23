@@ -64,15 +64,18 @@ class CollapaseCard extends Component {
         return (
             <div>
                 <Container>
+                <Collapse isOpen={this.state.collapsed}>
+                 Thumbnail array goes here
+                </Collapse>
                     <Row>
                         <Col sm="7">
                             <Row>
-                                <Col sm="3">
-                                    <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? "Show Items" : "Hide Items"}</Button>
-                                </Col>
-                                <Col sm="3">
-                                    <Button primary onClick={this.fulfillOrder}>Fulfill Order</Button>
-                                </Col>
+                            <Col sm="4">
+                            <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? " Show Order Items " : " Hide Order Items "}</Button>
+                        </Col>
+                        <Col sm="4">
+                            <Button primary onClick={this.fulfillOrder}>Mark as Fulfilled</Button>
+                        </Col>
                             </Row>
                         </Col>
                     </Row>
