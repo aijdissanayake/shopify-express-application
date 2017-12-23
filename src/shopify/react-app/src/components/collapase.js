@@ -43,13 +43,14 @@ class CollapaseCard extends Component {
                     if(resourceThumbnails.length < 5){
                         resourceThumbnails.push(                        
                             <Thumbnail
+                            key={resourceThumbnails.length}
                             source={product[0].images[0].src}
                             alt={" Image"}
                         />
                         );
                     }
                     else if (resourceThumbnails.length == 5) {
-                        resourceThumbnails.push(<p><b>. . .</b></p>);                            
+                        resourceThumbnails.push(<p key={resourceThumbnails.length}><b>. . .</b></p>);                            
                     }
                     
                 }
