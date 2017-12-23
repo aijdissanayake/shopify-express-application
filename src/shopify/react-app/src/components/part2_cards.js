@@ -58,7 +58,7 @@ class Part2Cards extends Component {
 
                 });
             });
-            customer = order.customer.first_name + " " + order.customer.last_name;
+            const customer = order.customer.first_name + " " + order.customer.last_name;
             orderArray.push({
                 id : order.id,
                 order_number: order.order_number,
@@ -83,7 +83,7 @@ class Part2Cards extends Component {
 
                                 <Col sm="10">
                                     Customer : {order.customer} <br/>
-                                    Created At: {created_at}
+                                    Created At: {order.created_at}
                                 </Col>
                                 <Col sm="2">
                                     <QRCode value={qrValue} />
