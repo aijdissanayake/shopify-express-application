@@ -83,8 +83,8 @@ class Part2Cards extends Component {
 
                                 <Col sm="10">
                                 <List type="bullet">
-                                <List.Item>Customer  : {order.customer}</List.Item>
-                                <List.Item>Created At: {order.created_at}</List.Item>
+                                <List.Item>Customer  &nbsp;&nbsp;: {order.customer}</List.Item>
+                                <List.Item>Created At&nbsp;&nbsp;: {order.created_at}</List.Item>
                             </List>
                                 </Col>
                                 <Col sm="2">

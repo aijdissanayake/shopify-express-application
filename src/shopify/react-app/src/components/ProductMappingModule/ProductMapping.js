@@ -30,6 +30,8 @@ import { setTimeout } from 'timers';
 import Spinner from '../../lib/components/Spinner';
 import { request } from 'http';
 import { Row, Col } from 'reactstrap';
+import Loading from '../Loading'
+
 
 
 
@@ -211,7 +213,7 @@ class ProductMapping extends Component {
     const { productName, tracifiedItemID, tracifiedItemtitle, permission, isTraceListLoading, isProductListLoading } = this.state;
 
     if (isTraceListLoading || isProductListLoading) {
-      return <Spinner />;
+      return <Loading/> ;
       console.log('spinner');
     } else {
       console.log('not spinner');

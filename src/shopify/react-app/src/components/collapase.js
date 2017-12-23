@@ -49,7 +49,7 @@ class CollapaseCard extends Component {
                         );
                     }
                     else if (resourceThumbnails.length == 5) {
-                        resourceThumbnails.push(<p><b>...</b></p>);                            
+                        resourceThumbnails.push(<p><b>. . .</b></p>);                            
                     }
                     
                 }
