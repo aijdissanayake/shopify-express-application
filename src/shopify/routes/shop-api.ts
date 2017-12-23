@@ -29,7 +29,10 @@ router.get("/orders", (req: Request, res: Response) => {
     console.log("orders");
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json", req["shopRequestHeaders"], null, (orders: any) => {
         console.log("got orders");
-        res.status(200).send(orders);
+        let unFulfilledOrders = orders.orders.filter((order: object) => {
+            return order["fulfillment_status"] != "fulfilled"
+        });
+        res.status(200).send(unFulfilledOrders);
     });
 });
 
