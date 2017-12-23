@@ -50,6 +50,7 @@ class Part2Cards extends Component {
                 });
             });
             orderArray.push({
+                id : order.id,
                 order_number: order.order_number,
                 lineItems: lineItems
             });
@@ -75,7 +76,7 @@ class Part2Cards extends Component {
                             </Row>
                             <Row>
                                 <Col sm="12">
-                                    <CollapaseCards itemArray={order.lineItems} products={this.state.products} />
+                                    <CollapaseCards itemArray={order.lineItems} products={this.state.products} orderID={order.id}/>
                                 </Col>
                             </Row>
                         </Card>

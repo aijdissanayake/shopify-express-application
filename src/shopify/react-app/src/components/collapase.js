@@ -17,7 +17,12 @@ class CollapaseCard extends Component {
     }
 
     fulfillOrder(){
-        alert("Order fulfilled")
+        const url = '/shopify/shop-api/orders/' + this.props.orderID + '/fulfill';
+        axios.get(url)
+        .then(response => {
+            console.log(response.data);
+            alert("order fulfilled!");
+        });
     }
 
     render() {
