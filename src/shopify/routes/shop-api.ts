@@ -72,7 +72,7 @@ router.get("/orders/:id/fulfill", (req: Request, res: Response) => {
           "notify_customer": true
         }
       }
-    shopAdminAPI("POST", req["session"].shop.name, url , req["shopRequestHeaders"], body, (orders: any) => {
+    shopAdminAPI("POST", shopName, url , shopRequestHeaders, body, (orders: any) => {
         console.log("order fulfilled");
         res.status(200).send(orders);
     });
