@@ -22,6 +22,7 @@ class CollapaseCard extends Component {
         .then(response => {
             console.log(response.data);
             alert("order fulfilled!");
+            this.props.resetOrders();
         });
     }
 

@@ -12,6 +12,7 @@ class Part2Cards extends Component {
             orders: [],
             products: {}
         };
+        this.resetOrders = this.resetOrders.bind(this);
     }
 
 
@@ -26,6 +27,13 @@ class Part2Cards extends Component {
             .then(response => {
                 this.setState({ orders: response.data.orders });
             });
+    }
+
+    resetOrders(){
+        axios.get('/shopify/shop-api/orders')
+        .then(response => {
+            this.setState({ orders: response.data.orders });
+        });
     }
 
 
@@ -76,7 +84,7 @@ class Part2Cards extends Component {
                             </Row>
                             <Row>
                                 <Col sm="12">
-                                    <CollapaseCards itemArray={order.lineItems} products={this.state.products} orderID={order.id}/>
+                                    <CollapaseCards resetOrders={this.resetOrders} itemArray={order.lineItems} products={this.state.products} orderID={order.id}/>
                                 </Col>
                             </Row>
                         </Card>

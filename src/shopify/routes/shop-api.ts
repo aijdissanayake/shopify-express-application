@@ -32,7 +32,7 @@ router.get("/orders", (req: Request, res: Response) => {
         let unFulfilledOrders = orders.orders.filter((order: object) => {
             return order["fulfillment_status"] != "fulfilled"
         });
-        res.status(200).send(unFulfilledOrders);
+        res.status(200).send({orders : unFulfilledOrders});
     });
 });
 
