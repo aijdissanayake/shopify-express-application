@@ -64,12 +64,12 @@ class CollapaseCard extends Component {
             <div>
                 <Container>
                     <Row>
-                        <Col sm="6">
+                        <Col sm="7">
                             <Row>
-                                <Col sm="4">
+                                <Col sm="3">
                                     <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? "Show Items" : "Hide Items"}</Button>
                                 </Col>
-                                <Col sm="4">
+                                <Col sm="3">
                                     <Button primary onClick={this.fulfillOrder}>Fulfill Order</Button>
                                 </Col>
                             </Row>
