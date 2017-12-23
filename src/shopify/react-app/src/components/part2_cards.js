@@ -55,12 +55,17 @@ class Part2Cards extends Component {
                     quantity: item.quantity,
                     variant_title: item.variant_title,
                     product_id: item.product_id
+
                 });
             });
+            customer = order.customer.first_name + " " + order.customer.last_name;
             orderArray.push({
                 id : order.id,
                 order_number: order.order_number,
-                lineItems: lineItems
+                lineItems: lineItems,
+                customer: customer,
+                created_at: order.created_at.substring(0,10);
+
             });
         });
 
@@ -77,6 +82,8 @@ class Part2Cards extends Component {
                             <Row>
 
                                 <Col sm="10">
+                                    Customer : {order.customer} <br/>
+                                    Created At: {created_at}
                                 </Col>
                                 <Col sm="2">
                                     <QRCode value={qrValue} />
