@@ -64,6 +64,19 @@ router.get("/products/:id/images", (req: Request, res: Response) => {
     });
 });
 
+router.get("/fulfilled-orders", (req: Request, res: Response) => {
+    console.log("orders");
+    shopAdminAPI("GET",  shopName, "/admin/orders.json?status=any", shopRequestHeaders, null, (orders: any) => {
+        console.log("got all orders");
+
+        let fulfilledOrders = orders.orders.filter((order: object) => {
+            console.log("inside fulfilled function");
+            return order["fulfillment_status"] == "fulfilled"
+        });
+    res.status(200).send({fulfilledOrders});
+    });
+});
+
 router.get("/orders/:id/fulfill", (req: Request, res: Response) => {
     const url: string = "/admin/orders/"+ req.params.id +"/fulfillments.json";
     const body: object = {
