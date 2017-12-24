@@ -1,5 +1,3 @@
-// ProductMapping.js
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ProductMappingService from './ProductMappingService';
