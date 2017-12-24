@@ -14,11 +14,8 @@ class Loading extends Component {
     render() {
 
         return (
-            <div style={{ padding: '20% 0 0 35%' }}>
-                <DisplayText
-                    size="small"
-                    element="h5"
-                >
+            <div style={{ padding: '5% 0 0 37%' }}>
+                <DisplayText  size="small"                >
                     <TextStyle variation="subdued">Loading... Please Wait!</TextStyle>
                 </DisplayText><br />
                 <div style={{ padding: '0 0 0 10%' }}>
