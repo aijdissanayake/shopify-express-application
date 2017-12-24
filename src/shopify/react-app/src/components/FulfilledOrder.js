@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
-import { Button,Select } from '@shopify/polaris';
+import { Button, Select } from '@shopify/polaris';
+import { EmbeddedApp, Alert, Modal } from '@shopify/polaris/embedded';
 
 class FulfilledOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderNumber : this.props.order.order_number,
-            itemID : this.props.order.lineItems[0].product_id
+            orderNumber: this.props.order.order_number,
+            itemID: this.props.order.lineItems[0].product_id,
+            open : true
         };
         this.onSelectItem = this.onSelectItem.bind(this);
         this.onTraceSelect = this.onTraceSelect.bind(this);
     }
 
-    onSelectItem(itemID, orderNumber){
-        this.setState({itemID: itemID});
+    onSelectItem(itemID, orderNumber) {
+        this.setState({ itemID: itemID });
     }
 
-    onTraceSelect(){
+    onTraceSelect() {
         alert("Item id : " + this.state.itemID + " Order Number : " + this.state.orderNumber);
     }
 
@@ -47,7 +49,26 @@ class FulfilledOrder extends Component {
                     />
                 </td>
                 <td>
-                    <Button  size="slim" onClick={this.onTraceSelect}>View Trace More Timeline</Button>
+                    <Button size="slim" onClick={this.onTraceSelect}>View Trace More Timeline</Button>
+                    <EmbeddedApp
+                        apiKey="7f3bc78eabe74bdca213aceb9cfcc1f4"
+                        shopOrigin="https://99xnsbm.myshopify.com"
+                    >
+                        <Modal
+                            src="https://stackoverflow.com"
+                            open={this.state.open}
+                            title="Edit account information"
+                            primaryAction={{
+                                content: 'Update account',
+                                onAction: () => this.setState({ open: false }),
+                            }}
+                            secondaryActions={[{
+                                content: 'Change account',
+                                onAction: () => this.setState({ open: false }),
+                            }]}
+                            onClose={() => this.setState({ open: false })}
+                        />
+                    </EmbeddedApp>
                 </td>
             </tr>
         );
