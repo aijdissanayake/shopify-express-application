@@ -13,7 +13,6 @@ router.all("/*", (req: Request, res: Response, next: NextFunction) => {
         console.log("cookies disabled");
         res.send("cookies not found, Please try re-openning the app.");
     }
-
 });
 
 router.get("/products", (req: Request, res: Response) => {
