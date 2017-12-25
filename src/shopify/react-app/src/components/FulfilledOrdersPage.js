@@ -10,6 +10,7 @@ class FulfilledOrdersPage extends Component {
         this.state = {
             orders: [],
             products: {},
+            shopDomain: "",
             isOrderListLoading: true
         };
     }
@@ -24,6 +25,7 @@ class FulfilledOrdersPage extends Component {
             .then(response => {
                 this.setState({
                     orders: response.data.fulfilledOrders,
+                    shopDomain = response.data.shopDomain,
                     isOrderListLoading: false
                 });
             });
@@ -82,7 +84,7 @@ class FulfilledOrdersPage extends Component {
                         {orderArray.map((order, index) => {
                         
                         return (
-                            <FulfilledOrder key={order.order_number} order={order} />
+                            <FulfilledOrder key={order.order_number} order={order} shopDomain={this.state.shopDomain} />
                         )
                     })}
           

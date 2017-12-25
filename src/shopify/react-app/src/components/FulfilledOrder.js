@@ -8,7 +8,7 @@ class FulfilledOrder extends Component {
         this.state = {
             orderNumber: this.props.order.order_number,
             itemID: this.props.order.lineItems[0].product_id,
-            open : true
+            open : false
         };
         this.onSelectItem = this.onSelectItem.bind(this);
         this.onTraceSelect = this.onTraceSelect.bind(this);
@@ -19,7 +19,8 @@ class FulfilledOrder extends Component {
     }
 
     onTraceSelect() {
-        alert("Item id : " + this.state.itemID + " Order Number : " + this.state.orderNumber);
+        // alert("Item id : " + this.state.itemID + " Order Number : " + this.state.orderNumber);
+        this.setState({open: true});
     }
 
     render() {
@@ -52,7 +53,7 @@ class FulfilledOrder extends Component {
                     <Button size="slim" onClick={this.onTraceSelect}>View Trace More Timeline</Button>
                     <EmbeddedApp
                         apiKey="7f3bc78eabe74bdca213aceb9cfcc1f4"
-                        shopOrigin="https://99xnsbm.myshopify.com"
+                        shopOrigin={this.props.shopDomain}
                     >
                         <Modal
                             src="https://tracified-local-test.herokuapp.com/shopify/product-mapping"
