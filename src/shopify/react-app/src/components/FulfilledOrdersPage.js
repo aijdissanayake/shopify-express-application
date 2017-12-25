@@ -25,7 +25,7 @@ class FulfilledOrdersPage extends Component {
             .then(response => {
                 this.setState({
                     orders: response.data.fulfilledOrders,
-                    shopDomain = response.data.shopDomain,
+                    shopDomain : response.data.shopDomain,
                     isOrderListLoading: false
                 });
             });
