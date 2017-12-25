@@ -21,7 +21,6 @@ ReactDOM.render(
             <Route exact path='/index' component={IndexItem} />
             <Route exact path='/edit/:id' component={EditItem} />
             <Route exact path='/product-mapping' component={ProductMapping} />
-            <Route exact path='/trace/:orderID/:itemID' component={Logo} />
             <Route exact path='/trace/:orderID/:itemID' component={TraceTimeLine} />
         </div>
     </Router>,
