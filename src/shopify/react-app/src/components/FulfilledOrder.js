@@ -61,15 +61,11 @@ class FulfilledOrder extends Component {
                         <Modal
                             src="https://tracified-local-test.herokuapp.com/shopify/product-mapping"
                             open={this.state.open}
-                            title="Edit account information"
+                            title="Traceability Details"
                             primaryAction={{
-                                content: 'Update account',
+                                content: 'Close',
                                 onAction: () => this.setState({ open: false }),
                             }}
-                            secondaryActions={[{
-                                content: 'Change account',
-                                onAction: () => this.setState({ open: false }),
-                            }]}
                             onClose={() => this.setState({ open: false })}
                         />
                     </EmbeddedApp>
