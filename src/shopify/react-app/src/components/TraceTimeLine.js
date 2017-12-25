@@ -4,7 +4,9 @@ import * as axios from 'axios';
 import {
     Spinner,
     DisplayText,
-    TextStyle
+    TextStyle,
+    Card,
+    Page
 } from '@shopify/polaris';
 
 class TraceTimeLine extends Component {
