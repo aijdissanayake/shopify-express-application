@@ -37,6 +37,7 @@ router.get("/orders", (req: Request, res: Response) => {
 
 router.get("/fulfilled-orders", (req: Request, res: Response) => {
     console.log("orders");
+    const shopDomain = req["session"].shop.name;
     shopAdminAPI("GET", req["session"].shop.name, "/admin/orders.json?status=any", req["shopRequestHeaders"], null, (orders: any) => {
         console.log("got all orders");
 
@@ -44,7 +45,8 @@ router.get("/fulfilled-orders", (req: Request, res: Response) => {
             console.log("inside fulfilled function");
             return order["fulfillment_status"] == "fulfilled"
         });
-    res.status(200).send({fulfilledOrders});
+        
+    res.status(200).send({fulfilledOrders, shopDomain});
     });
 });
 
