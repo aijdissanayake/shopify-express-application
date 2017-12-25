@@ -61,7 +61,7 @@ class FulfilledOrder extends Component {
                         shopOrigin={shopOrigin}
                     >
                         <Modal
-                            src="https://tracified-local-test.herokuapp.com/shopify/product-mapping"
+                            src={modalURL}
                             open={this.state.open}
                             title="Traceability Details"
                             primaryAction={{
