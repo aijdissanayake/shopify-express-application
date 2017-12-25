@@ -18,8 +18,11 @@ router.get("/item-list", (req: Request, res: Response) => {
     });
 });
 
-router.get("",  (req: Request, res: Response) => {
-    tracifiedServices["getOrderItemTraceabilityData"]().then((data: any) => {
+router.get("/trace/:orderID/:itemID",  (req: Request, res: Response) => {
+    const orderID = req.params.orderID;
+    const itemID = req.params.itemID;
+    console.log(orderID + itemID);
+    tracifiedServices["getOrderItemTraceabilityData"](orderID, itemID).then((data: any) => {
         console.log(data);
         res.send(data);
     });
