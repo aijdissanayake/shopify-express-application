@@ -34,6 +34,7 @@ class FulfilledOrder extends Component {
                 label: item.title
             });
         });
+        const shopOrigin = "https://"+this.props.shopDomain;
         return (
             <tr>
                 <td>
@@ -55,7 +56,7 @@ class FulfilledOrder extends Component {
                     <Button size="slim" onClick={this.onTraceSelect}>View Trace More Timeline</Button>
                     <EmbeddedApp
                         apiKey="7f3bc78eabe74bdca213aceb9cfcc1f4"
-                        shopOrigin="99xnsbm.myshopify.com"
+                        shopOrigin={shopOrigin}
                     >
                         <Modal
                             src="https://tracified-local-test.herokuapp.com/shopify/product-mapping"
