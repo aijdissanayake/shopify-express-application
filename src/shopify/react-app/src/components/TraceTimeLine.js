@@ -12,13 +12,13 @@ class TraceTimeLine extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            OTP:"",
+            OTP: "",
             isOTPLoading: true
         };
     }
 
     componentDidMount() {
-        const traceURL = "/shopify/tracified/trace/"+this.props.match.params.orderID+"/"+this.props.match.params.itemID;
+        const traceURL = "/shopify/tracified/trace/" + this.props.match.params.orderID + "/" + this.props.match.params.itemID;
         axios.get(traceURL)
             .then(response => {
                 this.setState({
@@ -37,22 +37,27 @@ class TraceTimeLine extends Component {
             console.log(this.props.match.params.orderID);
             console.log(this.props.match.params.itemID);
             return (
-                <div style={{ padding: '5% 0 0 37%' }}>
-                    <DisplayText size="small"                >
+                <Page title="Trace Back Timeline" separator>
+                    <DisplayText size="small">
                         <TextStyle variation="subdued">
-                            <b>Trace Time Line</b> for<br />
-                            Order ID : {this.props.match.params.orderID}<br />
-                            Shopify Product ID  : {this.props.match.params.itemID}<br />
-                            Should go here.<br/>
-                            OTP: {JSON.stringify(this.state.OTP)}
-
-                    </TextStyle>
+                            {this.state.OTP.map((stage, index) => {
+                                return (
+                                    <Card key={stage.stageId} title={stage.name}>
+                                        {stage.traceabilityData.map((traceabilityData, index) => {
+                                            const data = traceabilityData.name + " - " + traceabilityData.type;
+                                            return (
+                                                <Card.Section>{data}</Card.Section>
+                                            )
+                                        })}
+                                    </Card>
+                                )
+                            })}
+                        </TextStyle>
                     </DisplayText>
-                </div>
+                </Page>
             );
         }
     }
 }
-
 
 export default TraceTimeLine;
