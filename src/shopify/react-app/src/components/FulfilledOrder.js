@@ -55,7 +55,7 @@ class FulfilledOrder extends Component {
                         shopOrigin="https://99xnsbm.myshopify.com"
                     >
                         <Modal
-                            src="https://stackoverflow.com"
+                            src="https://tracified-local-test.herokuapp.com/shopify/product-mapping"
                             open={this.state.open}
                             title="Edit account information"
                             primaryAction={{
