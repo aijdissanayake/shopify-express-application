@@ -35,6 +35,8 @@ class FulfilledOrder extends Component {
             });
         });
         const shopOrigin = "https://"+this.props.shopDomain;
+        const modalURL = "/shopify/trace/"+this.state.orderNumber+"/"+this.state.itemID;
+        console.log(modalURL);
         return (
             <tr>
                 <td>

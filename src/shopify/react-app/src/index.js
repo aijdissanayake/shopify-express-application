@@ -6,6 +6,7 @@ import App from './App';
 import Tabs from './components/TabsView';
 import Logo from './components/TracifiedLogo';
 import ProductMapping from './components/ProductMappingModule/ProductMapping';
+import TraceTimeLine from './components/TraceTimeLine';
 import '@shopify/polaris/styles.css';
 import AddItem from './components/AddItem';
 import IndexItem from './components/IndexItem';
@@ -20,6 +21,8 @@ ReactDOM.render(
             <Route exact path='/index' component={IndexItem} />
             <Route exact path='/edit/:id' component={EditItem} />
             <Route exact path='/product-mapping' component={ProductMapping} />
+            <Route exact path='/trace/:orderID/:itemID' component={Logo} />
+            <Route exact path='/trace/:orderID/:itemID' component={TraceTimeLine} />
         </div>
     </Router>,
     document.getElementById('root')
