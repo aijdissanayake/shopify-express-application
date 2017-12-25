@@ -27,11 +27,11 @@ module.exports = {
         });
     },
 
-    getOrderTraceabilityData(orderID: string, accessToken: string) {
+    getOrderItemTraceabilityData(orderID: string, itemID: string, accessToken: string) {
         return new Promise((resolve, reject) => {
             const options = {
                 method: "GET",
-                uri: tracifiedURL + "/Traceability_data/Data/tracified_item_list/Odr_001/traceability-profiles",
+                uri: tracifiedURL + "/Traceability_data/Saaraketha_Process/Details",
             };
 
             request(options).then((data: any) => {
