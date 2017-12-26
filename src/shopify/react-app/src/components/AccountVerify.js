@@ -36,7 +36,7 @@ class AccountVerify extends Component {
     onClick(){
 
         const tempToken = this.state.tempToken;
-        axios.post('/shopify/account/verify', { tempToken })
+        axios.post('/shopify/tracified/account/verify', { tempToken })
           .then((result) => {
             alert("Account verified successfully");
             console.log(result);
@@ -54,7 +54,7 @@ class AccountVerify extends Component {
 
                         <Card.Section>
                             <Col sm="8" offset="2">
-                                <TextField onChange={this.onChange} label="Enter the access token" />
+                                <TextField onChange={this.onChange} value={this.state.tempToken} label="Enter the access token" />
                             </Col>
                             <Col sm="4" offset="2">
                                 <Button primary onClick={this.onClick}>Connect</Button>
