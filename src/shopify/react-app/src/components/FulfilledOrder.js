@@ -19,7 +19,7 @@ class FulfilledOrder extends Component {
         const mapping = this.props.mapping;        
         let itemID = "noTraceabilityItem";
             if (mapping.hasOwnProperty(productID) && mapping[productID][1]){
-                itemID = mapping[item.product_id][0];
+                itemID = mapping[productID][0];
             }
         this.setState({ 
             itemID: itemID,
