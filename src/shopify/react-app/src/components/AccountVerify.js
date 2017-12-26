@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '@shopify/polaris/styles.css';
 import { Row, Col } from 'reactstrap';
+import * as axios from 'axios';
 import {
     AccountConnection,
     Page,
@@ -17,7 +18,7 @@ import {
 
 class AccountVerify extends Component {
 
-    constructor() {
+    constructor(props) {
         super(props);
         this.state = {
             tempToken : ""
@@ -34,7 +35,7 @@ class AccountVerify extends Component {
 
     onClick(){
 
-        const mapping = this.state.tempToken;
+        const tempToken = this.state.tempToken;
         axios.post('/shopify/account/verify', { tempToken })
           .then((result) => {
             alert("Account verified successfully");
