@@ -8,32 +8,34 @@ class FulfilledOrder extends Component {
         this.state = {
             orderNumber: this.props.order.order_number,
             productID: this.props.order.lineItems[0].product_id,
-            modalOpen : false,
-            itemID: this.props.mapping.hasOwnProperty(this.props.order.lineItems[0].product_id)? (this.props.mapping[this.props.order.lineItems[0].product_id][1]?this.props.mapping[this.props.order.lineItems[0].product_id][1]:"noTraceabilityItem"):"noTraceabilityItem"
+            modalOpen: false,
+            alertOpen: false,
+            itemID: this.props.mapping.hasOwnProperty(this.props.order.lineItems[0].product_id) ? (this.props.mapping[this.props.order.lineItems[0].product_id][1] ? this.props.mapping[this.props.order.lineItems[0].product_id][1] : "noTraceabilityItem") : "noTraceabilityItem"
         };
         this.onSelectItem = this.onSelectItem.bind(this);
         this.onTraceSelect = this.onTraceSelect.bind(this);
     }
 
     onSelectItem(productID, orderNumber) {
-        const mapping = this.props.mapping;        
+        const mapping = this.props.mapping;
         let itemID = "noTraceabilityItem";
-            if (mapping.hasOwnProperty(productID) && mapping[productID][1]){
-                itemID = mapping[productID][0];
-            }
-        this.setState({ 
+        if (mapping.hasOwnProperty(productID) && mapping[productID][1]) {
+            itemID = mapping[productID][0];
+        }
+        this.setState({
             itemID: itemID,
             productID: productID
-         });
+        });
     }
 
     onTraceSelect() {
-        if(this.state.itemID == "noTraceabilityItem"){
-            console.log(this.state.itemID);            
-            alert("NO Traceability");
+        if (this.state.itemID == "noTraceabilityItem") {
+            console.log(this.state.itemID);
+            //alert("NO Traceability");
+            this.setState({alertOpen: true});
         }
-        else{
-            this.setState({modalOpen: true});
+        else {
+            this.setState({ modalOpen: true });
             console.log(this.state.itemID);
         }
     }
@@ -42,14 +44,14 @@ class FulfilledOrder extends Component {
         const order = this.props.order;
         var itemOptions = [];
         order.lineItems.forEach(item => {
-            
+
             itemOptions.push({
                 value: item.product_id,
                 label: item.title
             });
         });
-        const shopOrigin = "https://"+this.props.shopDomain;
-        const modalURL = "/shopify/trace/"+this.state.orderNumber+"/"+this.state.itemID;
+        const shopOrigin = "https://" + this.props.shopDomain;
+        const modalURL = "/shopify/trace/" + this.state.orderNumber + "/" + this.state.itemID;
         console.log(modalURL);
         console.log(this.props.mapping);
         return (
@@ -85,6 +87,14 @@ class FulfilledOrder extends Component {
                             }}
                             onClose={() => this.setState({ modalOpen: false })}
                         />
+                        <Alert
+                            title="Accept terms and conditions"
+                            open={this.state.alertOpen}
+                            confirmContent="I accept"
+                            onConfirm={() => this.setState({ alertOpen: false, alertConfirmed: true })}
+                        >
+                            You must accept the terms and conditions before proceeding.
+                        </Alert>
                     </EmbeddedApp>
                 </td>
             </tr>
