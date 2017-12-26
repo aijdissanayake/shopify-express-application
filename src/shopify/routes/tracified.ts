@@ -24,20 +24,21 @@ router.post("/account/verify", (req: Request, res: Response) => {
         Shop.findOne({ "name": shop }, "name access_token", function (err: Error, installedShop: ShopModel) { //to use if a shop record is alredy there
             if (err) return res.status(503).send("error with db connection. Plese try again in a while");
             if (installedShop) {
-              installedShop.tracified_token = tracifiedToken;
-              installedShop.save(function () {
-                if (err) return res.status(503).send("error with db connection. Plese try again in a while");
-                return res.status(200).send("Account successfullly verified and connected");
-              });
-            } 
+                installedShop.tracified_token = tracifiedToken;
+                installedShop.save(function () {
+                    if (err) return res.status(503).send("error with db connection. Plese try again in a while");
+                    return res.status(200).send("Account successfullly verified and connected");
+                });
+            }
             else {
                 return res.status(401).send("Account Verification Failed. Please try reinstalling the Plugin");
             }
-        res.send(data);
+            res.send(data);
+        });
+    }).catch(function (err: any) {
+        console.error(err);
+        return res.status(401).send("Account Verification Failed. Please try again!");
     });
-}).catch(function(err: any){
-    console.error(err);
-    return res.status(401).send("Account Verification Failed. Please try again!"); 
 });
 
 router.get("/item-list", (req: Request, res: Response) => {
@@ -47,7 +48,7 @@ router.get("/item-list", (req: Request, res: Response) => {
     });
 });
 
-router.get("/trace/:orderID/:itemID",  (req: Request, res: Response) => {
+router.get("/trace/:orderID/:itemID", (req: Request, res: Response) => {
     const orderID = req.params.orderID;
     const itemID = req.params.itemID;
     console.log(orderID + itemID);
