@@ -32,7 +32,7 @@ class FulfilledOrder extends Component {
         if (this.state.itemID == "noTraceabilityItem") {
             console.log(this.state.itemID);
             //alert("NO Traceability");
-            this.setState({alertOpen: true});
+            this.setState({ alertOpen: true });
         }
         else {
             this.setState({ modalOpen: true });
@@ -87,6 +87,11 @@ class FulfilledOrder extends Component {
                             }}
                             onClose={() => this.setState({ modalOpen: false })}
                         />
+                    </EmbeddedApp>
+                    <EmbeddedApp
+                        apiKey="7f3bc78eabe74bdca213aceb9cfcc1f4"
+                        shopOrigin={shopOrigin}
+                    >
                         <Alert
                             title="Accept terms and conditions"
                             open={this.state.alertOpen}
