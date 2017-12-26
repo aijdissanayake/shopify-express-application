@@ -15,6 +15,7 @@ router.post('/uninstall-app',(req, res) => {
             if (err) return res.status(503).send("error with db connection. Plese try again in a while");
             if (uninstalledShop) {
                 uninstalledShop.access_token = null;
+                uninstalledShop.tracified_token = null;
                 uninstalledShop.save(function () {
                     if (err) return res.status(503).send("error with db connection. Plese try again in a while");
                     console.log("access token removed from the app uninstalled shop");
