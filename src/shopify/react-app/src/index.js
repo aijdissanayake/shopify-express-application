@@ -11,6 +11,7 @@ import '@shopify/polaris/styles.css';
 import AddItem from './components/AddItem';
 import IndexItem from './components/IndexItem';
 import EditItem from './components/EditItem';
+import AccountVerify from './components/AccountVerify';
 
 ReactDOM.render(
     <Router basename="/shopify" >
@@ -22,6 +23,8 @@ ReactDOM.render(
             <Route exact path='/edit/:id' component={EditItem} />
             <Route exact path='/product-mapping' component={ProductMapping} />
             <Route exact path='/trace/:orderID/:itemID' component={TraceTimeLine} />
+            <Route exact path='/account-verify' component={AccountVerify} />
+            
         </div>
     </Router>,
     document.getElementById('root')

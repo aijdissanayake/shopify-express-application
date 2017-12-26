@@ -9,7 +9,21 @@ module.exports = {
      * a callback url(or to return a promise?) will also need to send
      * and have implemented here to handle te after verification peocess
      */
-    verifyTracifiedAccount(tempToken: string) {  /* implement the function */ },
+    verifyTracifiedAccount(tempToken: string) {
+        return new Promise((resolve, reject) => {
+            const options = {
+                method: "POST",
+                uri: tracifiedURL + "/account/verify",
+            };
+            
+            request(options).then((data: any) => {
+                const type: string = typeof data;
+                console.log(type);
+                console.log(data);
+                resolve(data);
+            });
+        });
+    },
 
     getTracifiedItemList(accessToken: string) {
         return new Promise((resolve, reject) => {

@@ -94,7 +94,7 @@ class FulfilledOrder extends Component {
                         <Alert
                             title="Tracified"
                             open={this.state.alertOpen}
-                            confirmContent="I accept"
+                            confirmContent="Close"
                             onConfirm={() => this.setState({ alertOpen: false, alertConfirmed: true })}
                         >
                             Traceability Not available for this Product!
