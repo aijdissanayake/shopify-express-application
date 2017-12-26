@@ -31,7 +31,6 @@ class FulfilledOrder extends Component {
     onTraceSelect() {
         if (this.state.itemID == "noTraceabilityItem") {
             console.log(this.state.itemID);
-            //alert("NO Traceability");
             this.setState({ alertOpen: true });
         }
         else {
@@ -93,12 +92,12 @@ class FulfilledOrder extends Component {
                         shopOrigin={shopOrigin}
                     >
                         <Alert
-                            title="Accept terms and conditions"
+                            title="Tracified"
                             open={this.state.alertOpen}
                             confirmContent="I accept"
                             onConfirm={() => this.setState({ alertOpen: false, alertConfirmed: true })}
                         >
-                            You must accept the terms and conditions before proceeding.
+                            Traceability Not available for this Product!
                         </Alert>
                     </EmbeddedApp>
                 </td>
