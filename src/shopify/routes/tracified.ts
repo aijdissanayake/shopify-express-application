@@ -14,6 +14,8 @@ router.all("/*", (req: Request, res: Response, next: NextFunction) => {
 router.post("/account/verify", (req: Request, res: Response) => {
     tracifiedServices["verifyTracifiedAccount"](req.body.tempToken).then((data: any) => {
         console.log(data);
+        console.log("tracifiedToken");
+        console.log(data["tracifiedToken"]);
         res.send(data);
     });
 });
