@@ -33,7 +33,6 @@ router.post("/account/verify", (req: Request, res: Response) => {
             else {
                 return res.status(401).send("Account Verification Failed. Please try reinstalling the Plugin");
             }
-            res.send(data);
         });
     }).catch(function (err: any) {
         console.error(err);
