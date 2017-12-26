@@ -18,6 +18,8 @@ router.post("/account/verify", (req: Request, res: Response) => {
     tracifiedServices["verifyTracifiedAccount"](req.body.tempToken).then((data: any) => {
         console.log("inside tracified end point");
         console.log(data);
+        console.log(typeof data);
+        data = JSON.parse(data);
         console.log("tracifiedToken");
         console.log(data["tracifiedToken"]);
         res.send(data);
