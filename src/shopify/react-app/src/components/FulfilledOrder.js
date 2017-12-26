@@ -14,32 +14,33 @@ class FulfilledOrder extends Component {
         this.onTraceSelect = this.onTraceSelect.bind(this);
     }
 
-    onSelectItem(itemID, orderNumber) {
+    onSelectItem(productID, orderNumber) {
+        const mapping = this.props.mapping;        
+        let itemID = "noTraceability";
+            if (mapping.hasOwnProperty(productID) && mapping[productID][1]){
+                itemID = mapping[item.product_id][0];
+            }
         this.setState({ itemID: itemID });
     }
 
     onTraceSelect() {
-        console.log("shop domain");
-        console.log(this.props.shopDomain);
         if(this.state.itemID == "noTraceability"){
+            console.log(this.state.itemID);            
             alert("NO Traceability");
         }
         else{
             this.setState({modalOpen: true});
+            console.log(this.state.itemID);
         }
     }
 
     render() {
         const order = this.props.order;
-        const mapping = this.props.mapping;
         var itemOptions = [];
         order.lineItems.forEach(item => {
-            let value = "noTraceability";
-            if (mapping.hasOwnProperty(item.product_id) && mapping[item.product_id][1]){
-                value = mapping[item.product_id][0];
-            }
+            
             itemOptions.push({
-                value: value,
+                value: item.product_id,
                 label: item.title
             });
         });
