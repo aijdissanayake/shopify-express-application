@@ -42,8 +42,4 @@ router.post("/mapping", (req: Request, res: Response) => {
     });
 });
 
-// router.get("/mapping", (req: Request, res: Response) => {
-
-// });
-
 export { router };

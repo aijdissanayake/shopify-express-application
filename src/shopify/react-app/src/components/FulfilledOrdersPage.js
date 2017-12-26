@@ -9,17 +9,20 @@ class FulfilledOrdersPage extends Component {
         super();
         this.state = {
             orders: [],
-            products: {},
+            mapping: {},
             shopDomain: "",
-            isOrderListLoading: true
+            isOrderListLoading: true,
+            isMappingLoading: true
         };
     }
 
     componentDidMount() {
-        axios.get('/shopify/shop-api/products')
+        axios.get('/shopify/config/mapping')
             .then(response => {
-                const products = response.data.products;
-                this.setState({ products: response.data.products });
+                this.setState({ 
+                    mapping: response.data,
+                    isMappingLoading: false 
+                });
             });
         axios.get('/shopify/shop-api/fulfilled-orders')
             .then(response => {
@@ -34,7 +37,7 @@ class FulfilledOrdersPage extends Component {
 
     render() {
 
-        if (this.state.isOrderListLoading) {
+        if (this.state.isOrderListLoading || this.state.isMappingLoading) {
             return <Loading />;
         }
         else {
@@ -84,7 +87,12 @@ class FulfilledOrdersPage extends Component {
                         {orderArray.map((order, index) => {
                         
                         return (
-                            <FulfilledOrder key={order.order_number} order={order} shopDomain={this.state.shopDomain} />
+                            <FulfilledOrder 
+                                key={order.order_number} 
+                                order={order} 
+                                shopDomain={this.state.shopDomain} 
+                                mapping={this.state.mapping} 
+                            />
                         )
                     })}
           

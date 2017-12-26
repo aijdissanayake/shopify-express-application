@@ -8,7 +8,7 @@ class FulfilledOrder extends Component {
         this.state = {
             orderNumber: this.props.order.order_number,
             itemID: this.props.order.lineItems[0].product_id,
-            open : false
+            modalOpen : false
         };
         this.onSelectItem = this.onSelectItem.bind(this);
         this.onTraceSelect = this.onTraceSelect.bind(this);
@@ -19,10 +19,9 @@ class FulfilledOrder extends Component {
     }
 
     onTraceSelect() {
-        // alert("Item id : " + this.state.itemID + " Order Number : " + this.state.orderNumber);
         console.log("shop domain");
         console.log(this.props.shopDomain);
-        this.setState({open: true});
+        this.setState({modalOpen: true});
     }
 
     render() {
@@ -37,6 +36,7 @@ class FulfilledOrder extends Component {
         const shopOrigin = "https://"+this.props.shopDomain;
         const modalURL = "/shopify/trace/"+this.state.orderNumber+"/"+this.state.itemID;
         console.log(modalURL);
+        console.log(this.props.mapping);
         return (
             <tr>
                 <td>
@@ -62,13 +62,13 @@ class FulfilledOrder extends Component {
                     >
                         <Modal
                             src={modalURL}
-                            open={this.state.open}
+                            open={this.state.modalOpen}
                             title="Tracified - Trust Through Traceability"
                             primaryAction={{
                                 content: 'Close',
-                                onAction: () => this.setState({ open: false }),
+                                onAction: () => this.setState({ modalOpen: false }),
                             }}
-                            onClose={() => this.setState({ open: false })}
+                            onClose={() => this.setState({ modalOpen: false })}
                         />
                     </EmbeddedApp>
                 </td>
