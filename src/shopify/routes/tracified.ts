@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import * as tracifiedServices from "../../tracified/services";
+import { Shop, ShopModel } from "../models/Shop";
+import { Error } from "mongoose";
+
 const router = Router();
 
 router.all("/*", (req: Request, res: Response, next: NextFunction) => {
@@ -13,6 +16,7 @@ router.all("/*", (req: Request, res: Response, next: NextFunction) => {
 
 router.post("/account/verify", (req: Request, res: Response) => {
     tracifiedServices["verifyTracifiedAccount"](req.body.tempToken).then((data: any) => {
+        console.log("inside tracified end point");
         console.log(data);
         console.log("tracifiedToken");
         console.log(data["tracifiedToken"]);
