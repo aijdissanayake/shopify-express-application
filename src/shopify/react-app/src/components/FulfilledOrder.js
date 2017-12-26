@@ -9,7 +9,7 @@ class FulfilledOrder extends Component {
             orderNumber: this.props.order.order_number,
             productID: this.props.order.lineItems[0].product_id,
             modalOpen : false,
-            itemID: "noTraceabilityItem"
+            itemID: this.props.mapping.hasOwnProperty(this.props.order.lineItems[0].product_id)? (this.props.mapping[this.props.order.lineItems[0].product_id][1]?this.props.mapping[this.props.order.lineItems[0].product_id][1]:"noTraceabilityItem"):"noTraceabilityItem"
         };
         this.onSelectItem = this.onSelectItem.bind(this);
         this.onTraceSelect = this.onTraceSelect.bind(this);
@@ -66,7 +66,7 @@ class FulfilledOrder extends Component {
                         placeholder="Select an Item to view"
                         id={order.order_number}
                         onChange={this.onSelectItem}
-                        value={this.state.itemID}
+                        value={this.state.productID}
                     />
                 </td>
                 <td>
