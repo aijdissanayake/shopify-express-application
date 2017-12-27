@@ -43,6 +43,7 @@ class AccountVerify extends Component {
                 // window.location.href = response.redirect;
                 console.log(response);
             }).catch((err) =>{
+                alert("Account verification Failed, PLease Try re-entering the temperory access token");
                 console.log(err);
             });
     }
@@ -54,17 +55,16 @@ class AccountVerify extends Component {
                     <FormLayout>
                         <Card.Section>
                             <p> Looks like you haven't connected a Tracified Account yet.</p>
-                            <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p>
+                            <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p><br/>
                         <Row>
-                            <Col sm="8" offset="2">
-                                <TextField onChange={this.onChange} value={this.state.tempToken} label="Enter the access token" />
+                            <Col sm="10" offset="2">
+                                <TextField onChange={this.onChange} value={this.state.tempToken} label="Enter the access token:" />
                             </Col>
-                            <Col sm="4" offset="2">
+                            <Col sm="2" offset="2">
                                 <Button primary onClick={this.onClick}>Connect</Button>
                             </Col>
                         </Row>                            
                         </Card.Section>
-                        <Card.Section></Card.Section>
                     </FormLayout>
                     <Row>
                     </Row>
