@@ -27,7 +27,7 @@ router.post("/account/verify", (req: Request, res: Response) => {
                 installedShop.tracified_token = tracifiedToken;
                 installedShop.save(function () {
                     if (err) return res.status(503).send("error with db connection. Plese try again in a while");
-                    return res.status(200).send("Account successfullly verified and connected");
+                    return res.redirect("/shopify/main-view");
                 });
             }
             else {

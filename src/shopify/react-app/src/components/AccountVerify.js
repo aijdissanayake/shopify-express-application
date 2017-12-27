@@ -47,10 +47,9 @@ class AccountVerify extends Component {
         return (
             <Page>
                 <Card title="Tracified Account Connection ">
-
                     <FormLayout>
                         <Card.Section>
-                            <p> Looks like you haven't connected a Tracified Account yet.</p> 
+                            <p> Looks like you haven't connected a Tracified Account yet.</p>
                             <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p>
                         </Card.Section>
                         <Card.Section>
@@ -60,6 +59,10 @@ class AccountVerify extends Component {
                             <Col sm="4" offset="2">
                                 <Button primary onClick={this.onClick}>Connect</Button>
                             </Col>
+                        </Card.Section>
+                        <Card.Section>
+                            <p> Looks like you haven't connected a Tracified Account yet.</p>
+                            <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p>
                         </Card.Section>
                     </FormLayout>
                     <Row>
