@@ -31,7 +31,7 @@ router.get("/", (req: Request, res: Response) => {
     const shop = req.query.shop;
     if (shop) {
         const query = Object.keys(req.query).map((key) => `${key}=${req.query[key]}`).join("&");
-        Shop.findOne({ "name": shop }, "name access_token", function (err: Error, exisitingShop: ShopModel) {
+        Shop.findOne({ "name": shop }, "name access_token tracified_token", function (err: Error, exisitingShop: ShopModel) {
             if (err) return res.status(503).send("error with db connection. Plese try again in a while");
             if (exisitingShop && exisitingShop.access_token) {
                 req["session"].shop = exisitingShop;
