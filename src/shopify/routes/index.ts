@@ -51,16 +51,18 @@ router.get("/cookie-check", (req: Request, res: Response) => {
     if (req["session"] && req["session"].shop) {
         if (req["session"].shop.tracified_token){
             console.log("tracified token exists");
+            console.log(req["session"].shop);
             return res.redirect("/shopify/main-view");
         }
         else{
             console.log("no tracified token");
+            console.log(req["session"].shop);
             return res.redirect("/shopify/main-view");
         }
         
     } else {
-        console.log("cookie disabled");
-        res.send("cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.");
+        console.log("cookies disabled");
+        res.send("cookies disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.");
     }
 });
 /**
