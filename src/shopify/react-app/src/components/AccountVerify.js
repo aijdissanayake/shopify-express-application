@@ -38,7 +38,7 @@ class AccountVerify extends Component {
         const tempToken = this.state.tempToken;
         axios.post('/shopify/tracified/account/verify', { tempToken })
             .then((result) => {
-                alert("Account verified successfully " + result);
+                alert("Account verified successfully " + result.data);
                 console.log(result);
             });
     }
@@ -46,10 +46,13 @@ class AccountVerify extends Component {
     render() {
         return (
             <Page>
-                <Card title="Account Verficaction ">
+                <Card title="Tracified Account Connection ">
 
                     <FormLayout>
-
+                        <Card.Section>
+                            <p> Looks like you haven't connected a Tracified Account yet.</p> 
+                            <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p>
+                        </Card.Section>
                         <Card.Section>
                             <Col sm="8" offset="2">
                                 <TextField onChange={this.onChange} value={this.state.tempToken} label="Enter the access token" />
@@ -58,11 +61,6 @@ class AccountVerify extends Component {
                                 <Button primary onClick={this.onClick}>Connect</Button>
                             </Col>
                         </Card.Section>
-
-                        <Card.Section>
-                            <p>  You may want to connect to your Tracified Account for further proceedings</p>
-                        </Card.Section>
-
                     </FormLayout>
                     <Row>
                     </Row>

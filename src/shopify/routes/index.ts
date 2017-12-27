@@ -57,7 +57,7 @@ router.get("/cookie-check", (req: Request, res: Response) => {
         else{
             console.log("no tracified token");
             console.log(req["session"].shop);
-            return res.redirect("/shopify/main-view");
+            return res.redirect("/shopify/account-verify");
         }
         
     } else {
