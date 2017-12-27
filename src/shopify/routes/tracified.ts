@@ -10,6 +10,11 @@ const router = Router();
 //         res.send("cookies not found, Please try re-openning the app.");
 //     }
 // });
+  router.all('/*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
 
 router.get("/item-list", (req: Request, res: Response) => {
     tracifiedServices["getTracifiedItemList"]("token").then((data: any) => {
