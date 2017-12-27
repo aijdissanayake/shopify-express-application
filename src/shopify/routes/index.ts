@@ -34,7 +34,7 @@ router.get("/", (req: Request, res: Response) => {
         Shop.findOne({ "name": shop }, "name access_token", function (err: Error, exisitingShop: ShopModel) {
             if (err) return res.status(503).send("error with db connection. Plese try again in a while");
             if (exisitingShop && exisitingShop.access_token) {
-                req["session"].shop = exisitingShop;
+                res["session"].shop = exisitingShop;
                 return res.redirect("/shopify/cookie-check");
             } else {
                 return res.redirect(`/shopify/install/?${query}`);
