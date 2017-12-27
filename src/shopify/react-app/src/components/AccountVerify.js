@@ -40,7 +40,7 @@ class AccountVerify extends Component {
             .then((response) => {
                 // alert("Account verified successfully " + result.data);
                 window.location.href = response.redirect;
-                console.log(result);
+                console.log(response);
             });
     }
 
@@ -61,10 +61,7 @@ class AccountVerify extends Component {
                                 <Button primary onClick={this.onClick}>Connect</Button>
                             </Col>
                         </Card.Section>
-                        <Card.Section>
-                            <p> Looks like you haven't connected a Tracified Account yet.</p>
-                            <p> Please Contact your Tracified Admin and submit the temporary token here to connect an account for further proceedings</p>
-                        </Card.Section>
+                        <Card.Section></Card.Section>
                     </FormLayout>
                     <Row>
                     </Row>
