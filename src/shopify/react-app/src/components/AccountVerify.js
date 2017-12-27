@@ -21,32 +21,30 @@ class AccountVerify extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tempToken : ""
+            tempToken: ""
         };
         this.onChange = this.onChange.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
-    onChange(token, id){
+    onChange(token, id) {
         this.setState({
             tempToken: token
         });
     }
 
-    onClick(){
+    onClick() {
 
         const tempToken = this.state.tempToken;
         axios.post('/shopify/tracified/account/verify', { tempToken })
-          .then((result) => {
-            alert("Account verified successfully " + result);
-            console.log(result);
-          });
+            .then((result) => {
+                alert("Account verified successfully " + result);
+                console.log(result);
+            });
     }
 
     render() {
-
         return (
-
             <Page>
                 <Card title="Account Verficaction ">
 
@@ -73,4 +71,5 @@ class AccountVerify extends Component {
         );
     }
 }
+
 export default AccountVerify;

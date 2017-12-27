@@ -49,7 +49,15 @@ router.get("/", (req: Request, res: Response) => {
  */
 router.get("/cookie-check", (req: Request, res: Response) => {
     if (req["session"] && req["session"].shop) {
-        return res.redirect("/shopify/main-view");
+        if (req["session"].shop.tracified_token){
+            console.log("tracified token exists");
+            return res.redirect("/shopify/main-view");
+        }
+        else{
+            console.log("no tracified token");
+            return res.redirect("/shopify/main-view");
+        }
+        
     } else {
         console.log("cookie disabled");
         res.send("cookie disabled, You need to enable browser cookie to use the plugin without interruptions. Please enable cookies and retry.");
