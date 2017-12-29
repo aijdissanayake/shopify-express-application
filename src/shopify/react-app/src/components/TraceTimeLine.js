@@ -86,13 +86,12 @@ class TraceTimeLine extends Component {
                                                     source={stage.icon}
                                                 />
                                             </Col>
+                                            <Col sm='9'>
                                             <TextStyle variation='strong' >
                                                 {index+1}.&nbsp;{stage.title}
 
                                             </TextStyle>
-
-
-
+                                            </Col>   
                                         </Row>
                                         <div >
                                             <Row>
