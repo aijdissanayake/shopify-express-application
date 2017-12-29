@@ -66,7 +66,7 @@ router.get("/trace/:orderID/:itemID", (req: Request, res: Response) => {
 router.get("/artifacts/:itemID", (req: Request, res: Response) => {
     const itemID = req.params.itemID;
     tracifiedServices["getProductArtifacts"](itemID, req["session"].shop.tracified_token).then((data: any) => {
-
+        res.send(data);
     });
 });
 
