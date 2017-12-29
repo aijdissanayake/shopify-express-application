@@ -78,6 +78,7 @@ class FulfilledOrder extends Component {
                     >
                         <Modal
                             src={modalURL}
+                            width="fullwidth"
                             open={this.state.modalOpen}
                             title="Tracified - Trust Through Traceability"
                             primaryAction={{
