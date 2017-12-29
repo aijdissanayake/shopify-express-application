@@ -79,14 +79,14 @@ class TraceTimeLine extends Component {
                                 >
                                     <Card.Section>
                                         <Row>
-                                            <Col sm='2'>
+                                            <Col sm='1'>
                                                 <Avatar
                                                     customer
                                                     name="Farrah"
                                                     source={stage.icon}
                                                 />
                                             </Col>
-                                            <Col sm='10'>
+                                            <Col sm='11'>
                                             <TextStyle variation='strong' >
                                                 {index+1}.&nbsp;{stage.title}
 
@@ -99,7 +99,7 @@ class TraceTimeLine extends Component {
                                                     {/* <div style={line}></div> */}
                                                     <hr width="1" size="500"/>
                                                 </Col>
-                                                <Col sm="8">
+                                                <Col sm="11">
                                                     <Heading> <div > {stage.description} </div> </Heading> <br />
 
                                                     {
