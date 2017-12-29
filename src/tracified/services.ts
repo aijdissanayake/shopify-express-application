@@ -45,7 +45,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const options = {
                 method: "GET",
-                uri: tracifiedURL + "/Traceability_data/Saaraketha_Process/Details",
+                uri: tracifiedURL + "/Traceability_data/otp/customer-app",
             };
 
             request(options).then((data: any) => {
