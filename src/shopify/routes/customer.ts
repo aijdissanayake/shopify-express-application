@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import * as tracifiedServices from "../../tracified/services";
-import { Shop, ShopModel } from "../models/Shop";
+import {ShopifyMapping, ShopifyMappingModel} from "../models/ShopifyMapping";
 import { Error } from "mongoose";
 
 const router = Router();
@@ -11,10 +11,17 @@ router.all('/*',  (req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-router.get("/:product/enabled", (req: Request, res: Response) => {
+router.get("/:productID/enabled", (req: Request, res: Response) => {
     const shop = req.query.shop;
+    const productID = req.params.productID;
     if (shop) {
-        return res.json({enabled: true});
+        ShopifyMapping.findOne({ "shop_name": shop }, (err: Error, mapping: ShopifyMappingModel) => {
+            if (err) return res.status(503).send("error with db connection. Plese try again in a while");
+            return res.json({
+                enabled:mapping.mapping[productID][1],
+                itemID:mapping.mapping[productID][0]
+            });
+        });
     }
     else{
         return res.json({enabled: false});
