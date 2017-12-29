@@ -7,7 +7,13 @@ const router = Router();
 
 router.all("/*", (req: Request, res: Response, next: NextFunction) => {
     if (req["session"] && req["session"].shop) {
-        next();
+        if(req["session"].shop.tracified_token){
+            next();
+        }
+        else{
+            res.status(401).send("Account Verification Failed. Please try reinstalling the Plugin");
+        }
+       
     } else {
         console.log("cookies not found");
         res.send("cookies not found, Please try re-openning the app.");
@@ -41,7 +47,7 @@ router.post("/account/verify", (req: Request, res: Response) => {
 });
 
 router.get("/item-list", (req: Request, res: Response) => {
-    tracifiedServices["getTracifiedItemList"]("token").then((data: any) => {
+    tracifiedServices["getTracifiedItemList"](req["session"].shop.tracified_token).then((data: any) => {
         console.log(data);
         res.send(data);
     });
@@ -51,9 +57,16 @@ router.get("/trace/:orderID/:itemID", (req: Request, res: Response) => {
     const orderID = req.params.orderID;
     const itemID = req.params.itemID;
     console.log(orderID + itemID);
-    tracifiedServices["getOrderItemTraceabilityData"](orderID, itemID).then((data: any) => {
+    tracifiedServices["getOrderItemTraceabilityData"](orderID, itemID, req["session"].shop.tracified_token).then((data: any) => {
         console.log(data);
         res.send(data);
+    });
+});
+
+router.get("/artifacts/:itemID", (req: Request, res: Response) => {
+    const itemID = req.params.itemID;
+    tracifiedServices["getProductArtifacts"](itemID, req["session"].shop.tracified_token).then((data: any) => {
+
     });
 });
 

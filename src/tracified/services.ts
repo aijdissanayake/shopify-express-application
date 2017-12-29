@@ -56,4 +56,20 @@ module.exports = {
             });
         });
     },
+
+    getProductArtifacts(itemID: string, accessToken: string){
+        return new Promise((resolve, reject) => {
+            const options = {
+                method: "GET",
+                uri: tracifiedURL + "/Traceability_data/artifacts/" + itemID,
+            };
+
+            request(options).then((data: any) => {
+                const type: string = typeof data;
+                console.log(type);
+                console.log(data);
+                resolve(data);
+            });
+        });
+    }
 };

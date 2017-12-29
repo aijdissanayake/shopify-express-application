@@ -28,7 +28,7 @@ router.get("/", (req: Request, res: Response) => {
     res.cookie("state", state);
     res.redirect(installUrl);
   } else {
-    return res.status(400).send("Missing shop parameter. Please add ?shop=your-development-shop.myshopify.com to your request");
+    return res.status(400).send("Missing shop parameter. Please add ?shop=your-shop.myshopify.com to your request");
   }
 });
 
