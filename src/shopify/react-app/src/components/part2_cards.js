@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import CollapaseCards from './collapase';
 import * as axios from 'axios';
-import { Container, Row, Col, Button } from 'reactstrap';
-import { Thumbnail, Card, Page, List } from '@shopify/polaris';
+import { Page } from '@shopify/polaris';
 import Loading from './Loading';
+import CollapseMain from './CollapseMain';
 const QRCode = require('qrcode.react');
 
 class Part2Cards extends Component {
@@ -91,27 +90,17 @@ class Part2Cards extends Component {
                         const qrValue = order.order_number.toString();
                         const title = "Order ID: " + order.order_number;
                         return (
-                            <Card key={order.order_number} title={title} sectioned subdued={false}>
-                                <Row>
-
-                                    <Col sm="10">
-                                        <List type="bullet">
-                                            <List.Item>Customer  &nbsp;&nbsp;: {order.customer}</List.Item>
-                                            <List.Item>Created At&nbsp;&nbsp;: {order.created_at}</List.Item>
-                                        </List>
-                                    </Col>
-                                    <Col sm="2">
-                                        <QRCode value={qrValue} />
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col sm="12">
-                                        <CollapaseCards resetOrders={this.resetOrders} itemArray={order.lineItems} products={this.state.products} orderID={order.id} />
-                                    </Col>
-                                </Row>
-                            </Card>
+                            <CollapseMain 
+                                key={index} 
+                                order={order} 
+                                productsProp={this.state.products} 
+                                qrVal={qrValue} 
+                                title={title}
+                                resetOrders={this.resetOrders}
+                            />
                         )
                     })}
+
                 </Page>
             );
         }

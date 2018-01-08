@@ -24,8 +24,8 @@ class CollapseMain extends Component {
         let buttonProps = this.state.collapse ? {disclosure:false, text:"Hide Details"} : {disclosure:true, text:"View Details"}
     
         return (
-  
-            <Card key={this.props.order.order_number} sectioned subdued={false}>    
+
+            <Card key={this.props.order.order_number} sectioned subdued={false}>
                 <Stack>
                     <Stack.Item >
                         <TextStyle variation="strong">{this.props.title}</TextStyle>
@@ -48,20 +48,20 @@ class CollapseMain extends Component {
                         </Button>
                     </Stack.Item>
                 </Stack>
-                
                 <Collapse isOpen={this.state.collapse}>
                     <Row style={{paddingTop: '1rem' }}>
                         <Col sm="10">
-                            <CollapaseCards itemArray={this.props.order.lineItems} products={this.props.productsProp} orderID={this.props.order.id
+                            <CollapaseCards resetOrders={this.props.resetOrders} itemArray={this.props.order.lineItems} products={this.props.productsProp} orderID={this.props.order.id
                             } />
                         </Col>
                         <Col sm="2">
                             <QRCode value={this.props.qrVal} />
                         </Col>
                     </Row>
-                </Collapse>   
-
-            </Card>                
+                </Collapse>
+                            
+            </Card>
+                
         );
     }
 }
