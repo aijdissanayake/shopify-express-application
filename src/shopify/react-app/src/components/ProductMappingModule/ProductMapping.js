@@ -234,6 +234,7 @@ class ProductMapping extends Component {
         </Row>
         </div>
 
+        <div className="product-Mapping">
         <Card title="Product Mapping Details">
           <br />
           <form>
@@ -261,6 +262,7 @@ class ProductMapping extends Component {
                 </Row>
           </form>
         </Card>
+        </div>
       </div>
     );
     <ProductMapping /> , document.getElementById('productmapping')
