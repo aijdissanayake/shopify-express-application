@@ -23,7 +23,8 @@ import {
   Checkbox
 } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
-import './AppMP.css'
+import './AppMP.css';
+import './ProductMapping.css';
 import { setTimeout } from 'timers';
 import Spinner from '../../lib/components/Spinner';
 import { request } from 'http';
@@ -222,7 +223,7 @@ class ProductMapping extends Component {
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
-        
+
         <div className="saveBtn">
         <Row>
           <Col sm="10">
