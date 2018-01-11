@@ -12,28 +12,34 @@ class FulfilledOrdersPage extends Component {
             mapping: {},
             shopDomain: "",
             isOrderListLoading: true,
-            isMappingLoading: true
+            isMappingLoading: true,
+            search: ''
         };
     }
 
     componentDidMount() {
         axios.get('/shopify/config/mapping')
             .then(response => {
-                this.setState({ 
+                this.setState({
                     mapping: response.data,
-                    isMappingLoading: false 
+                    isMappingLoading: false
                 });
             });
         axios.get('/shopify/shop-api/fulfilled-orders')
             .then(response => {
                 this.setState({
                     orders: response.data.fulfilledOrders,
-                    shopDomain : response.data.shopDomain,
+                    shopDomain: response.data.shopDomain,
                     isOrderListLoading: false
                 });
             });
     }
 
+    updateSearch(event){
+        this.setState({
+            search: event.target.value.substr(0, 20)
+        });
+    }
 
     render() {
 
@@ -42,7 +48,13 @@ class FulfilledOrdersPage extends Component {
         }
         else {
             // All the order details
-            var orders = this.state.orders;
+            //var orders = this.state.orders;
+            let orders = this.state.orders.filter(
+                (order1) => {
+                    return order1.name.indexOf(this.state.search) !== -1;
+                }
+             );
+
             console.log(orders);
             var orderArray = [];
             orders.forEach((order) => {
@@ -75,31 +87,40 @@ class FulfilledOrdersPage extends Component {
                 <Page title="Fulfilled Orders" separator>
                     <table className="table table-striped">
                         <thead>
-                          <tr>
-                            <td ><b>Order No</b></td>
-                            <td ><b>Customer</b></td>
-                            <td ><b>Order Item to View</b></td>
-                            <td ><b>Trace</b></td>
-                          </tr>
+                            <tr>
+                                <input
+                                    type="text"
+                                    placeholder="Enter the order id"
+                                    value={this.state.search}
+                                    onChange={this.updateSearch.bind(this)}
+                                />
+
+                            </tr>
+                            <tr>
+                                <td ><b>Order No</b></td>
+                                <td ><b>Customer</b></td>
+                                <td ><b>Order Item to View</b></td>
+                                <td ><b>Trace</b></td>
+                            </tr>
                         </thead>
                         <tbody>
-          
-                        {orderArray.map((order, index) => {
-                        
-                        return (
-                            <FulfilledOrder 
-                                key={order.order_number} 
-                                order={order} 
-                                shopDomain={this.state.shopDomain} 
-                                mapping={this.state.mapping} 
-                            />
-                        )
-                    })}
-          
+
+                            {orderArray.map((order, index) => {
+
+                                return (
+                                    <FulfilledOrder
+                                        key={order.order_number}
+                                        order={order}
+                                        shopDomain={this.state.shopDomain}
+                                        mapping={this.state.mapping}
+                                    />
+                                )
+                            })}
+
                         </tbody>
-                      </table>
+                    </table>
                 </Page>
-                
+
             );
         }
     }
