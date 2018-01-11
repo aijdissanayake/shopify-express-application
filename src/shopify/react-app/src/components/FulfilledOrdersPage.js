@@ -72,7 +72,7 @@ class FulfilledOrdersPage extends Component {
 
 
             return (
-                <Page title="Unfulfilled Orders" separator>
+                <Page title="Fulfilled Orders" separator>
                     <table className="table table-striped">
                         <thead>
                           <tr>

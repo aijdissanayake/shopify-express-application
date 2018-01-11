@@ -12,7 +12,8 @@ class Part2Cards extends Component {
         this.state = {
             orders: [],
             products: {},
-            isOrderListLoading: true
+            isOrderListLoading: true,
+            search: ''
         };
         this.resetOrders = this.resetOrders.bind(this);
     }
@@ -47,6 +48,12 @@ class Part2Cards extends Component {
             });
     }
 
+    updateSearch(event) {
+        this.setState({
+            search: event.target.value.substr(0, 20)
+        });
+    }
+
 
     render() {
         if (this.state.isOrderListLoading) {
@@ -54,7 +61,13 @@ class Part2Cards extends Component {
         }
         else {
             // All the order details
-            var orders = this.state.orders;
+            //var orders = this.state.orders;
+            let orders = this.state.orders.filter(
+                (order) => {
+                    return order.name.indexOf(this.state.search) !== -1;
+                }
+            );
+
             console.log(orders);
 
             var orderArray = [];
@@ -86,6 +99,17 @@ class Part2Cards extends Component {
 
             return (
                 <Page title="Unfulfilled Orders" separator>
+
+                    <div>
+                        <Card>
+                            <input
+                                type="text"
+                                placeholder="Enter the order id"
+                                value={this.state.search}
+                                onChange={this.updateSearch.bind(this)}
+                            />
+                        </Card>
+                    </div>
 
                     {orderArray.map((order, index) => {
                         const qrValue = order.order_number.toString();
