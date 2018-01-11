@@ -222,6 +222,17 @@ class ProductMapping extends Component {
       <div class="loader" id="productmapping">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.js"></script>
+        
+        <div className="saveBtn">
+        <Row>
+          <Col sm="10">
+          </Col>
+          <Col sm="2">
+            <Button primary onClick={this.onSubmit}>Save</Button>
+          </Col>
+        </Row>
+        </div>
+
         <Card title="Product Mapping Details">
           <br />
           <form>
@@ -244,7 +255,7 @@ class ProductMapping extends Component {
                   <Col sm="10">
                   </Col>
                   <Col sm="2">
-                    <Button primary onClick={this.onSubmit}>Save</Button>
+                    {/* <Button primary onClick={this.onSubmit}>Save</Button> */}
                   </Col>
                 </Row>
           </form>

@@ -1,0 +1,27 @@
+.saveBtn{
+    background-color: transparent;
+    z-index: initial;
+    position: fixed;
+    width: 100%;
+    padding-bottom: 1%;
+    display: inline-block;
+}
+
+.product-Mapping form{
+    margin-top: 3%;
+/*     padding-top: 5%; */
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.checkPolaris,.selectPolaris{
+    z-index: -10;
+}
+
+.Polaris-Card__Header h2{
+    margin-top: 1.5%;
+    font-weight: bolder !important;
+    display: inline-block;
+}
