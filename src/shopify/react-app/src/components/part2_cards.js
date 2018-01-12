@@ -97,6 +97,16 @@ class Part2Cards extends Component {
 
             console.log(orderArray);
 
+            var inputStyle={
+                marginLeft: '2%',
+                float: 'left',
+                padding: '1%',
+                fontSize: '17px',
+                marginTop: '2%',
+                borderStyle: 'dotted',
+                marginBottom:'2%'
+            }
+
             return (
                 <Page title="Unfulfilled Orders" separator>
 
@@ -107,6 +117,7 @@ class Part2Cards extends Component {
                                 placeholder="Enter the order id"
                                 value={this.state.search}
                                 onChange={this.updateSearch.bind(this)}
+                                style={inputStyle}
                             />
                         </Card>
                     </div>
