@@ -21,7 +21,7 @@ class CollapseMain extends Component {
 
     render() {
 
-        let buttonProps = this.state.collapse ? {disclosure:false, text:"Hide Details"} : {disclosure:true, text:"View Details"}
+        let buttonProps = this.state.collapse ? {text:"Hide Details"} : {text:"View Details"}
     
         return (
 
@@ -39,8 +39,7 @@ class CollapseMain extends Component {
                     <Stack.Item>
                         <Button 
                             size="slim" 
-                            outline 
-                            disclosure={buttonProps.disclosure}  
+                            outline   
                             onClick={this.toggle} 
                             style={{ marginBottom: '1rem' }}
                         >
