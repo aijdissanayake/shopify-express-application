@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
-import { Page } from '@shopify/polaris';
+import { Page, Button, Stack } from '@shopify/polaris';
 import Loading from './Loading';
 import CollapseMain from './CollapseMain';
+import Uncollapsed from './Uncollapsed';
 const QRCode = require('qrcode.react');
 
 class Part2Cards extends Component {
@@ -11,12 +12,17 @@ class Part2Cards extends Component {
         this.state = {
             orders: [],
             products: {},
-            isOrderListLoading: true
+            isOrderListLoading: true,
+            isExpanded: true
         };
+        this.toggleCardType = this.toggleCardType.bind(this);
         this.resetOrders = this.resetOrders.bind(this);
     }
 
 
+    toggleCardType() {
+        this.setState({isExpanded: !this.state.isExpanded});
+    }
 
     componentDidMount() {
         axios.get('/shopify/shop-api/products')
@@ -48,6 +54,9 @@ class Part2Cards extends Component {
 
 
     render() {
+
+        let buttonText = this.state.isExpanded ? {text:"Switch to collapsed view"} : {text:"Switch to expanded view"}
+
         if (this.state.isOrderListLoading) {
             return <Loading />;
         }
@@ -85,20 +94,52 @@ class Part2Cards extends Component {
 
             return (
                 <Page title="Unfulfilled Orders" separator>
+                <Stack 
+                     distribution="trailing"
+                 >
+                 <div style={{paddingBottom:10}}>
+                 <Stack.Item>
+                         <Button 
+                             plain
+                             size="slim" 
+                             outline  
+                             onClick={this.toggleCardType} 
+                             style={{ marginBottom: '1rem' }}
+                         >
+                             {buttonText.text}
+                         </Button>
+                     </Stack.Item>
+                 </div>
+                     
+                 </Stack>
 
                     {orderArray.map((order, index) => {
                         const qrValue = order.order_number.toString();
                         const title = "Order ID: " + order.order_number;
-                        return (
-                            <CollapseMain 
-                                key={index} 
-                                order={order} 
-                                productsProp={this.state.products} 
-                                qrVal={qrValue} 
-                                title={title}
-                                resetOrders={this.resetOrders}
-                            />
-                        )
+
+                        if(this.state.isExpanded){
+                            return (
+                                <Uncollapsed 
+                                    key={index}
+                                    order={order} 
+                                    productsProp={this.state.products} 
+                                    qrVal={qrValue} 
+                                    title={title}
+                                />
+                       
+                            );}else{
+                                return (
+                                    <CollapseMain 
+                                        key={index} 
+                                        order={order} 
+                                        productsProp={this.state.products} 
+                                        qrVal={qrValue} 
+                                        title={title}
+                                        resetOrders={this.resetOrders}
+                                    />
+                                );
+                            }          
+                               
                     })}
 
                 </Page>

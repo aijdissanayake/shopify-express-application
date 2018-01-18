@@ -11,7 +11,7 @@ class CollapseMain extends Component {
         super();
         this.toggle = this.toggle.bind(this);
         this.state = {
-            collapase: false
+            collapse: false
         };
     }
 
