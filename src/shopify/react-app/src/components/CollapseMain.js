@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CollapaseCards from './collapase';
+import Collapse2 from './collapse2';
 import * as axios from 'axios';
 import { Row, Col, Collapse } from 'reactstrap';
 import { Thumbnail, Card, Page, Button, Stack, TextStyle } from '@shopify/polaris';
@@ -50,7 +50,7 @@ class CollapseMain extends Component {
                 <Collapse isOpen={this.state.collapse}>
                     <Row style={{paddingTop: '1rem' }}>
                         <Col sm="10">
-                            <CollapaseCards resetOrders={this.props.resetOrders} itemArray={this.props.order.lineItems} products={this.props.productsProp} orderID={this.props.order.id
+                            <Collapse2 resetOrders={this.props.resetOrders} itemArray={this.props.order.lineItems} products={this.props.productsProp} orderID={this.props.order.id
                             } />
                         </Col>
                         <Col sm="2">
