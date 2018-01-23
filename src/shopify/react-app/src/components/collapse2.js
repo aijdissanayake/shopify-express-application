@@ -7,14 +7,9 @@ import { isUndefined } from 'util';
 class CollapaseCard extends Component {
     constructor(props) {
         super(props);
-        // this.toggleCollapse = this.toggleCollapse.bind(this);
         this.fulfillOrder = this.fulfillOrder.bind(this);
         this.state = { collapsed: true };
     }
-
-    // toggleCollapse() {
-    //     this.setState({ collapsed: !this.state.collapsed });
-    // }
 
     fulfillOrder(){
         const url = '/shopify/shop-api/orders/' + this.props.orderID + '/fulfill';
@@ -29,7 +24,6 @@ class CollapaseCard extends Component {
     render() {
 
         console.log("collapse products");
-        // let resourceThumbnails = [];
         let resourceList = this.props.itemArray.map((resItem, index) => {
             let productImage = "no/image";
             if (!isUndefined(this.props.products.length) && !isUndefined(this.props.products)) {
@@ -40,18 +34,6 @@ class CollapaseCard extends Component {
 
                 if (!isUndefined(product[0])) {
                     productImage = product[0].images[0].src;
-                    // if(resourceThumbnails.length < 5){
-                    //     resourceThumbnails.push(                        
-                    //         <Thumbnail
-                    //         key={resourceThumbnails.length}
-                    //         source={product[0].images[0].src}
-                    //         alt={" Image"}
-                    //     />
-                    //     );
-                    // }
-                    // else if (resourceThumbnails.length == 5) {
-                    //     resourceThumbnails.push(<p key={resourceThumbnails.length}><b>. . .</b></p>);                            
-                    // }
                     
                 }
             }
@@ -75,31 +57,20 @@ class CollapaseCard extends Component {
         return (
             <div>
                 <Container>
-                {/* <Collapse isOpen={this.state.collapsed}>
-                <Stack alignment="baseline" wrap={false}> {resourceThumbnails} </Stack>
-                </Collapse> */}
                     <Row>
                         <Col sm="7">
                             <Row style={{paddingBottom:50}}>
-                            {/* <Col sm="4">
-                            <Button primary onClick={this.toggleCollapse} >{this.state.collapsed ? " Show Order Items " : " Hide Order Items "}</Button>
-                        </Col> */}
-                        <Col sm="4">
                             <Button primary onClick={this.fulfillOrder}>Mark as Fulfilled</Button>
-                        </Col>
                             </Row>
                         </Col>
                     </Row>
                 </Container>
-                {/* <Collapse isOpen={!this.state.collapsed}> */}
                     <ResourceList
                         items={resourceList}
                         renderItem={(item, index) => {
                             return <ResourceList.Item key={index} {...item} />;
                         }}
                     />
-
-                {/* </Collapse> */}
             </div>
         );
     }

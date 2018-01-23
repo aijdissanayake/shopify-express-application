@@ -4,7 +4,6 @@ import { Page, Button, Stack } from '@shopify/polaris';
 import Loading from './Loading';
 import CollapseMain from './CollapseMain';
 import Uncollapsed from './Uncollapsed';
-const QRCode = require('qrcode.react');
 
 class Part2Cards extends Component {
     constructor() {
