@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Collapse2 from './collapse2';
 import * as axios from 'axios';
-import { Row, Col, Collapse } from 'reactstrap';
-import { Thumbnail, Card, Page, Button, Stack, TextStyle } from '@shopify/polaris';
+import { Row, Col, Card, Collapse } from 'reactstrap';
+import { Thumbnail, Page, Button, Stack, TextStyle } from '@shopify/polaris';
 const QRCode = require('qrcode.react');
 
 class CollapseMain extends Component {
@@ -33,31 +33,35 @@ class CollapseMain extends Component {
     render() {
 
         let buttonProps = this.state.collapse ? {text:"Hide Details"} : {text:"View Details"}
+        let cardStyle = {   backgroundColor: 'white',
+                            margin: 10,
+                            padding: 10,
+                            boxShadow: "0.2px 0.2px 1px 0.5px rgba(0, 0, 0, .2)"
+                        }
     
         return (
 
-            <Card key={this.props.order.order_number} sectioned subdued={false}>
-                <Stack>
-                    <Stack.Item >
+            <Card style={cardStyle}>
+                <Row >
+                    <Col sm="2" >
                         <TextStyle variation="strong">{this.props.title}</TextStyle>
-                    </Stack.Item>
-                    <Stack.Item>
+                    </Col>
+                    <Col sm="3" >
                         <TextStyle variation="subdued"><strong>Created on:</strong> {this.props.order.created_at}</TextStyle>
-                    </Stack.Item>
-                    <Stack.Item fill>
+                    </Col>
+                    <Col xs="3" sm="5" style={{paddingRight: 0, width: 420}}>
                         <TextStyle variation="subdued"><strong>Customer:</strong> {this.props.order.customer}</TextStyle>
-                    </Stack.Item>
-                    <Stack.Item>
+                    </Col>
+                    <Col sm="2" style={{paddingRight: 0, width: 130}}>
                         <Button 
                             size="slim" 
-                            outline   
+                            outline  
                             onClick={this.toggle} 
-                            style={{ marginBottom: '1rem' }}
                         >
                             {buttonProps.text}
                         </Button>
-                    </Stack.Item>
-                </Stack>
+                    </Col>
+                </Row >
                 <Collapse isOpen={this.state.collapse}>
                     <Row style={{paddingTop: '1rem' }}>
                         <Col sm="12">
