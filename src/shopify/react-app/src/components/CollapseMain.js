@@ -7,13 +7,18 @@ const QRCode = require('qrcode.react');
 
 class CollapseMain extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.onClick = this.props.onClick;
         this.fulfillOrder = this.fulfillOrder.bind(this);
         this.toggle = this.toggle.bind(this);
         this.state = {
-            collapse: false
+            collapseArray: this.props.collapseArray
         };
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ collapseArray: props.collapseArray });
     }
 
     fulfillOrder(){
@@ -32,12 +37,13 @@ class CollapseMain extends Component {
 
     render() {
 
-        let buttonProps = this.state.collapse ? {text:"Hide Details"} : {text:"View Details"}
+        var isClosed = this.props.collapseArray[this.props.collapseArrayKey];
+        var buttonText = this.props.collapseArray[this.props.collapseArrayKey] ? {text: "see less"} : {text: "see more"};
         let cardStyle = {   backgroundColor: 'white',
                             margin: 10,
                             padding: 10,
                             boxShadow: "0.2px 0.2px 1px 0.5px rgba(0, 0, 0, .2)"
-                        }
+                        };
     
         return (
 
@@ -56,13 +62,13 @@ class CollapseMain extends Component {
                         <Button 
                             size="slim" 
                             outline  
-                            onClick={this.toggle} 
+                            onClick={(e) => {this.props.onClick(this.props.collapseArrayKey, isClosed)}} 
                         >
-                            {buttonProps.text}
+                            {buttonText.text}
                         </Button>
                     </Col>
                 </Row >
-                <Collapse isOpen={this.state.collapse} style={{marginTop:8 , borderTop: '2px solid rgba(0, 0, 0, .3)'}}>
+                <Collapse isOpen={this.state.collapseArray[this.props.collapseArrayKey]} style={{marginTop:8 , borderTop: '2px solid rgba(0, 0, 0, .3)'}}>
                     <Row style={{paddingTop: '1rem' }}>
                         <Col sm="12">
                             <Row style={{padding: 20}}>
