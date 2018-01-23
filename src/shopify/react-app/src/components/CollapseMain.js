@@ -42,14 +42,14 @@ class CollapseMain extends Component {
         return (
 
             <Card style={cardStyle}>
-                <Row >
-                    <Col sm="2" >
+                <Row style={{ paddingBottom: 5}}>
+                    <Col sm="2" style={{paddingBottom:5, paddingTop:5}}>
                         <TextStyle variation="strong">{this.props.title}</TextStyle>
                     </Col>
-                    <Col sm="3" >
+                    <Col sm="3" style={{paddingBottom:5, paddingTop:5}}>
                         <TextStyle variation="subdued"><strong>Created on:</strong> {this.props.order.created_at}</TextStyle>
                     </Col>
-                    <Col xs="3" sm="5" style={{paddingRight: 0, width: 420}}>
+                    <Col xs="3" sm="5" style={{paddingTop:5, paddingBottom:5, paddingRight: 0, width: 420}}>
                         <TextStyle variation="subdued"><strong>Customer:</strong> {this.props.order.customer}</TextStyle>
                     </Col>
                     <Col sm="2" style={{paddingRight: 0, width: 130}}>
@@ -62,7 +62,7 @@ class CollapseMain extends Component {
                         </Button>
                     </Col>
                 </Row >
-                <Collapse isOpen={this.state.collapse}>
+                <Collapse isOpen={this.state.collapse} style={{marginTop:8 , borderTop: '2px solid rgba(0, 0, 0, .3)'}}>
                     <Row style={{paddingTop: '1rem' }}>
                         <Col sm="12">
                             <Row style={{padding: 20}}>
