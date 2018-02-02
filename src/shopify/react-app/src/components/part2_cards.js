@@ -14,11 +14,8 @@ class Part2Cards extends Component {
             cardStateArray: [],
             products: {},
             isOrderListLoading: true,
-<<<<<<< HEAD
-            isExpanded: true
-=======
+            isExpanded: true,
             search: ''
->>>>>>> interface-intergration
         };
         this.toggleCardType = this.toggleCardType.bind(this);
         this.resetOrders = this.resetOrders.bind(this);
