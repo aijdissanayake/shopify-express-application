@@ -14,7 +14,11 @@ class Part2Cards extends Component {
             cardStateArray: [],
             products: {},
             isOrderListLoading: true,
+<<<<<<< HEAD
             isExpanded: true
+=======
+            search: ''
+>>>>>>> interface-intergration
         };
         this.toggleCardType = this.toggleCardType.bind(this);
         this.resetOrders = this.resetOrders.bind(this);
@@ -73,6 +77,12 @@ class Part2Cards extends Component {
             });
     }
 
+    updateSearch(event) {
+        this.setState({
+            search: event.target.value.substr(0, 20)
+        });
+    }
+
 
     render() {
 
@@ -83,7 +93,13 @@ class Part2Cards extends Component {
         }
         else {
             // All the order details
-            var orders = this.state.orders;
+            //var orders = this.state.orders;
+            let orders = this.state.orders.filter(
+                (order) => {
+                    return order.name.indexOf(this.state.search) !== -1;
+                }
+            );
+
             console.log(orders);
 
             var orderArray = [];
@@ -113,6 +129,16 @@ class Part2Cards extends Component {
 
             console.log(orderArray);
 
+            var inputStyle={
+                marginLeft: '2%',
+                float: 'left',
+                padding: '1%',
+                fontSize: '17px',
+                marginTop: '2%',
+                borderStyle: 'dotted',
+                marginBottom:'2%'
+            }
+
             return (
                 <Page title="Unfulfilled Orders" separator>
                 <Stack 
@@ -133,6 +159,18 @@ class Part2Cards extends Component {
                  </div>
                      
                  </Stack>
+
+                    <div>
+                        <Card>
+                            <input
+                                type="text"
+                                placeholder="Enter the order id"
+                                value={this.state.search}
+                                onChange={this.updateSearch.bind(this)}
+                                style={inputStyle}
+                            />
+                        </Card>
+                    </div>
 
                     {orderArray.map((order, index) => {
                         const qrValue = order.order_number.toString();

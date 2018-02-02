@@ -7,7 +7,11 @@ import {
     Page
 } from '@shopify/polaris';
 import { Row, Col, Container } from 'reactstrap';
+<<<<<<< HEAD
 import {Timeline, TimelineEvent} from 'react-event-timeline';
+=======
+import { Timeline, TimelineEvent } from 'react-event-timeline';
+>>>>>>> interface-intergration
 
 class TraceTimeLine extends Component {
 
@@ -21,10 +25,9 @@ class TraceTimeLine extends Component {
 
     componentDidMount() {
         const traceURL = "/shopify/tracified/trace/" + this.props.match.params.orderID + "/" + this.props.match.params.itemID;
-
         axios({
             method: 'get',
-            url: traceURL, 
+            url: traceURL,
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8',
             },
@@ -41,6 +44,7 @@ class TraceTimeLine extends Component {
 
     render() {
 
+<<<<<<< HEAD
         //OLD CODE --------------------------
 
         // var description = {
@@ -61,6 +65,8 @@ class TraceTimeLine extends Component {
         //OLD CODE ----------------------------
 
 
+=======
+>>>>>>> interface-intergration
         if (this.state.istimelineLoading) {
             return <Loading />;
         }
@@ -68,6 +74,7 @@ class TraceTimeLine extends Component {
             console.log(this.props.match.params.orderID);
             console.log(this.props.match.params.itemID);
             return (
+<<<<<<< HEAD
                 <div style={{backgroundColor: '#f4f6f8'}}>
                     <Page title="Trace Back Timeline" separator>    
                         <Timeline>
@@ -165,6 +172,45 @@ class TraceTimeLine extends Component {
 
                 //OLD CODE ----------------------------
 
+=======
+                <div style={{ backgroundColor: '#f4f6f8' }}>
+                    <Page title="Trace Back Timeline" separator>
+                        <Timeline>
+                            {this.state.timeline.items.map((stage, index) => {
+
+                                let titleText = (index + 1) + ". " + stage.title;
+                                let descriptionText = stage.description;
+
+                                var ico = (<svg height="20" width="20" >
+                                    <image width="20" height="20" xlinkHref={stage.icon} />
+                                </svg>);
+
+                                return (
+                                    <TimelineEvent
+                                        key={index}
+                                        title={titleText}
+                                        titleStyle={{ fontSize: 17 }}
+                                        subtitle={descriptionText}
+                                        subtitleStyle={{ fontSize: 15 }}
+                                        icon={ico}
+                                        iconColor="#6fba1c"
+                                        contentStyle={{ fontSize: 13 }}
+                                    >
+                                        {
+
+                                            Object.keys(stage.data).map(function (key) {
+                                                return <div key={key}> {stage.data[key].title}</div>;
+                                            })
+
+                                        }
+                                    </TimelineEvent>
+                                );
+
+                            })}
+                        </Timeline>
+                    </Page>
+                </div>
+>>>>>>> interface-intergration
             );
         }
     }
