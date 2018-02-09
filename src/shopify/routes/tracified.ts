@@ -6,6 +6,8 @@ import { Error } from "mongoose";
 const router = Router();
 
 router.all("/*", (req: Request, res: Response, next: NextFunction) => {
+    if(req.path == '/abc') return next();
+
     if (req["session"] && req["session"].shop) {
         if(req["session"].shop.tracified_token){
             next();
